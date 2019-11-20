@@ -52,11 +52,11 @@ public class MainCityWnd : WindowRoot
     {
         PlayerData pd = GameRoot.instance.Playerdata;
 
-        SetText(txtFight, PECommon.GetFightByPlayerData(pd));
+        //SetText(txtFight, PECommon.GetFightByPlayerData(pd));
         SetText(txtLV,pd.lv);
-        SetText(txtPower,"体力："+pd.power+"/"+PECommon.GetPowerLimit(pd.lv));
+        //SetText(txtPower,"体力："+pd.power+"/"+PECommon.GetPowerLimit(pd.lv));
         //需要限制不要超出范围吗？
-        imgPowerPrg.fillAmount = pd.power * 1.0f / PECommon.GetPowerLimit(pd.lv);
+        //imgPowerPrg.fillAmount = pd.power * 1.0f / PECommon.GetPowerLimit(pd.lv);
         SetText(txtName,pd.name);
 
         #region ExpProgress
@@ -90,7 +90,7 @@ public class MainCityWnd : WindowRoot
         #endregion
 
         //设置自动任务图标
-        currentTaskData = resSvc.GetGuideCfgData(pd.guideid);
+        //currentTaskData = resSvc.GetGuideCfgData(pd.guideid);
         if (currentTaskData!=null)
         {
             SetGuideBtnIcon(currentTaskData.npcID);
@@ -126,18 +126,18 @@ public class MainCityWnd : WindowRoot
         SetSprite(image,spPath);
     }
     #region Click Events
-    public void ClickGuideBtn()
-    {
-        audioSvc.PlayUIAudio(Constants.uiClick);
-        if (currentTaskData!=null)
-        {
-            MainCitySys.Instance.RunTask(currentTaskData);
-        }
-        else
-        {
-            GameRoot.instance.AddTips("更多引导，正在开发中，敬请期待。。。");
-        }
-    }
+    //public void ClickGuideBtn()
+    //{
+    //    audioSvc.PlayUIAudio(Constants.uiClick);
+    //    if (currentTaskData!=null)
+    //    {
+    //        MainCitySys.Instance.RunTask(currentTaskData);
+    //    }
+    //    else
+    //    {
+    //        GameRoot.instance.AddTips("更多引导，正在开发中，敬请期待。。。");
+    //    }
+    //}
     public void ClickMenuBtn()
     {
         audioSvc.PlayUIAudio(Constants.uiExtenBtn);
@@ -181,7 +181,7 @@ public class MainCityWnd : WindowRoot
             //小圆点位置设置为中心锚点的中间
             imgDirPoint.transform.localPosition = Vector2.zero;
             //方向信息传递
-            MainCitySys.Instance.SetMoveDir(Vector2.zero);
+            //MainCitySys.Instance.SetMoveDir(Vector2.zero);
         });
         OnDrag(imgTouch.gameObject, (PointerEventData evt) =>
         {
@@ -198,7 +198,7 @@ public class MainCityWnd : WindowRoot
                 imgDirPoint.transform.position = evt.position;
             }
             //方向信息传递
-            MainCitySys.Instance.SetMoveDir(dir.normalized);
+            //MainCitySys.Instance.SetMoveDir(dir.normalized);
         });
     }
 

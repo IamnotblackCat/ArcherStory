@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController ctrl;
 
     private Transform camMainTrans;
+    private Animation playerAnim;
     private bool isMove = false;
 
     private Vector2 dir=Vector2.zero;
@@ -46,40 +47,46 @@ public class PlayerController : MonoBehaviour
     {
         camMainTrans = Camera.main.transform;
         cameraOffset = camMainTrans.transform.position - transform.position;
+        playerAnim = GetComponent<Animation>();
     }
     private void Update()
     {
         #region Input
-        /*float h = Input.GetAxis("Horizontal");
+        float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector2 _dir = new Vector2(h, v);
         if (_dir != Vector2.zero)
         {
             Dir = _dir;
-            SetBlend(1);
+            playerAnim.Play("Run");
+            SetDir();
+            SetMove();
+            SetCamera();
+            //SetBlend(1);
         }
         else
         {
             Dir = Vector2.zero;
-            SetBlend(0);
+            playerAnim.Play("Idle");
+            //SetBlend(0);
         }
-        */
+
         #endregion
-        if (currentBlend!=targetBlend)
-        {
-            UpdateMixBlend();
-        }
-        if (isMove)
-        {
-            //设置主角朝向
-            SetDir();
-            //设置移动
-            SetMove();
+        //if (currentBlend!=targetBlend)
+        //{
+        //    UpdateMixBlend();
+        //}
+        //if (isMove)
+        //{
+        //    //设置主角朝向
+        //    SetDir();
+        //    //设置移动
+        //    SetMove();
 
-            //相机跟随
-            SetCamera();
+        //    //相机跟随
+        //    SetCamera();
 
-        }
+        //}
     }
     private void SetDir()
     {//第二个参数是角色正面朝向，h=0,v=1,这里因为摄像机偏转了，
@@ -91,6 +98,10 @@ public class PlayerController : MonoBehaviour
     private void SetMove()
     {
         ctrl.Move(transform.forward*Time.deltaTime*Constants.playerMoveSpeed);
+        if (!ctrl.isGrounded)
+        {
+            ctrl.Move(-transform.up * Time.deltaTime);
+        }
     }
     public void SetCamera()
     {

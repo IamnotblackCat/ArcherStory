@@ -55,11 +55,11 @@ public class Constants
     //场景类名、ID
     public const string SceneLogin = "SceneLogin";
     //public const string SceneMainCity = "SceneMainCity";
-    public const int MainCityMapID = 10000;
+    public const int MainCityMapID = 1001;
 
     //音效名
     public const string BGLogin = "bgLogin";
-    public const string BGMainCity = "bgMainCity";
+    public const string BGMainCity = "BG";
     public const string uiClick = "uiClickBtn";
     public const string uiExtenBtn = "uiExtenBtn";
     public const string uiOpenPage = "uiOpenPage";

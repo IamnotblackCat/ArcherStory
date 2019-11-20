@@ -15,7 +15,7 @@ public class WindowRoot : MonoBehaviour
 {
     protected ResSvc resSvc = null;
     protected AudioSvc audioSvc = null;
-    protected NetService netService = null;
+    //protected NetService netService = null;
 
     public void SetWndState(bool isActive = true)
     {
@@ -36,14 +36,14 @@ public class WindowRoot : MonoBehaviour
     {
         resSvc = ResSvc.instance;
         audioSvc = AudioSvc.instance;
-        netService = NetService.instance;
+        //netService = NetService.instance;
     }
     //窗口关闭的时候要释放引用。 
     protected virtual void ClearWnd()
     {
         resSvc = null;
         audioSvc = null;
-        netService = null;
+        //netService = null;
     }
     //UI的一些设置方法的重载，可以快速设置UI的激活和目标
     #region ToolFunction

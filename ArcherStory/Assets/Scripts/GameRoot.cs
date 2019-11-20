@@ -1,12 +1,12 @@
 /****************************************************
-    文件：GameRoot.cs
+	文件：GameRoot.cs
 	作者：Echo
-    邮箱: 350383921@qq.com
-    日期：2019/10/12 14:59:31
+	邮箱: 350383921@qq.com
+	日期：2019/11/20 10:18   	
 	功能：游戏启动入口
 *****************************************************/
 
-using PEProtocol;
+//using PEProtocol;
 using UnityEngine;
 
 public class GameRoot : MonoBehaviour 
@@ -19,7 +19,7 @@ public class GameRoot : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(this);
-        PECommon.Log("游戏开始。。。");
+        //PECommon.Log("游戏开始。。。");
         ClearUIRoot();
         Init();    
     }
@@ -27,21 +27,23 @@ public class GameRoot : MonoBehaviour
     {
 
         //服务模块初始化
-        NetService netService = GetComponent<NetService>();
-        netService.InitSvc();
+        //NetService netService = GetComponent<NetService>();
+        //netService.InitSvc();
         ResSvc resSvc = GetComponent<ResSvc>();
         resSvc.InitSvc();
         AudioSvc audioSvc = GetComponent<AudioSvc>();
         audioSvc.InitSvc();
 
         //业务系统初始化
-        LoginSys loginSys = GetComponent<LoginSys>();
-        loginSys.InitSys();
+        //LoginSys loginSys = GetComponent<LoginSys>();
+        //loginSys.InitSys();
         MainCitySys mainCitySys = GetComponent<MainCitySys>();
         mainCitySys.InitSys();
 
+        //动画系统-老的模型不支持animator
+
         //进入登陆场景并加载UI
-        loginSys.EnterLogin();
+        //loginSys.EnterLogin();
 
         
     }
@@ -50,9 +52,13 @@ public class GameRoot : MonoBehaviour
     {
         Transform canvasTrans = transform.Find("Canvas");
         for (int i = 0; i < canvasTrans.childCount; i++)
-        { 
-            canvasTrans.GetChild(i).gameObject.SetActive(false);
+        {
+            if (i!=0)
+            {
+                canvasTrans.GetChild(i).gameObject.SetActive(false);
+            }
         }
+        
         dynamicWnd.SetWndState();
     }
     public void AddTips(string tips)
@@ -64,31 +70,27 @@ public class GameRoot : MonoBehaviour
     {
         get { return playerData; }
     }
-    public void SetPlayerData(ResponLogin data)
-    {
-        playerData = data.playerData;
-    }
+    //public void SetPlayerData(ResponLogin data)
+    //{
+    //    playerData = data.playerData;
+    //}
     public void SetPlayerName(string name)
     {
         playerData.name = name;
     }
-    public void SetPlayerDataByGuide(RspGuide data)
-    {
-        playerData.coin = data.coin;
-        playerData.exp = data.exp;
-        playerData.lv = data.lv;
-        playerData.guideid = data.guideid;
-    }
-    public void SetPlayerDataByStrong(ResStrong data)
-    {
-        Playerdata.coin = data.coin;
-        Playerdata.crystal = data.crystal;
-        Playerdata.ad = data.ad;
-        Playerdata.addef = data.addef;
-        Playerdata.ap = data.ap;
-        Playerdata.apdef = data.apdef;
-        Playerdata.hp = data.hp;
+    //public void SetPlayerDataByGuide(RspGuide data)
+    //{
+    //    playerData.coin = data.coin;
+    //    playerData.exp = data.exp;
+    //    playerData.lv = data.lv;
+    //    //playerData.guideid = data.guideid;
+    //}
+    //public void SetPlayerDataByStrong(ResStrong data)
+    //{
+    //    Playerdata.coin = data.coin;
+    //    Playerdata.crystal = data.crystal;
+    //    Playerdata.attackValue = data.ad;
 
-        Playerdata.strengthArray = data.strongArr;
-    }
+    //    //Playerdata.strengthArray = data.strongArr;
+    //}
 }

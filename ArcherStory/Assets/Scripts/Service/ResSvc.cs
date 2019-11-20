@@ -20,11 +20,11 @@ public class ResSvc : MonoBehaviour
     public void InitSvc()
     {
         instance = this;
-        InitRDNameCfg(PathDefine.RDName);
+        //InitRDNameCfg(PathDefine.RDName);
         InitMapCfg(PathDefine.MapCfg);
-        InitGuideCfg(PathDefine.GuideCfg);
-        InitStrengthCfg(PathDefine.StrengthCfg);
-        PECommon.Log("启动资源加载...");
+        //InitGuideCfg(PathDefine.GuideCfg);
+       // InitStrengthCfg(PathDefine.StrengthCfg);
+        //PECommon.Log("启动资源加载...");
     }
     private Action prgCB = null;//这个委托为了能在update里面实时更新进度值
     public void AsyncLoadScene(string sceneName,Action loaded)//参数委托为了复用这个函数
@@ -32,7 +32,7 @@ public class ResSvc : MonoBehaviour
 
         //GameRoot.instance.loadingWnd.setwind;
         GameRoot.instance.loadingWnd.SetWndState(true);
-
+        //Debug.Log("出来了"+GameRoot.instance.loadingWnd.gameObject.activeSelf);
         AsyncOperation sceneAsync = SceneManager.LoadSceneAsync(sceneName);
         prgCB = () =>
         {
@@ -182,7 +182,8 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
+            //PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
+            Debug.Log("指定文件不存在，路径：" + path);
         }
         else
         {

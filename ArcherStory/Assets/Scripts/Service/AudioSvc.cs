@@ -21,7 +21,7 @@ public class AudioSvc : MonoBehaviour
     }
     public void PlayBGMusic(string name, bool isLoop = true)
     {
-        AudioClip audio = ResSvc.instance.LoadAudio("ResAudio/"+name,true);
+        AudioClip audio = ResSvc.instance.LoadAudio("Audio/ArcherAudio/"+name,true);
        
         if (bgAudio.clip==null||bgAudio.clip!=audio)
         {
@@ -33,7 +33,7 @@ public class AudioSvc : MonoBehaviour
     }
     public void PlayUIAudio(string name)
     {
-        AudioClip audio = ResSvc.instance.LoadAudio("ResAudio/" + name);
+        AudioClip audio = ResSvc.instance.LoadAudio("Audio/ArcherAudio/" + name);
         uiAudio.clip = audio;
         uiAudio.Play();
     }

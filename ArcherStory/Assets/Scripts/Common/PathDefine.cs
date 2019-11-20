@@ -12,7 +12,7 @@ public class PathDefine
 {
     #region Config
     public const string RDName = "ResCfgs/rdName";
-    public const string MapCfg = "ResCfgs/map_format_v1";
+    public const string MapCfg = "XML/map_v1";
     public const string GuideCfg = "ResCfgs/guideCfg";
     public const string StrengthCfg = "ResCfgs/strengthCfg";
     #endregion
@@ -49,6 +49,6 @@ public class PathDefine
 
 
     #region Player
-    public const string AssassinCityPlayerPrefab = "PrefabPlayer/AssassinCity";
+    public const string ArcherPrefab = "Character/Archer/Female/Archer_Female_03/Archer_Female_00";
     #endregion
 }

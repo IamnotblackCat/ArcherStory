@@ -70,21 +70,21 @@ public class InfoWnd : WindowRoot
         SetText(txtCharactor,pd.name+" LV"+pd.lv);
         SetText(txtExp,pd.exp+"/"+PECommon.GetExpUpValByLv(pd.lv));
         imgExp.fillAmount = (pd.exp*1.0f/PECommon.GetExpUpValByLv(pd.lv));
-        SetText(txtPower,pd.power);
-        imgPower.fillAmount = (pd.power*1.0f/PECommon.GetPowerLimit(pd.lv));
+        //SetText(txtPower,pd.power);
+        //imgPower.fillAmount = (pd.power*1.0f/PECommon.GetPowerLimit(pd.lv));
         SetText(txtJob, " 职业  暗夜刺客");
-        SetText(txtFight, " 战力  "+PECommon.GetFightByPlayerData(pd));
+        //SetText(txtFight, " 战力  "+PECommon.GetFightByPlayerData(pd));
         SetText(txtHP, " 生命  " + pd.hp);
-        SetText(txtDamage, " 伤害  "+(pd.ad+pd.ap));
-        SetText(txtDefend, " 防御  " + (pd.addef+pd.apdef));
+        //SetText(txtDamage, " 伤害  "+(pd.ad+pd.ap));
+        //SetText(txtDefend, " 防御  " + (pd.addef+pd.apdef));
 
         //detail
         SetText(hpValue,pd.hp);
-        SetText(addValue,pd.ad);
-        SetText(apValue,pd.ap);
-        SetText(addValue,pd.addef);
-        SetText(apdValue,pd.apdef);
-        SetText(dodgeValue,pd.dodge);
+        //SetText(addValue,pd.ad);
+       // SetText(apValue,pd.ap);
+        //SetText(addValue,pd.addef);
+       // SetText(apdValue,pd.apdef);
+       // SetText(dodgeValue,pd.dodge);
         SetText(pierceValue,pd.pierce);
         SetText(criticalValue,pd.critical);
     }

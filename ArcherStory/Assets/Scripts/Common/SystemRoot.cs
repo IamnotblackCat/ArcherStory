@@ -12,12 +12,12 @@ public class SystemRoot : MonoBehaviour
 {
     protected ResSvc resSvc;
     protected AudioSvc audioSvc;
-    protected NetService netService;
+    //protected NetService netService;
 
     public virtual void InitSys()
     {
         resSvc = ResSvc.instance;
         audioSvc = AudioSvc.instance;
-        netService = NetService.instance;
+        //netService = NetService.instance;
     }
 }

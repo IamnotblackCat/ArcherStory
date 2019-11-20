@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item ID="1001">
+		<mapname>圣光主城</mapname>
+		<sceneName>SceneMainCity</sceneName>
+		<mainCamPos>125.69,15.59,113.78</mainCamPos>
+		<mainCamRote>33.293,0,0</mainCamRote>
+		<playerBornPos>126.3,12.37,117.9</playerBornPos>
+		<playerBornRote>0,0,0</playerBornRote>
+	</item>
+	<item/>
+	<item/>
+	<item/>
+	<item/>
+	<item/>
+	<item/>
+	<item/>
+	<item/>
+	<item/>
+	<item/>
+</root>
