@@ -56,6 +56,7 @@ public class Constants
     public const string SceneLogin = "SceneLogin";
     //public const string SceneMainCity = "SceneMainCity";
     public const int MainCityMapID = 1001;
+    public const int MainCityMap2ID = 1002;
 
     //音效名
     public const string BGLogin = "bgLogin";
@@ -85,4 +86,8 @@ public class Constants
     //混合树动画设定值
     public const float blendIdle = 0;
     public const float blendWalk = 1;
+
+    //json文件目录
+    public const string jsonPath = "/Resources/Json/playerData.json";
+    public const string jsonInitPath = "/Resources/Json/playerInitData.json";
 }

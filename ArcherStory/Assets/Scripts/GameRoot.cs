@@ -31,6 +31,7 @@ public class GameRoot : MonoBehaviour
         //netService.InitSvc();
         ResSvc resSvc = GetComponent<ResSvc>();
         resSvc.InitSvc();
+
         AudioSvc audioSvc = GetComponent<AudioSvc>();
         audioSvc.InitSvc();
 
@@ -41,7 +42,7 @@ public class GameRoot : MonoBehaviour
         mainCitySys.InitSys();
 
         //动画系统-老的模型不支持animator
-
+        
         //进入登陆场景并加载UI
         //loginSys.EnterLogin();
 
@@ -65,19 +66,27 @@ public class GameRoot : MonoBehaviour
     {
         dynamicWnd.AddTips(tips);
     }
-    private PlayerData playerData;
+    private PlayerData playerData=new PlayerData();
     public PlayerData Playerdata
     {
         get { return playerData; }
+    }
+    public void ReadPlayerData()
+    {
+        playerData.ReadJson();
+    }
+    public void GetExp(int exp)
+    {
+        playerData.CalculateExp(exp);
     }
     //public void SetPlayerData(ResponLogin data)
     //{
     //    playerData = data.playerData;
     //}
-    public void SetPlayerName(string name)
-    {
-        playerData.name = name;
-    }
+    //public void SetPlayerName(string name)
+    //{
+    //    playerData.name = name;
+    //}
     //public void SetPlayerDataByGuide(RspGuide data)
     //{
     //    playerData.coin = data.coin;

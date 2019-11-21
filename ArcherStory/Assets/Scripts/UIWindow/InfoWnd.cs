@@ -15,13 +15,13 @@ public class InfoWnd : WindowRoot
 {
     public RawImage imgCharactor;
 
-    public Text txtCharactor;
+    //public Text txtCharactor;
     public Text txtExp;
     public Image imgExp;
-    public Text txtPower;
-    public Image imgPower;
+    //public Text txtPower;
+    //public Image imgPower;
     public Text txtJob;
-    public Text txtFight;
+   //public Text txtFight;
     public Text txtHP;
     public Text txtDamage;
     public Text txtDefend;
@@ -33,10 +33,10 @@ public class InfoWnd : WindowRoot
     public Button CloseDetailBtn;
     public Text hpValue;
     public Text adValue;
-    public Text apValue;
+    //public Text apValue;
     public Text addValue;
-    public Text apdValue;
-    public Text dodgeValue;
+   // public Text apdValue;
+   // public Text dodgeValue;
     public Text pierceValue;
 
     #endregion
@@ -67,22 +67,22 @@ public class InfoWnd : WindowRoot
     private void RefreshUI()
     {
         PlayerData pd = GameRoot.instance.Playerdata;
-        SetText(txtCharactor,pd.name+" LV"+pd.lv);
-        SetText(txtExp,pd.exp+"/"+PECommon.GetExpUpValByLv(pd.lv));
-        imgExp.fillAmount = (pd.exp*1.0f/PECommon.GetExpUpValByLv(pd.lv));
+        //SetText(txtCharactor,pd.name+" LV"+pd.lv);
+        SetText(txtExp,pd.exp+"/"+100);
+        imgExp.fillAmount = (pd.exp*1.0f/100);
         //SetText(txtPower,pd.power);
         //imgPower.fillAmount = (pd.power*1.0f/PECommon.GetPowerLimit(pd.lv));
-        SetText(txtJob, " 职业  暗夜刺客");
+        SetText(txtJob, " 职业  弓箭手");
         //SetText(txtFight, " 战力  "+PECommon.GetFightByPlayerData(pd));
         SetText(txtHP, " 生命  " + pd.hp);
-        //SetText(txtDamage, " 伤害  "+(pd.ad+pd.ap));
-        //SetText(txtDefend, " 防御  " + (pd.addef+pd.apdef));
+        SetText(txtDamage, " 伤害  "+(pd.attackValue));
+        SetText(txtDefend, " 防御  " + (pd.defend));
 
         //detail
         SetText(hpValue,pd.hp);
-        //SetText(addValue,pd.ad);
+        SetText(adValue,pd.attackValue);
        // SetText(apValue,pd.ap);
-        //SetText(addValue,pd.addef);
+        SetText(addValue,pd.defend);
        // SetText(apdValue,pd.apdef);
        // SetText(dodgeValue,pd.dodge);
         SetText(pierceValue,pd.pierce);

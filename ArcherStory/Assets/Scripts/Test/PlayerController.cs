@@ -14,7 +14,12 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public CharacterController ctrl;
 
+    #region 相机控制
     private Transform camMainTrans;
+    private Vector3 startMousePos;
+    private Vector3 endMousePos;
+    private float camRotSmooth = 0.15f;
+    #endregion
     private Animation playerAnim;
     private bool isMove = false;
 
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.Play("Idle");
             //SetBlend(0);
         }
-
+        CameraControl();
         #endregion
         //if (currentBlend!=targetBlend)
         //{
@@ -100,7 +105,7 @@ public class PlayerController : MonoBehaviour
         ctrl.Move(transform.forward*Time.deltaTime*Constants.playerMoveSpeed);
         if (!ctrl.isGrounded)
         {
-            ctrl.Move(-transform.up * Time.deltaTime);
+            ctrl.Move(-transform.up * Time.deltaTime*10f);
         }
     }
     public void SetCamera()
@@ -111,24 +116,51 @@ public class PlayerController : MonoBehaviour
     {
         targetBlend = blend;
     }
-    private void UpdateMixBlend()
+    //private void UpdateMixBlend()
+    //{
+    //    //如果当前值比目标值大就减小，比目标值小就增大，绝对值相差范围内设置相等
+    //    //接近每帧插值范围，直接设置相等
+    //    if (Mathf.Abs(currentBlend-targetBlend)<Constants.accelerateSpeed*Time.deltaTime)
+    //    {
+    //        currentBlend = targetBlend;
+    //    }
+    //    //由运动状态转向idle状态
+    //    else if (currentBlend>targetBlend)
+    //    {
+    //        currentBlend -= Constants.accelerateSpeed * Time.deltaTime;
+    //    }
+    //    //由idle转化为运动
+    //    else
+    //    {
+    //        currentBlend += Constants.accelerateSpeed * Time.deltaTime;
+    //    }
+    //    anim.SetFloat("Blend",currentBlend);
+    //}
+
+    private void CameraControl()
     {
-        //如果当前值比目标值大就减小，比目标值小就增大，绝对值相差范围内设置相等
-        //接近每帧插值范围，直接设置相等
-        if (Mathf.Abs(currentBlend-targetBlend)<Constants.accelerateSpeed*Time.deltaTime)
+        if (Input.GetMouseButtonDown(1))
         {
-            currentBlend = targetBlend;
+            startMousePos = Input.mousePosition;
         }
-        //由运动状态转向idle状态
-        else if (currentBlend>targetBlend)
+        if (Input.GetMouseButton(1))
         {
-            currentBlend -= Constants.accelerateSpeed * Time.deltaTime;
+            endMousePos = Input.mousePosition;
         }
-        //由idle转化为运动
-        else
+        float horizentalRot = endMousePos.x - startMousePos.x;
+        //float verticalRot = endMousePos.y - startMousePos.y;
+        if (Input.GetMouseButtonUp(1))
         {
-            currentBlend += Constants.accelerateSpeed * Time.deltaTime;
+            horizentalRot = 0;
+            //verticalRot = 0;
+            startMousePos = Vector3.zero;
+            endMousePos = Vector3.zero;
         }
-        anim.SetFloat("Blend",currentBlend);
+        if (horizentalRot!=0)
+        {
+            camMainTrans.RotateAround(transform.position,transform.up,horizentalRot*Time.deltaTime*camRotSmooth);
+            transform.RotateAround(transform.position,transform.up,horizentalRot*Time.deltaTime*camRotSmooth);
+            cameraOffset = camMainTrans.transform.position - transform.position;
+        }
     }
 }

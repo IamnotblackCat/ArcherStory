@@ -34,16 +34,16 @@ public class MainCitySys : SystemRoot
 
     public void EnterMainCity()
     {
-        MapConfig mapData = resSvc.GetMapCfgData(Constants.MainCityMapID);
+        MapConfig mapData = resSvc.GetMapCfgData(Constants.MainCityMap2ID);
         //Debug.Log(mapData.sceneName);
-        GameRoot.instance.transform.GetChild(0).gameObject.SetActive(false);
+        GameRoot.instance.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         resSvc.AsyncLoadScene(mapData.sceneName,()=>
         {
             //PECommon.Log("Enter MainCity already");
             //加载主角
             LoadPlayer(mapData);
             //打开UI
-            //mainCityWnd.SetWndState();
+            mainCityWnd.SetWndState();
             //背景音乐
             audioSvc.PlayBGMusic(Constants.BGMainCity);
             //GameObject go= GameObject.FindGameObjectWithTag("MapRoot");
@@ -90,6 +90,7 @@ public class MainCitySys : SystemRoot
     {
         if (charactorCamTrans == null)
         {
+            //Debug.Log(GameObject.FindGameObjectWithTag("CharactorCam"));
             charactorCamTrans = GameObject.FindGameObjectWithTag("CharactorCam").transform;
         }
         //设置相机的相对位置

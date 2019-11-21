@@ -13,15 +13,15 @@ using UnityEngine.EventSystems;
 public class MainCityWnd : WindowRoot 
 {
     #region Public UI Transform
-    public Image imgTouch;
-    public Image imgDirBg;
-    public Image imgDirPoint;
+    //public Image imgTouch;
+    //public Image imgDirBg;
+    //public Image imgDirPoint;
 
-    public Text txtFight;
+    //public Text txtFight;
     public Text txtLV;
-    public Text txtPower;
-    public Image imgPowerPrg;
-    public Text txtName;
+   // public Text txtPower;
+   //public Image imgPowerPrg;
+    //public Text txtName;
     public Text txtExpPrg;
 
     public Button btnGuide;
@@ -32,8 +32,8 @@ public class MainCityWnd : WindowRoot
     #endregion
 
     private bool menuState = true;//true是打开，false收起
-    private Vector2 clickPos = Vector2.zero;//点击的位置-摇杆背景图位置
-    private Vector2 defaultPos = Vector2.zero;//摇杆背景图的初始位置。
+    //private Vector2 clickPos = Vector2.zero;//点击的位置-摇杆背景图位置
+    //private Vector2 defaultPos = Vector2.zero;//摇杆背景图的初始位置。
     private AutoGuideCfg currentTaskData;
 
     //UI自适应不能使用固定距离，要计算得出比率距离
@@ -43,9 +43,9 @@ public class MainCityWnd : WindowRoot
     {
         base.InitWnd();
 
-        defaultPos = imgDirBg.transform.position;//默认位置为世界坐标
-        SetActive(imgDirPoint,false);
-        RegistrTouchEvts();
+        //defaultPos = imgDirBg.transform.position;//默认位置为世界坐标
+        //SetActive(imgDirPoint,false);
+        //RegistrTouchEvts();
         RefreshUI();
     }
     public void RefreshUI()
@@ -57,10 +57,10 @@ public class MainCityWnd : WindowRoot
         //SetText(txtPower,"体力："+pd.power+"/"+PECommon.GetPowerLimit(pd.lv));
         //需要限制不要超出范围吗？
         //imgPowerPrg.fillAmount = pd.power * 1.0f / PECommon.GetPowerLimit(pd.lv);
-        SetText(txtName,pd.name);
+        //SetText(txtName,pd.name);
 
         #region ExpProgress
-        int expValPercent = (int)(pd.exp * 1.0f / PECommon.GetExpUpValByLv(pd.lv) * 100);
+        int expValPercent = (int)(pd.exp * 1.0f /100);
         SetText(txtExpPrg, expValPercent + "%");
         int index = expValPercent / 10;
         GridLayoutGroup grid = expProgramTrans.GetComponent<GridLayoutGroup>();
@@ -91,14 +91,14 @@ public class MainCityWnd : WindowRoot
 
         //设置自动任务图标
         //currentTaskData = resSvc.GetGuideCfgData(pd.guideid);
-        if (currentTaskData!=null)
-        {
-            SetGuideBtnIcon(currentTaskData.npcID);
-        }
-        else
-        {//没任务就显示默认图标
-            SetGuideBtnIcon(-1);
-        }
+        //if (currentTaskData!=null)
+        //{
+        //    SetGuideBtnIcon(currentTaskData.npcID);
+        //}
+        //else
+        //{//没任务就显示默认图标
+        //    SetGuideBtnIcon(-1);
+        //}
     }
     //根据任务的不同设置不同的NPC头像
     private void SetGuideBtnIcon(int npcID)
@@ -138,23 +138,23 @@ public class MainCityWnd : WindowRoot
     //        GameRoot.instance.AddTips("更多引导，正在开发中，敬请期待。。。");
     //    }
     //}
-    public void ClickMenuBtn()
-    {
-        audioSvc.PlayUIAudio(Constants.uiExtenBtn);
-        menuState = !menuState;
+    //public void ClickMenuBtn()
+    //{
+    //    audioSvc.PlayUIAudio(Constants.uiExtenBtn);
+    //    menuState = !menuState;
 
-        AnimationClip clip = null;
-        //取反之后的状态
-        if (menuState)
-        {
-            clip = menuAnim.GetClip("OpenMainCityBtn");
-        }
-        else
-        {
-            clip = menuAnim.GetClip("CloseMainCityBtn");
-        }
-        menuAnim.Play(clip.name);
-    }
+    //    AnimationClip clip = null;
+    //    //取反之后的状态
+    //    if (menuState)
+    //    {
+    //        clip = menuAnim.GetClip("OpenMainCityBtn");
+    //    }
+    //    else
+    //    {
+    //        clip = menuAnim.GetClip("CloseMainCityBtn");
+    //    }
+    //    menuAnim.Play(clip.name);
+    //}
     public void ClickHeadBtn()
     {
         audioSvc.PlayUIAudio(Constants.uiOpenPage);
@@ -165,42 +165,42 @@ public class MainCityWnd : WindowRoot
         audioSvc.PlayUIAudio(Constants.uiOpenPage);
         MainCitySys.Instance.OpenStrengthWnd();
     }
-    public void RegistrTouchEvts()
-    {
-        //添加监听器
-        OnClickDown(imgTouch.gameObject, (PointerEventData evt) =>
-         {
-             clickPos = evt.position;
-             SetActive(imgDirPoint);
-             imgDirBg.transform.position = evt.position;
-         });
-        OnClickUP(imgTouch.gameObject, (PointerEventData evt) =>
-        {
-            imgDirBg.transform.position = defaultPos;
-            SetActive(imgDirPoint,false);
-            //小圆点位置设置为中心锚点的中间
-            imgDirPoint.transform.localPosition = Vector2.zero;
-            //方向信息传递
-            //MainCitySys.Instance.SetMoveDir(Vector2.zero);
-        });
-        OnDrag(imgTouch.gameObject, (PointerEventData evt) =>
-        {
-            Vector2 dir = evt.position - clickPos;//得到拖拽的方向
-            //要把拖拽向量方向不变，但是距离限制
-            if (dir.magnitude>pointDis)
-            {
-                Vector2 clampDir = Vector2.ClampMagnitude(dir,pointDis);
-                //背景图位置+自身需要移动的
-                imgDirPoint.transform.position = clickPos + clampDir;
-            }
-            else
-            {
-                imgDirPoint.transform.position = evt.position;
-            }
-            //方向信息传递
-            //MainCitySys.Instance.SetMoveDir(dir.normalized);
-        });
-    }
+    //public void RegistrTouchEvts()
+    //{
+    //    //添加监听器
+    //    OnClickDown(imgTouch.gameObject, (PointerEventData evt) =>
+    //     {
+    //         clickPos = evt.position;
+    //         SetActive(imgDirPoint);
+    //         imgDirBg.transform.position = evt.position;
+    //     });
+    //    OnClickUP(imgTouch.gameObject, (PointerEventData evt) =>
+    //    {
+    //        imgDirBg.transform.position = defaultPos;
+    //        SetActive(imgDirPoint,false);
+    //        //小圆点位置设置为中心锚点的中间
+    //        imgDirPoint.transform.localPosition = Vector2.zero;
+    //        //方向信息传递
+    //        //MainCitySys.Instance.SetMoveDir(Vector2.zero);
+    //    });
+    //    OnDrag(imgTouch.gameObject, (PointerEventData evt) =>
+    //    {
+    //        Vector2 dir = evt.position - clickPos;//得到拖拽的方向
+    //        //要把拖拽向量方向不变，但是距离限制
+    //        if (dir.magnitude>pointDis)
+    //        {
+    //            Vector2 clampDir = Vector2.ClampMagnitude(dir,pointDis);
+    //            //背景图位置+自身需要移动的
+    //            imgDirPoint.transform.position = clickPos + clampDir;
+    //        }
+    //        else
+    //        {
+    //            imgDirPoint.transform.position = evt.position;
+    //        }
+    //        //方向信息传递
+    //        //MainCitySys.Instance.SetMoveDir(dir.normalized);
+    //    });
+    //}
 
     #endregion
 }

@@ -6,8 +6,10 @@
 	功能：资源服务
 *****************************************************/
 
+using LitJson;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +24,8 @@ public class ResSvc : MonoBehaviour
         instance = this;
         //InitRDNameCfg(PathDefine.RDName);
         InitMapCfg(PathDefine.MapCfg);
+        //读取玩家数据
+        GameRoot.instance.ReadPlayerData();
         //InitGuideCfg(PathDefine.GuideCfg);
        // InitStrengthCfg(PathDefine.StrengthCfg);
         //PECommon.Log("启动资源加载...");
@@ -453,4 +457,5 @@ public class ResSvc : MonoBehaviour
     }
     #endregion
     #endregion
+    
 }
