@@ -11,7 +11,7 @@
 	<item ID="1002">
 		<mapname>完美主城</mapname>
 		<sceneName>SceneMainCity2</sceneName>
-		<mainCamPos>19,50,20</mainCamPos>
+		<mainCamPos>16.15,51.89,17.15</mainCamPos>
 		<mainCamRote>18,45,0</mainCamRote>
 		<playerBornPos>22,47.48,23</playerBornPos>
 		<playerBornRote>0,0,0</playerBornRote>

@@ -16,9 +16,10 @@ public class PlayerController : MonoBehaviour
 
     #region 相机控制
     private Transform camMainTrans;
-    private Vector3 startMousePos;
-    private Vector3 endMousePos;
-    private float camRotSmooth = 0.15f;
+    private float camRotSmooth = 3f;
+    private bool isRotate;
+    private float distance;
+    private float disSmooth = 10f;
     #endregion
     private Animation playerAnim;
     private bool isMove = false;
@@ -72,10 +73,23 @@ public class PlayerController : MonoBehaviour
         else
         {
             Dir = Vector2.zero;
-            playerAnim.Play("Idle");
+                int value = Random.Range(1, 5);
+            if (Input.GetMouseButtonDown(0))
+            {
+                playerAnim.Play("Attack" + value);
+            }
+            else
+            {
+                if (playerAnim.IsPlaying("Run"))
+                {
+                    playerAnim.Play("Idle");
+                }
+                playerAnim.PlayQueued("Idle");
+            }
             //SetBlend(0);
         }
         CameraControl();
+        ScrollView();
         #endregion
         //if (currentBlend!=targetBlend)
         //{
@@ -116,51 +130,39 @@ public class PlayerController : MonoBehaviour
     {
         targetBlend = blend;
     }
-    //private void UpdateMixBlend()
-    //{
-    //    //如果当前值比目标值大就减小，比目标值小就增大，绝对值相差范围内设置相等
-    //    //接近每帧插值范围，直接设置相等
-    //    if (Mathf.Abs(currentBlend-targetBlend)<Constants.accelerateSpeed*Time.deltaTime)
-    //    {
-    //        currentBlend = targetBlend;
-    //    }
-    //    //由运动状态转向idle状态
-    //    else if (currentBlend>targetBlend)
-    //    {
-    //        currentBlend -= Constants.accelerateSpeed * Time.deltaTime;
-    //    }
-    //    //由idle转化为运动
-    //    else
-    //    {
-    //        currentBlend += Constants.accelerateSpeed * Time.deltaTime;
-    //    }
-    //    anim.SetFloat("Blend",currentBlend);
-    //}
-
     private void CameraControl()
     {
+        Vector3 originalCamTrans = camMainTrans.position;
+        Quaternion originalCamQua = camMainTrans.rotation;
         if (Input.GetMouseButtonDown(1))
         {
-            startMousePos = Input.mousePosition;
+            isRotate = true;
         }
-        if (Input.GetMouseButton(1))
-        {
-            endMousePos = Input.mousePosition;
-        }
-        float horizentalRot = endMousePos.x - startMousePos.x;
-        //float verticalRot = endMousePos.y - startMousePos.y;
         if (Input.GetMouseButtonUp(1))
         {
-            horizentalRot = 0;
-            //verticalRot = 0;
-            startMousePos = Vector3.zero;
-            endMousePos = Vector3.zero;
+            isRotate = false;
         }
-        if (horizentalRot!=0)
+        if (isRotate)
         {
-            camMainTrans.RotateAround(transform.position,transform.up,horizentalRot*Time.deltaTime*camRotSmooth);
-            transform.RotateAround(transform.position,transform.up,horizentalRot*Time.deltaTime*camRotSmooth);
-            cameraOffset = camMainTrans.transform.position - transform.position;
+            camMainTrans.RotateAround(transform.position, transform.up,Input.GetAxis("Mouse X")*camRotSmooth);
+
+            camMainTrans.RotateAround(transform.position,camMainTrans.right,-Input.GetAxis("Mouse Y")*camRotSmooth);
+            float x = camMainTrans.eulerAngles.x;
+            if (x>80||x<10)
+            {
+                camMainTrans.position = originalCamTrans;
+                camMainTrans.rotation = originalCamQua;
+            }
         }
+        cameraOffset = camMainTrans.position - transform.position;
+    }
+    private void ScrollView()
+    {
+        distance = cameraOffset.magnitude;
+        distance -= Input.GetAxis("Mouse ScrollWheel") * disSmooth;
+        distance = Mathf.Clamp(distance,4,15);
+        cameraOffset = cameraOffset.normalized * distance;
+        SetCamera();
+        //Debug.Log(distance + "CameraOffset: " + cameraOffset);
     }
 }
