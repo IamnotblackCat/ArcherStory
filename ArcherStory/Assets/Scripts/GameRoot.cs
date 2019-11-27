@@ -40,7 +40,8 @@ public class GameRoot : MonoBehaviour
         //loginSys.InitSys();
         MainCitySys mainCitySys = GetComponent<MainCitySys>();
         mainCitySys.InitSys();
-
+        BattleSys battleSys = GetComponent<BattleSys>();
+        battleSys.InitSys();
         //动画系统-老的模型不支持animator
         
         //进入登陆场景并加载UI
@@ -49,7 +50,7 @@ public class GameRoot : MonoBehaviour
         
     }
     //初始化的时候确保所有的UI除了提示面板都是隐藏的
-    private void ClearUIRoot()
+    public void ClearUIRoot()
     {
         Transform canvasTrans = transform.Find("Canvas");
         for (int i = 0; i < canvasTrans.childCount; i++)

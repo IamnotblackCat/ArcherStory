@@ -18,6 +18,7 @@ public class MainCityWnd : WindowRoot
     //public Image imgDirPoint;
 
     //public Text txtFight;
+    public GameObject goFuben;
     public Text txtLV;
    // public Text txtPower;
    //public Image imgPowerPrg;
@@ -27,7 +28,7 @@ public class MainCityWnd : WindowRoot
     public Button btnGuide;
 
     public Transform expProgramTrans;
-    public Animation menuAnim;
+    //public Animation menuAnim;
 
     #endregion
 
@@ -164,6 +165,19 @@ public class MainCityWnd : WindowRoot
     {
         audioSvc.PlayUIAudio(Constants.uiOpenPage);
         MainCitySys.Instance.OpenStrengthWnd();
+    }
+    public void ClickFubenBtn()
+    {
+        goFuben.SetActive(true);
+    }
+    public void ClickConfirm()
+    {
+        GameRoot.instance.ClearUIRoot();
+        BattleSys.Instance.StartBattle(1003);
+    }
+    public void ClickConcel()
+    {
+        goFuben.SetActive(false);
     }
     //public void RegistrTouchEvts()
     //{

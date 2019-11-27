@@ -11,12 +11,19 @@
 	<item ID="1002">
 		<mapname>完美主城</mapname>
 		<sceneName>SceneMainCity2</sceneName>
-		<mainCamPos>16.15,51.89,17.15</mainCamPos>
+		<mainCamPos>19,50,20</mainCamPos>
 		<mainCamRote>18,45,0</mainCamRote>
 		<playerBornPos>22,47.48,23</playerBornPos>
 		<playerBornRote>0,0,0</playerBornRote>
 	</item>
-	<item/>
+	<item ID="1003">
+		<mapname>应天大牢</mapname>
+		<sceneName>ScenePrison</sceneName>
+		<mainCamPos>30.58,42.29,57.7</mainCamPos>
+		<mainCamRote>13.177,-43.59,0</mainCamRote>
+		<playerBornPos>26.75,40,61</playerBornPos>
+		<playerBornRote>0,0,0</playerBornRote>
+	</item>
 	<item/>
 	<item/>
 	<item/>

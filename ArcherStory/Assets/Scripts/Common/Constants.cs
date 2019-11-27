@@ -61,6 +61,8 @@ public class Constants
     //音效名
     public const string BGLogin = "bgLogin";
     public const string BGMainCity = "BG";
+    public const string BGFuben = "BGFuben";
+    public const string BGBoss = "BGBoss";
     public const string uiClick = "uiClickBtn";
     public const string uiExtenBtn = "uiExtenBtn";
     public const string uiOpenPage = "uiOpenPage";

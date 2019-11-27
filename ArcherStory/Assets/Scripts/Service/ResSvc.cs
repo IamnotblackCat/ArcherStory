@@ -254,7 +254,6 @@ public class ResSvc : MonoBehaviour
     public MapConfig GetMapCfgData(int id)
     {
         MapConfig data;
-        //Debug.Log(id);
         if (mapCfgDataDic.TryGetValue(id, out data))
         {
             //Debug.Log(data);
