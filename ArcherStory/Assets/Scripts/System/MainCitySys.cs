@@ -71,20 +71,19 @@ public class MainCitySys : SystemRoot
         //Debug.Log("CameraPos"+Camera.main.transform.position+"--mapDataCamPos"+mapData.mainCamPos);
         Camera.main.transform.eulerAngles = mapData.mainCamRote;
     }
-    //当检测到摇杆插件信息的时候
-    //public void SetMoveDir(Vector2 dir)
-    //{
-    //    StopNavTask();
-    //    if (dir==Vector2.zero)
-    //    {
-    //        playerCtrl.SetBlend(Constants.blendIdle);
-    //    }
-    //    else
-    //    {
-    //        playerCtrl.SetBlend(Constants.blendWalk);
-    //    }
-    //    playerCtrl.Dir = dir;
-    //}
+    //主城角色运动
+    public void SetMoveDir(Vector2 dir)
+    {
+        if (dir == Vector2.zero)
+        {
+            playerCtrl.SetBlend(Constants.blendIdle);
+        }
+        else
+        {
+            playerCtrl.SetBlend(Constants.blendWalk);
+        }
+        playerCtrl.Dir = dir;
+    }
     #region 玩家信息相关
     public void OpenInfoWnd()
     {

@@ -14,6 +14,7 @@ public class StateIdle : IState
 {
     public void Enter(EntityBase entity)
     {
+        entity.currentState = AniState.Idle;
     }
 
     public void Exit(EntityBase entity)

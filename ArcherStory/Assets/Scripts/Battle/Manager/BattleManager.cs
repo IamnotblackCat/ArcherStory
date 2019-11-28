@@ -18,6 +18,7 @@ public class BattleManager:MonoBehaviour
     private StateManager stateMg;
     private SkillManager skillMg;
     private MapManager mapMg;
+    private EntityPlayer entityPlayer;
 
     public void Init(int mapId)
     {
@@ -53,8 +54,8 @@ public class BattleManager:MonoBehaviour
         player.transform.position = mapData.playerBornPos;
         player.transform.eulerAngles = mapData.playerBornRote;
         player.transform.localScale = Vector3.one;
-        //载入角色以后，把控制器注入到逻辑实体里面，通过逻辑实体的控制器来控制角色
-        EntityPlayer entityPlayer = new EntityPlayer
+        //载入角色以后，把状态管理器、角色控制器注入到逻辑实体里面，通过逻辑实体的状态管理管理状态，然后在状态管理器里面调整角色控制器来表现
+        entityPlayer = new EntityPlayer
         {
             stateMg = this.stateMg
         };
@@ -63,6 +64,18 @@ public class BattleManager:MonoBehaviour
         entityPlayer.controller = playerController;
     }
 
+    //战斗场景角色控制
+    public void SetSelfPlayerMoveDir(Vector2 dir)
+    {
+        if (dir==Vector2.zero)
+        {
+            entityPlayer.Idle();
+        }
+        else
+        {
+            entityPlayer.Move();
+        }
+    }
     public void ReleaseSkill(int index)
     {
         switch (index)

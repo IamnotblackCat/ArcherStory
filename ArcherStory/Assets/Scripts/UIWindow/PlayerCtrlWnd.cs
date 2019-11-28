@@ -125,4 +125,8 @@ public class PlayerCtrlWnd : WindowRoot
     {
         BattleSys.Instance.ReleaseSkill(8);
     }
+    private void Update()
+    {
+        
+    }
 }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-public class EntityBase
+public abstract class EntityBase
 {
     public AniState currentState = AniState.None;
     public StateManager stateMg = null;

@@ -179,6 +179,13 @@ public class MainCityWnd : WindowRoot
     {
         goFuben.SetActive(false);
     }
+    private void Update()
+    {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        Vector2 _dir = new Vector2(h, v);
+        MainCitySys.Instance.SetMoveDir(_dir);
+    }
     //public void RegistrTouchEvts()
     //{
     //    //添加监听器

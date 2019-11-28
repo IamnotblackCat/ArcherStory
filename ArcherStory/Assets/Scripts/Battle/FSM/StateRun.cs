@@ -14,16 +14,14 @@ public class StateRun : IState
 {
     public void Enter(EntityBase entity)
     {
-        throw new NotImplementedException();
+        entity.currentState = AniState.Run;
     }
 
     public void Exit(EntityBase entity)
     {
-        throw new NotImplementedException();
     }
 
     public void Process(EntityBase entity)
     {
-        throw new NotImplementedException();
     }
 }

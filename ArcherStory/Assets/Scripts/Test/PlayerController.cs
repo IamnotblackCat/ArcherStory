@@ -58,57 +58,44 @@ public class PlayerController : Controller
     private void Update()
     {
         #region Input
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        Vector2 _dir = new Vector2(h, v);
-        if (_dir != Vector2.zero)
-        {
-            Dir = _dir;
-            //playerAnim.Play("Run");
-            SetBlend(1);
-            anim.SetFloat("Blend", 1);
-            SetDir();
-            SetMove();
-            SetCamera();
-        }
-        else
-        {
-            Dir = Vector2.zero;
-            //    int value = Random.Range(1, 5);
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    playerAnim.Play("Attack" + value);
-            //}
-            //else
-            //{
-            //    if (playerAnim.IsPlaying("Run"))
-            //    {
-            //        playerAnim.Play("Idle");
-            //    }
-            //    playerAnim.PlayQueued("Idle");
-            //}
-            SetBlend(0);
-            //anim.SetFloat("Blend", 0);
-        }
+        //float h = Input.GetAxis("Horizontal");
+        //float v = Input.GetAxis("Vertical");
+        //Vector2 _dir = new Vector2(h, v);
+        //if (_dir != Vector2.zero)
+        //{
+        //    Dir = _dir;
+        //    //playerAnim.Play("Run");
+        //    SetBlend(1);
+        //    //anim.SetFloat("Blend", 1);
+        //    SetDir();
+        //    SetMove();
+        //    SetCamera();
+        //}
+        //else
+        //{
+        //    Dir = Vector2.zero;
+        //    SetBlend(0);
+        //    //anim.SetFloat("Blend", 0);
+        //}
+        #endregion
+        CameraControl();
+        ScrollView();
         if (currentBlend != targetBlend)
         {
             UpdateMixBlend();
             //Debug.Log(currentBlend + "TargetBlend:" + targetBlend);
         }
-        CameraControl();
-        ScrollView();
-        #endregion
-        //if (isMove)
-        //{
-        //    //设置主角朝向
-        //    SetDir();
-        //    //设置移动
-        //    SetMove();
+        if (isMove)
+        {
+            //设置主角朝向
+            SetDir();
+            //设置移动
+            SetMove();
 
-        //    //相机跟随
-        //    SetCamera();
+            //相机跟随
+            SetCamera();
 
-        //}
+        }
     }
     private void SetDir()
     {//第二个参数是角色正面朝向，h=0,v=1,这里因为摄像机偏转了，

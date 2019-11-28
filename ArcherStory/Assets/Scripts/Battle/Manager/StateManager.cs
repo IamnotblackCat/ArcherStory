@@ -26,7 +26,11 @@ public class StateManager : MonoBehaviour
         }
         if (fsm.ContainsKey(targetState))
         {
-            fsm[entity.currentState].Exit(entity);
+            if (entity.currentState!=AniState.None)
+            {
+                fsm[entity.currentState].Exit(entity);
+
+            }
             fsm[targetState].Enter(entity);
             fsm[targetState].Process(entity);
         }
