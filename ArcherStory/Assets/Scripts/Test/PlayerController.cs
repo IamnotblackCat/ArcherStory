@@ -8,7 +8,7 @@
 
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour 
+public class PlayerController : Controller 
 {
 
     public Animator anim;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float distance;
     private float disSmooth = 10f;
     #endregion
-    private Animation playerAnim;
+    //private Animation playerAnim;
     private bool isMove = false;
 
     private Vector2 dir=Vector2.zero;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         camMainTrans = Camera.main.transform;
         cameraOffset = camMainTrans.transform.position - transform.position;
-        playerAnim = GetComponent<Animation>();
+        //playerAnim = GetComponent<Animation>();
     }
     private void Update()
     {
@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour
     }
     private void CameraControl()
     {
+        //Debug.Log(camMainTrans.position);
         Vector3 originalCamTrans = camMainTrans.position;
         Quaternion originalCamQua = camMainTrans.rotation;
         if (Input.GetMouseButtonDown(1))

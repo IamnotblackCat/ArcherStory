@@ -8,9 +8,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400000}
-  - component: {fileID: 11100000}
   - component: {fileID: 14300000}
   - component: {fileID: 114620223943363010}
+  - component: {fileID: 95001438015925202}
   m_Layer: 9
   m_Name: Archer_Female_00
   m_TagString: Player
@@ -1779,43 +1779,6 @@ Transform:
   m_Father: {fileID: 400000}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &11100000
-Animation:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: d29096c64cf38ac4db1c04f4a0431aa5, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: ec7d987945b8405418a7c34b6c004d63, type: 3}
-  - {fileID: 7400000, guid: 8043c43f4d9b3a844a4d78ed47660d11, type: 3}
-  - {fileID: 7400000, guid: c564b92550816b04fab5b58b98c7d89e, type: 3}
-  - {fileID: 7400000, guid: 65dcd15a861032f46b31a7bd830c380c, type: 3}
-  - {fileID: 7400000, guid: 98f5a6f47ff7b9242969c6aec384e7da, type: 3}
-  - {fileID: 7400000, guid: ed50504933612e845beff9897ab8a04d, type: 3}
-  - {fileID: 7400000, guid: aa8bcc4cf3c4302468e015c1c9e969e3, type: 3}
-  - {fileID: 7400000, guid: 607e4acdcc0bb8a408d98a697fed7224, type: 3}
-  - {fileID: 7400000, guid: da5f76b0b4dd1aa43866f1d9b8b83768, type: 3}
-  - {fileID: 7400000, guid: 92488580ccc28a9498aca30ee583b077, type: 3}
-  - {fileID: 7400000, guid: c221eeef7705eb64e9dfe92fd759ef6d, type: 3}
-  - {fileID: 7400000, guid: 7916cb39ce304454e9294df1e9533367, type: 3}
-  - {fileID: 7400000, guid: 06939cb9e5eba0a4f87b2a6bc5969065, type: 3}
-  - {fileID: 7400000, guid: d0e1379888573a94799788f78afb3c6b, type: 3}
-  - {fileID: 7400000, guid: 8b4b4a94177599e489e17b6d8d9b3f87, type: 3}
-  - {fileID: 7400000, guid: d29096c64cf38ac4db1c04f4a0431aa5, type: 3}
-  - {fileID: 7400000, guid: 6ae2b47241c48b94e8b5cb10d4a6b9c3, type: 3}
-  - {fileID: 7400000, guid: c7e53d199e1d0024387ea140c813c6b8, type: 3}
-  - {fileID: 7400000, guid: b32a68005eaac024ba135ccd871989f7, type: 3}
-  - {fileID: 7400000, guid: c2217e4828187e34d93d4efa50c7d7fe, type: 3}
-  - {fileID: 7400002, guid: 78f3a7a3ce850e341b804dd448f534a9, type: 3}
-  - {fileID: 7400000, guid: f97d1ada1942d6c48bf09a45fd1b175b, type: 3}
-  - {fileID: 7400000, guid: 457df97d78ccd1a46b871381a3587c4b, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 1
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2279,6 +2242,24 @@ Transform:
   m_Father: {fileID: 4295248389420474}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95001438015925202
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6716ecdc399906a4ea4d5e93a7f7e500, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95108756230384888
 Animator:
   serializedVersion: 3
@@ -2308,7 +2289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c858bbfbd3c9754bb18c52b798bc35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 95001438015925202}
   ctrl: {fileID: 14300000}
 --- !u!137 &137529089540219256
 SkinnedMeshRenderer:

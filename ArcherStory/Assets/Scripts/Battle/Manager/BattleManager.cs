@@ -42,7 +42,6 @@ public class BattleManager:MonoBehaviour
             Camera.main.transform.localEulerAngles = mapData.mainCamRote;
 
             LoadPlayer(mapData);
-
             audioSvc.PlayBGMusic(Constants.BGFuben);
         });
     }
@@ -54,5 +53,78 @@ public class BattleManager:MonoBehaviour
         player.transform.position = mapData.playerBornPos;
         player.transform.eulerAngles = mapData.playerBornRote;
         player.transform.localScale = Vector3.one;
+        //载入角色以后，把控制器注入到逻辑实体里面，通过逻辑实体的控制器来控制角色
+        EntityPlayer entityPlayer = new EntityPlayer
+        {
+            stateMg = this.stateMg
+        };
+        PlayerController playerController = player.GetComponent<PlayerController>();
+        playerController.Init();
+        entityPlayer.controller = playerController;
+    }
+
+    public void ReleaseSkill(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                ReleaseNormalATK();
+                break;
+            case 2:
+                ReleaseSkill2();
+                break;
+            case 3:
+                ReleaseSkill3();
+                break;
+            case 4:
+                ReleaseSkill4();
+                break;
+            case 5:
+                ReleaseSkill5();
+                break;
+            case 6:
+                ReleaseSkill6();
+                break;
+            case 7:
+                ReleaseSkill7();
+                break;
+            case 8:
+                ReleaseSkill8();
+                break;
+            default:
+                break;
+        }
+    }
+    private void ReleaseNormalATK()
+    {
+
+    }
+    private void ReleaseSkill2()
+    {
+
+    }
+    private void ReleaseSkill3()
+    {
+
+    }
+    private void ReleaseSkill4()
+    {
+
+    }
+    private void ReleaseSkill5()
+    {
+
+    }
+    private void ReleaseSkill6()
+    {
+
+    }
+    private void ReleaseSkill7()
+    {
+
+    }
+    private void ReleaseSkill8()
+    {
+
     }
 }

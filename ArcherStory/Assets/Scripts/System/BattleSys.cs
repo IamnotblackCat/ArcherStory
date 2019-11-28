@@ -13,6 +13,8 @@ using UnityEngine;
 public class BattleSys:SystemRoot
 {
     public static BattleSys Instance = null;
+    public PlayerCtrlWnd playerCtrlWnd;
+    public BattleManager battleMg;
 
     public override void InitSys()
     {
@@ -23,8 +25,20 @@ public class BattleSys:SystemRoot
     {
         GameObject go = new GameObject { name = "BattleRoot" };
         go.transform.SetParent(GameRoot.instance.transform);
-        BattleManager battleMg = go.AddComponent<BattleManager>();
+        battleMg = go.AddComponent<BattleManager>();
 
         battleMg.Init(mapid);
+        //Invoke("SetPlayerCtrlWndState", 0.5f);
+        SetPlayerCtrlWndState();
     }
+    public void SetPlayerCtrlWndState(bool isActive = true)
+    {
+        playerCtrlWnd.SetWndState(isActive);
+    }
+
+    public void ReleaseSkill(int index)
+    {
+        battleMg.ReleaseSkill(index);
+    }
+   
 }

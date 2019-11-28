@@ -37197,6 +37197,10 @@ Prefab:
       propertyPath: m_UseLightProbes
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11100000, guid: 23555704681a6094db0b605d00e0f6ae, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23555704681a6094db0b605d00e0f6ae, type: 3}
   m_IsPrefabAsset: 0
@@ -49603,6 +49607,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.10000002
       objectReference: {fileID: 0}
+    - target: {fileID: 11100000, guid: e2a99aeb3e00efc418f664568023be2e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a99aeb3e00efc418f664568023be2e, type: 3}
   m_IsPrefabAsset: 0
@@ -61288,27 +61296,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc5a29b936332944ab80fa429b97f594, type: 3}
   m_IsPrefabAsset: 0
---- !u!1 &1482786167 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 23555704681a6094db0b605d00e0f6ae,
-    type: 3}
-  m_PrefabInternal: {fileID: 908125919}
 --- !u!4 &1482786168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 23555704681a6094db0b605d00e0f6ae,
     type: 3}
   m_PrefabInternal: {fileID: 908125919}
---- !u!114 &1482786172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1482786167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47b734d6cf544e946a6217f77fe9aa3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1482885089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b6377642dfcfee844a7e2f1519728938,
