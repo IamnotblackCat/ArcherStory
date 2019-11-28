@@ -49,6 +49,10 @@ public class BattleManager:MonoBehaviour
 
     private void LoadPlayer(MapConfig mapData)
     {
+        GameObject player = resSvc.LoadPrefab(PathDefine.ArcherBattle);
 
+        player.transform.position = mapData.playerBornPos;
+        player.transform.eulerAngles = mapData.playerBornRote;
+        player.transform.localScale = Vector3.one;
     }
 }

@@ -64,37 +64,40 @@ public class PlayerController : MonoBehaviour
         if (_dir != Vector2.zero)
         {
             Dir = _dir;
-            playerAnim.Play("Run");
+            //playerAnim.Play("Run");
+            SetBlend(1);
+            anim.SetFloat("Blend", 1);
             SetDir();
             SetMove();
             SetCamera();
-            //SetBlend(1);
         }
         else
         {
             Dir = Vector2.zero;
-                int value = Random.Range(1, 5);
-            if (Input.GetMouseButtonDown(0))
-            {
-                playerAnim.Play("Attack" + value);
-            }
-            else
-            {
-                if (playerAnim.IsPlaying("Run"))
-                {
-                    playerAnim.Play("Idle");
-                }
-                playerAnim.PlayQueued("Idle");
-            }
-            //SetBlend(0);
+            //    int value = Random.Range(1, 5);
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    playerAnim.Play("Attack" + value);
+            //}
+            //else
+            //{
+            //    if (playerAnim.IsPlaying("Run"))
+            //    {
+            //        playerAnim.Play("Idle");
+            //    }
+            //    playerAnim.PlayQueued("Idle");
+            //}
+            SetBlend(0);
+            //anim.SetFloat("Blend", 0);
+        }
+        if (currentBlend != targetBlend)
+        {
+            UpdateMixBlend();
+            //Debug.Log(currentBlend + "TargetBlend:" + targetBlend);
         }
         CameraControl();
         ScrollView();
         #endregion
-        //if (currentBlend!=targetBlend)
-        //{
-        //    UpdateMixBlend();
-        //}
         //if (isMove)
         //{
         //    //设置主角朝向
@@ -164,5 +167,25 @@ public class PlayerController : MonoBehaviour
         cameraOffset = cameraOffset.normalized * distance;
         SetCamera();
         //Debug.Log(distance + "CameraOffset: " + cameraOffset);
+    }
+    private void UpdateMixBlend()
+    {
+        //如果当前值比目标值大就减小，比目标值小就增大，绝对值相差范围内设置相等
+        //接近每帧插值范围，直接设置相等
+        if (Mathf.Abs(currentBlend - targetBlend) < Constants.accelerateSpeed * Time.deltaTime)
+        {
+            currentBlend = targetBlend;
+        }
+        //由运动状态转向idle状态
+        else if (currentBlend > targetBlend)
+        {
+            currentBlend -= Constants.accelerateSpeed * Time.deltaTime;
+        }
+        //由idle转化为运动
+        else
+        {
+            currentBlend += Constants.accelerateSpeed * Time.deltaTime;
+        }
+        anim.SetFloat("Blend", currentBlend);
     }
 }

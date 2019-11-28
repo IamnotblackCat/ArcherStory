@@ -50,5 +50,6 @@ public class PathDefine
 
     #region Player
     public const string ArcherPrefab = "Character/Archer/Female/Archer_Female_03/Archer_Female_00";
+    public const string ArcherBattle = "Character/Archer/Female/Archer_Female_03/ArcherBattle";
     #endregion
 }
