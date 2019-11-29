@@ -10,8 +10,6 @@ using UnityEngine;
 
 public class PlayerController : Controller 
 {
-
-    public Animator anim;
     public CharacterController ctrl;
 
     #region 相机控制
@@ -21,33 +19,12 @@ public class PlayerController : Controller
     private float distance;
     private float disSmooth = 10f;
     #endregion
-    //private Animation playerAnim;
-    private bool isMove = false;
 
-    private Vector2 dir=Vector2.zero;
     private Vector3 cameraOffset = Vector3.zero;
     //平滑动画混合树用到的值
     private float currentBlend = 0;
     private float targetBlend = 0;
-    public Vector2 Dir
-    {
-        get
-        {
-            return dir;
-        }
-        set
-        {
-            dir = value;
-            if (value==Vector2.zero)
-            {
-                isMove = false;
-            }
-            else
-            {
-                isMove = true;
-            }
-        }
-    }
+    
 
     public void Init()
     {
@@ -91,10 +68,8 @@ public class PlayerController : Controller
             SetDir();
             //设置移动
             SetMove();
-
             //相机跟随
             SetCamera();
-
         }
     }
     private void SetDir()
@@ -116,7 +91,8 @@ public class PlayerController : Controller
     {
         camMainTrans.transform.position = transform.position + cameraOffset;
     }
-    public void SetBlend(float blend)
+    //重写父类的设置blend，因为玩家角色动画融合，使用了updateBlend进行细腻表现，怪物控制就不用了。
+    public override void SetBlend(float blend)
     {
         targetBlend = blend;
     }

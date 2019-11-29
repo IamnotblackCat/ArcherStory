@@ -21,4 +21,5 @@ public enum AniState
     None,
     Idle,
     Run,
+    Attack,
 }

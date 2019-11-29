@@ -18,7 +18,8 @@ public class BattleManager:MonoBehaviour
     private StateManager stateMg;
     private SkillManager skillMg;
     private MapManager mapMg;
-    private EntityPlayer entityPlayer;
+     
+    public EntityPlayer entitySelfPlayer;
 
     public void Init(int mapId)
     {
@@ -54,14 +55,15 @@ public class BattleManager:MonoBehaviour
         player.transform.position = mapData.playerBornPos;
         player.transform.eulerAngles = mapData.playerBornRote;
         player.transform.localScale = Vector3.one;
-        //载入角色以后，把状态管理器、角色控制器注入到逻辑实体里面，通过逻辑实体的状态管理管理状态，然后在状态管理器里面调整角色控制器来表现
-        entityPlayer = new EntityPlayer
+        /*载入角色以后，把状态管理器、角色控制器注入到逻辑实体里面，通过逻辑实体的状态管理管理状态，然后在状态管理器里面
+        又通过逻辑实体里面持有的角色控制器来控制表现*/
+        entitySelfPlayer = new EntityPlayer
         {
             stateMg = this.stateMg
         };
         PlayerController playerController = player.GetComponent<PlayerController>();
         playerController.Init();
-        entityPlayer.controller = playerController;
+        entitySelfPlayer.controller = playerController;
     }
 
     //战斗场景角色控制
@@ -69,11 +71,12 @@ public class BattleManager:MonoBehaviour
     {
         if (dir==Vector2.zero)
         {
-            entityPlayer.Idle();
+            entitySelfPlayer.Idle();
         }
         else
         {
-            entityPlayer.Move();
+            entitySelfPlayer.Move();
+            entitySelfPlayer.SetDir(dir);
         }
     }
     public void ReleaseSkill(int index)
@@ -114,7 +117,7 @@ public class BattleManager:MonoBehaviour
     }
     private void ReleaseSkill2()
     {
-
+        entitySelfPlayer.Attack();
     }
     private void ReleaseSkill3()
     {

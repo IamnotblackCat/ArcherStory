@@ -1,22 +1,21 @@
 /****************************************************
-	文件：StateIdle.cs
+	文件：StateAttack.cs
 	作者：Echo
 	邮箱: 350383921@qq.com
-	日期：2019/11/28 15:39   	
-	功能：Idle状态
+	日期：2019/11/29 16:34   	
+	功能：攻击状态
 *****************************************************/
 using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class StateIdle : IState
+
+public class StateAttack : IState
 {
     public void Enter(EntityBase entity)
     {
-        entity.currentState = AniState.Idle;
-        //进来就设置方向向量为0，停止移动
-        entity.SetDir(Vector2.zero);
+        Debug.Log("技能2");
     }
 
     public void Exit(EntityBase entity)
@@ -25,6 +24,5 @@ public class StateIdle : IState
 
     public void Process(EntityBase entity)
     {
-        entity.SetBlend(Constants.blendIdle);
     }
 }

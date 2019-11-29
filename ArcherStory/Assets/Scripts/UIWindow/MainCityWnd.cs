@@ -173,7 +173,8 @@ public class MainCityWnd : WindowRoot
     public void ClickConfirm()
     {
         GameRoot.instance.ClearUIRoot();
-        BattleSys.Instance.StartBattle(1003);
+        goFuben.SetActive(false);
+        BattleSys.Instance.StartBattle(Constants.Duplicate);
     }
     public void ClickConcel()
     {

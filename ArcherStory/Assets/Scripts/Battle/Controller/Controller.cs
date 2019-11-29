@@ -12,5 +12,30 @@ using UnityEngine;
 
 public abstract class Controller:MonoBehaviour
 {
-
+    public Animator anim;
+    protected bool isMove;
+    private Vector2 dir = Vector2.zero;
+    public Vector2 Dir
+    {
+        get
+        {
+            return dir;
+        }
+        set
+        {
+            dir = value;
+            if (value == Vector2.zero)
+            {
+                isMove = false;
+            }
+            else
+            {
+                isMove = true;
+            }
+        }
+    }
+    public virtual void SetBlend(float blend)
+    {
+        anim.SetFloat("Blend",blend);
+    }
 }

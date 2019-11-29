@@ -23,5 +23,6 @@ public class StateRun : IState
 
     public void Process(EntityBase entity)
     {
+        entity.SetBlend(Constants.blendRun);
     }
 }

@@ -85,7 +85,8 @@ public class PlayerCtrlWnd : WindowRoot
     public void ClickConfirm()
     {
         GameRoot.instance.ClearUIRoot();
-        BattleSys.Instance.StartBattle(1003);
+        returnGo.SetActive(false);
+        MainCitySys.Instance.EnterMainCity();
     }
     public void ClickConcel()
     {
@@ -127,6 +128,12 @@ public class PlayerCtrlWnd : WindowRoot
     }
     private void Update()
     {
-        
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        Vector2 _dir = new Vector2(h, v);
+        if (BattleSys.Instance.battleMg.entitySelfPlayer!=null)
+        {
+            BattleSys.Instance.battleMg.SetSelfPlayerMoveDir(_dir);
+        }
     }
 }

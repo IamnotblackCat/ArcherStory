@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using UnityEngine;
 
 public abstract class EntityBase
 {
@@ -23,5 +23,23 @@ public abstract class EntityBase
     public void Move()
     {
         stateMg.ChangeState(this, AniState.Run);
+    }
+    public void Attack()
+    {
+        stateMg.ChangeState(this,AniState.Attack);
+    }
+    public virtual void SetBlend(float blend)
+    {
+        if (controller!=null)
+        {
+            controller.SetBlend(blend);
+        }
+    }
+    public virtual void SetDir(Vector2 dir)
+    {
+        if (controller!=null)
+        {
+            controller.Dir = dir;
+        }
     }
 }

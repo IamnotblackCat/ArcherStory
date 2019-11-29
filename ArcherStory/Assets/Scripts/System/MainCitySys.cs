@@ -80,7 +80,7 @@ public class MainCitySys : SystemRoot
         }
         else
         {
-            playerCtrl.SetBlend(Constants.blendWalk);
+            playerCtrl.SetBlend(Constants.blendRun);
         }
         playerCtrl.Dir = dir;
     }
