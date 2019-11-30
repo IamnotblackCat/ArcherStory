@@ -13,16 +13,18 @@ using UnityEngine;
 
 public class StateAttack : IState
 {
-    public void Enter(EntityBase entity)
+    public void Enter(EntityBase entity, params object[] args)
     {
-        Debug.Log("技能2");
+        //Debug.Log("技能2");
+        entity.currentState = AniState.Attack;
     }
 
-    public void Exit(EntityBase entity)
+    public void Exit(EntityBase entity, params object[] args)
     {
     }
 
-    public void Process(EntityBase entity)
+    public void Process(EntityBase entity, params object[] args)
     {
+        entity.AttackEffect((int)args[0]);
     }
 }

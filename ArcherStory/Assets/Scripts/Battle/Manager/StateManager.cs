@@ -19,7 +19,7 @@ public class StateManager : MonoBehaviour
         fsm.Add(AniState.Run,new StateRun());
         fsm.Add(AniState.Attack,new StateAttack());
     }
-    public void ChangeState(EntityBase entity,AniState targetState)
+    public void ChangeState(EntityBase entity,AniState targetState, params object[] args)
     {
         if (entity.currentState==targetState)
         {
@@ -29,11 +29,10 @@ public class StateManager : MonoBehaviour
         {
             if (entity.currentState!=AniState.None)
             {
-                fsm[entity.currentState].Exit(entity);
-
+                fsm[entity.currentState].Exit(entity,args);
             }
-            fsm[targetState].Enter(entity);
-            fsm[targetState].Process(entity);
+            fsm[targetState].Enter(entity,args);
+            fsm[targetState].Process(entity,args);
         }
     }
 }

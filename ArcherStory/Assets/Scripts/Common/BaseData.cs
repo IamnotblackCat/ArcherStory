@@ -33,3 +33,10 @@ public class MapConfig : BaseData<MapConfig>
     public Vector3 playerBornPos;
     public Vector3 playerBornRote;
 }
+public class SkillCfg : BaseData<SkillCfg>
+{
+    public string skillName;
+    public float skillTime;
+    public int aniAction;
+    public string fx;
+}

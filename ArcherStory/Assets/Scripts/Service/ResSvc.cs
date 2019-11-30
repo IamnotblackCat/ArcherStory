@@ -24,6 +24,8 @@ public class ResSvc : MonoBehaviour
         instance = this;
         //InitRDNameCfg(PathDefine.RDName);
         InitMapCfg(PathDefine.MapCfg);
+
+        InitSkillCfg(PathDefine.SkillCfg);
         //读取玩家数据
         GameRoot.instance.ReadPlayerData();
         //InitGuideCfg(PathDefine.GuideCfg);
@@ -115,69 +117,6 @@ public class ResSvc : MonoBehaviour
         return sp;
     }
     #region InitCfgs
-    #region 初始化名字配置
-    //三个list来存储姓、男名、女名
-    private List<string> surNameList = new List<string>();
-    private List<string> manNameList = new List<string>();
-    private List<string> womanNameList = new List<string>();
-    private void InitRDNameCfg(string path)
-    {
-        TextAsset xml = Resources.Load<TextAsset>(path);
-        if (!xml)
-        {
-            PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
-        }
-        else
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml.text);
-            //选中子节点集合
-            XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
-            for (int i = 0; i < nodList.Count; i++)
-            {
-                XmlElement ele = nodList[i] as XmlElement;
-                if (ele.GetAttributeNode("ID") == null)
-                {//不包含ID的节点，直接跳到下一个遍历，安全校验
-                    continue;
-                }
-                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
-                foreach (XmlElement element in nodList[i].ChildNodes)
-                {
-                    switch (element.Name)
-                    {
-                        case "surname":
-                            surNameList.Add(element.InnerText);
-                            break;
-                        case "man":
-                            manNameList.Add(element.InnerText);
-                            break;
-                        case "woman":
-                            womanNameList.Add(element.InnerText);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
-
-    }
-    public string GetRDNameData(bool man = true)//默认男性角色
-    {
-        //System.Random rd = new System.Random();
-
-        string rdName = surNameList[PETools.RDInt(0, surNameList.Count - 1)];
-        if (man)
-        {
-            rdName += manNameList[PETools.RDInt(0, manNameList.Count - 1)];
-        }
-        else
-        {
-            rdName += womanNameList[PETools.RDInt(0, womanNameList.Count - 1)];
-        }
-        return rdName;
-    }
-    #endregion
 
     #region 地图配置
     private Dictionary<int, MapConfig> mapCfgDataDic = new Dictionary<int, MapConfig>();
@@ -333,7 +272,72 @@ public class ResSvc : MonoBehaviour
         return null;
     }
     #endregion
+    #region 技能配置
+    private Dictionary<int, SkillCfg> skillCfgDic = new Dictionary<int, SkillCfg>();
+    private void InitSkillCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+            //选中子节点集合
+            XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
+            for (int i = 0; i < nodList.Count; i++)
+            {
+                XmlElement ele = nodList[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {//不包含ID的节点，直接跳到下一个遍历，安全校验
+                    continue;
+                }
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                SkillCfg skillCfgData = new SkillCfg();
+                skillCfgData.ID = ID;
 
+                foreach (XmlElement element in nodList[i].ChildNodes)
+                {
+                    switch (element.Name)
+                    {
+                        case "skillName":
+                            {
+                                skillCfgData.skillName = element.InnerText;
+                            }
+                            break;
+                        case "skillTime":
+                            skillCfgData.skillTime = float.Parse(element.InnerText);
+                            break;
+                        case "aniAction":
+                            skillCfgData.aniAction = int.Parse(element.InnerText);
+                            break;
+                        case "fx":
+                            skillCfgData.fx = element.InnerText;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                skillCfgDic.Add(ID, skillCfgData);
+                //Debug.Log("ID:"+ID+"  mapCfg:"+mapCfg.ToString());
+            }
+        }
+    }
+    public SkillCfg GetSkillCfgData(int id)
+    {
+        SkillCfg agc = null;
+
+        //Debug.Log(id);
+        if (skillCfgDic.TryGetValue(id, out agc))
+        {
+            //Debug.Log(data);
+            return agc;
+        }
+        return null;
+    } 
+    #endregion
     #region 强化配置
     private Dictionary<int, Dictionary<int, StrengthCfg>> strengthDic = new Dictionary<int, Dictionary<int, StrengthCfg>>();
     private void InitStrengthCfg(string path)

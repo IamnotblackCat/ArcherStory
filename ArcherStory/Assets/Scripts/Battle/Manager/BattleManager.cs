@@ -59,7 +59,8 @@ public class BattleManager:MonoBehaviour
         又通过逻辑实体里面持有的角色控制器来控制表现*/
         entitySelfPlayer = new EntityPlayer
         {
-            stateMg = this.stateMg
+            stateMg = this.stateMg,
+            skillMg = skillMg,
         };
         PlayerController playerController = player.GetComponent<PlayerController>();
         playerController.Init();
@@ -117,7 +118,7 @@ public class BattleManager:MonoBehaviour
     }
     private void ReleaseSkill2()
     {
-        entitySelfPlayer.Attack();
+        entitySelfPlayer.Attack(102);
     }
     private void ReleaseSkill3()
     {

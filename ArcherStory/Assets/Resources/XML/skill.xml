@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item ID="101">
+		<skillName>普通攻击</skillName>
+		<skillTime>1.167</skillTime>
+	</item>
+	<item ID="102">
+		<skillName>贯通箭</skillName>
+		<skillTime>1.333</skillTime>
+		<aniAction>1</aniAction>
+		<fx>skill2</fx>
+	</item>
+	<item ID="103">
+		<skillName>烈焰矢</skillName>
+		<skillTime>1.833</skillTime>
+		<fx>skill3</fx>
+	</item>
+	<item ID="104">
+		<skillName>陨石</skillName>
+		<skillTime>2</skillTime>
+		<fx>skill4</fx>
+	</item>
+	<item ID="105">
+		<skillName>治疗</skillName>
+		<skillTime>0.8</skillTime>
+		<fx>skill5_heal</fx>
+	</item>
+	<item ID="106">
+		<skillName>变身</skillName>
+		<skillTime>0.876</skillTime>
+		<fx>skill6_huoBuff</fx>
+	</item>
+	<item ID="107">
+		<skillName>闪现</skillName>
+		<skillTime>0.8</skillTime>
+		<fx>skill7_blink</fx>
+	</item>
+	<item ID="108">
+		<skillName>闪避</skillName>
+		<skillTime>0.8</skillTime>
+	</item>
+</root>

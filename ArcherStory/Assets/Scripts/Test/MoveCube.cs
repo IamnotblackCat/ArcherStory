@@ -1,16 +1,17 @@
 /****************************************************
-    文件：PlayerMoveTest.cs
+    文件：MoveCube.cs
 	作者：Echo
     邮箱: 350383921@qq.com
-    日期：2019/10/29 11:37:58
-	功能：主角移动脚本
+    日期：2019/11/29 18:52:37
+	功能：Nothing
 *****************************************************/
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : Controller 
+public class MoveCube : Controller 
 {
-    public GameObject skill2FX;
     public CharacterController ctrl;
 
     #region 相机控制
@@ -20,23 +21,19 @@ public class PlayerController : Controller
     private float distance;
     private float disSmooth = 10f;
     #endregion
+    public GameObject texiao;
 
     private Vector3 cameraOffset = Vector3.zero;
     //平滑动画混合树用到的值
     private float currentBlend = 0;
     private float targetBlend = 0;
-    
 
-    public override void Init()
+
+    public void Start()
     {
-        base.Init();
         camMainTrans = Camera.main.transform;
         cameraOffset = camMainTrans.transform.position - transform.position;
-
-        if (skill2FX!=null)
-        {
-            fxDic.Add(skill2FX.name,skill2FX);
-        }
+        //playerAnim = GetComponent<Animation>();
     }
     private void Update()
     {
@@ -81,47 +78,26 @@ public class PlayerController : Controller
     private void SetDir()
     {//第二个参数是角色正面朝向，h=0,v=1,这里因为摄像机偏转了，
         //所以人物的朝向也需要加上摄像机的偏转，不然会出现朝向不一致
-        float angle = Vector2.SignedAngle(Dir,new Vector2(0,1))+camMainTrans.eulerAngles.y;
-        Vector3 eulerAngle = new Vector3(0,angle,0);
+        float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) + camMainTrans.eulerAngles.y;
+        Vector3 eulerAngle = new Vector3(0, angle, 0);
         transform.eulerAngles = eulerAngle;
     }
     private void SetMove()
     {
-        ctrl.Move(transform.forward*Time.deltaTime*Constants.playerMoveSpeed);
+        ctrl.Move(transform.forward * Time.deltaTime * Constants.playerMoveSpeed);
         if (!ctrl.isGrounded)
         {
-            ctrl.Move(-transform.up * Time.deltaTime*10f);
+            ctrl.Move(-transform.up * Time.deltaTime * 10f);
         }
     }
-    //重写父类的设置blend，因为玩家角色动画融合，使用了updateBlend进行细腻表现，怪物控制就不用了。
-    private void UpdateMixBlend()
-    {
-        //如果当前值比目标值大就减小，比目标值小就增大，绝对值相差范围内设置相等
-        //接近每帧插值范围，直接设置相等
-        if (Mathf.Abs(currentBlend - targetBlend) < Constants.accelerateSpeed * Time.deltaTime)
-        {
-            currentBlend = targetBlend;
-        }
-        //由运动状态转向idle状态
-        else if (currentBlend > targetBlend)
-        {
-            currentBlend -= Constants.accelerateSpeed * Time.deltaTime;
-        }
-        //由idle转化为运动
-        else
-        {
-            currentBlend += Constants.accelerateSpeed * Time.deltaTime;
-        }
-        anim.SetFloat("Blend", currentBlend);
-    } 
-    public override void SetBlend(float blend)
-    {
-        targetBlend = blend;
-    }
-    #region 摄像机控制
     public void SetCamera()
     {
         camMainTrans.transform.position = transform.position + cameraOffset;
+    }
+    //重写父类的设置blend，因为玩家角色动画融合，使用了updateBlend进行细腻表现，怪物控制就不用了。
+    public override void SetBlend(float blend)
+    {
+        targetBlend = blend;
     }
     private void CameraControl()
     {
@@ -159,17 +135,37 @@ public class PlayerController : Controller
         SetCamera();
         //Debug.Log(distance + "CameraOffset: " + cameraOffset);
     }
-    #endregion
-    public override void SetFX(string fxName, float closeTime)
+    private void UpdateMixBlend()
     {
-        GameObject go;
-        if (fxDic.TryGetValue(fxName,out go))
+        //如果当前值比目标值大就减小，比目标值小就增大，绝对值相差范围内设置相等
+        //接近每帧插值范围，直接设置相等
+        if (Mathf.Abs(currentBlend - targetBlend) < Constants.accelerateSpeed * Time.deltaTime)
         {
-            go.SetActive(true);
-            timeSvc.AddTimeTask((int tid) =>
-            {
-                go.SetActive(false);
-            }, closeTime);
+            currentBlend = targetBlend;
         }
+        //由运动状态转向idle状态
+        else if (currentBlend > targetBlend)
+        {
+            currentBlend -= Constants.accelerateSpeed * Time.deltaTime;
+        }
+        //由idle转化为运动
+        else
+        {
+            currentBlend += Constants.accelerateSpeed * Time.deltaTime;
+        }
+        anim.SetFloat("Blend", currentBlend);
+    }
+    public void ClickSkill1()
+    {
+        anim.SetInteger("Action",1);
+        //Debug.Log(anim.GetInteger("Action"));
+        texiao.SetActive(true);
+        StartCoroutine(Delay());
+    }
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        anim.SetInteger("Action",-1);
+        texiao.gameObject.SetActive(false);
     }
 }

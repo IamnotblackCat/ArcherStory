@@ -12,16 +12,16 @@ using System.Text;
 
 public class StateRun : IState
 {
-    public void Enter(EntityBase entity)
+    public void Enter(EntityBase entity, params object[] args)
     {
         entity.currentState = AniState.Run;
     }
 
-    public void Exit(EntityBase entity)
+    public void Exit(EntityBase entity, params object[] args)
     {
     }
 
-    public void Process(EntityBase entity)
+    public void Process(EntityBase entity, params object[] args)
     {
         entity.SetBlend(Constants.blendRun);
     }

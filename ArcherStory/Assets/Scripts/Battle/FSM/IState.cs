@@ -12,9 +12,9 @@ using System.Text;
 
 public interface IState
 {
-    void Enter(EntityBase entity);
-    void Exit(EntityBase entity);
-    void Process(EntityBase entity);
+    void Enter(EntityBase entity,params object[] args);//可变参数，可能有或者没有，不确定是什么参数
+    void Exit(EntityBase entity, params object[] args);
+    void Process(EntityBase entity, params object[] args);
 }
 public enum AniState
 {

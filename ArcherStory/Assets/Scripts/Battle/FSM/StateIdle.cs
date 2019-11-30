@@ -12,18 +12,18 @@ using UnityEngine;
 
 public class StateIdle : IState
 {
-    public void Enter(EntityBase entity)
+    public void Enter(EntityBase entity, params object[] args)
     {
         entity.currentState = AniState.Idle;
         //进来就设置方向向量为0，停止移动
         entity.SetDir(Vector2.zero);
     }
 
-    public void Exit(EntityBase entity)
+    public void Exit(EntityBase entity, params object[] args)
     {
     }
 
-    public void Process(EntityBase entity)
+    public void Process(EntityBase entity, params object[] args)
     {
         entity.SetBlend(Constants.blendIdle);
     }

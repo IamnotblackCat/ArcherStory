@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Glow_003
-  m_Shader: {fileID: 4800000, guid: d509ede28498b7040a215b30226c4ece, type: 3}
+  m_Shader: {fileID: 4800000, guid: edb60c39e8b7e784eab74ff362d5ca7d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

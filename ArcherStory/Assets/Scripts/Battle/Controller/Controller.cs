@@ -12,9 +12,12 @@ using UnityEngine;
 
 public abstract class Controller:MonoBehaviour
 {
-    public Animator anim;
     protected bool isMove;
+    protected TimeService timeSvc;
+
     private Vector2 dir = Vector2.zero;
+
+    public Animator anim;
     public Vector2 Dir
     {
         get
@@ -34,8 +37,24 @@ public abstract class Controller:MonoBehaviour
             }
         }
     }
+    
+    protected Dictionary<string, GameObject> fxDic = new Dictionary<string, GameObject>();
+
+    public virtual void Init()
+    {
+        timeSvc = TimeService.instance;
+    }
+
     public virtual void SetBlend(float blend)
     {
         anim.SetFloat("Blend",blend);
+    }
+    public virtual void SetAction(int act)
+    {
+        anim.SetInteger("Action",act);
+    }
+    public virtual void SetFX(string fxName ,float closeTime)
+    {
+        
     }
 }

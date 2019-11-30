@@ -35,6 +35,8 @@ public class GameRoot : MonoBehaviour
         AudioSvc audioSvc = GetComponent<AudioSvc>();
         audioSvc.InitSvc();
 
+        TimeService timeSvc = GetComponent<TimeService>();
+        timeSvc.InitSvc();
         //业务系统初始化
         //LoginSys loginSys = GetComponent<LoginSys>();
         //loginSys.InitSys();
@@ -43,10 +45,9 @@ public class GameRoot : MonoBehaviour
         BattleSys battleSys = GetComponent<BattleSys>();
         battleSys.InitSys();
         //动画系统-老的模型不支持animator
-        
+
         //进入登陆场景并加载UI
         //loginSys.EnterLogin();
-
         
     }
     //初始化的时候确保所有的UI除了提示面板都是隐藏的

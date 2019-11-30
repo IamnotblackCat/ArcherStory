@@ -13,33 +13,53 @@ using UnityEngine;
 public abstract class EntityBase
 {
     public AniState currentState = AniState.None;
+
     public StateManager stateMg = null;
-    public Controller controller=null;
+    public Controller controller = null;
+    public SkillManager skillMg = null;
 
     public void Idle()
     {
-        stateMg.ChangeState(this, AniState.Idle);
+        stateMg.ChangeState(this, AniState.Idle, null);
     }
     public void Move()
     {
-        stateMg.ChangeState(this, AniState.Run);
+        stateMg.ChangeState(this, AniState.Run, null);
     }
-    public void Attack()
+    public void Attack(int skillID)
     {
-        stateMg.ChangeState(this,AniState.Attack);
+        stateMg.ChangeState(this, AniState.Attack, skillID);
     }
     public virtual void SetBlend(float blend)
     {
-        if (controller!=null)
+        if (controller != null)
         {
             controller.SetBlend(blend);
         }
     }
     public virtual void SetDir(Vector2 dir)
     {
-        if (controller!=null)
+        if (controller != null)
         {
             controller.Dir = dir;
         }
+    }
+    public virtual void SetAction(int act)
+    {
+        if (controller != null)
+        {
+            controller.SetAction(act);
+        }
+    }
+    public virtual void SetFX(string fxName,float closeTime)
+    {
+        if (controller!=null)
+        {
+            controller.SetFX(fxName,closeTime);
+        }
+    }
+    public virtual void AttackEffect(int skillID)
+    {
+        skillMg.AttackEffect(this,skillID);
     }
 }
