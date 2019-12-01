@@ -13,10 +13,12 @@ using UnityEngine;
 
 public class SkillManager:MonoBehaviour
 {
+    private TimeService timeSvc;
     private ResSvc resSvc;
     public void Init()
     {
         resSvc = ResSvc.instance;
+        timeSvc = TimeService.instance;
     }
     /// <summary>
     /// 技能效果表现
@@ -29,5 +31,11 @@ public class SkillManager:MonoBehaviour
 
         entity.SetAction(skillData.aniAction);
         entity.SetFX(skillData.fx,skillData.skillTime);
+        timeSvc.AddTimeTask((int tid)=>
+        {
+            entity.Idle();
+            /*不能直接在这里修改action的值是因为，这个攻击可能会被打断，被打断以后不会进入这个状态
+            这样就无法设置action了，所以是在退出攻击状态的时候设置action*/
+        },skillData.skillTime);
     }
 }

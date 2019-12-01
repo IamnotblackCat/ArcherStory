@@ -85,6 +85,8 @@ public class Constants
     //动画混合树平滑加快速率
     public const float accelerateSpeed = 5;
 
+    //Action触发参数
+    public const int ActionDefault = -1;
     //混合树动画设定值
     public const float blendIdle = 0;
     public const float blendRun = 1;
@@ -92,4 +94,7 @@ public class Constants
     //json文件目录
     public const string jsonPath = "/Resources/Json/playerData.json";
     public const string jsonInitPath = "/Resources/Json/playerInitData.json";
+
+    //技能prefab路径
+    public const string skill2Path = "PrefabSkillFX/skill2";
 }

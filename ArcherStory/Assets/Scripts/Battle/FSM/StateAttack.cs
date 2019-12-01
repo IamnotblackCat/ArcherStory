@@ -21,6 +21,7 @@ public class StateAttack : IState
 
     public void Exit(EntityBase entity, params object[] args)
     {
+        entity.SetAction(Constants.ActionDefault);
     }
 
     public void Process(EntityBase entity, params object[] args)

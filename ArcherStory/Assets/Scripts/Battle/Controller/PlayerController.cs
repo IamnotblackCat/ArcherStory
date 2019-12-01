@@ -11,6 +11,9 @@ using UnityEngine;
 public class PlayerController : Controller 
 {
     public GameObject skill2FX;
+    public GameObject skill2Emp;
+    public GameObject skill4FX;
+    public GameObject skill4Emp;
     public CharacterController ctrl;
 
     #region 相机控制
@@ -32,10 +35,10 @@ public class PlayerController : Controller
         base.Init();
         camMainTrans = Camera.main.transform;
         cameraOffset = camMainTrans.transform.position - transform.position;
-
         if (skill2FX!=null)
         {
             fxDic.Add(skill2FX.name,skill2FX);
+            //fxDic.Add(skill4FX.name,skill4FX);
         }
     }
     private void Update()
@@ -166,8 +169,27 @@ public class PlayerController : Controller
         if (fxDic.TryGetValue(fxName,out go))
         {
             go.SetActive(true);
+            /*这里因为技能2和技能4是在出现以后位置就固定不变的
+             但是出现的时候位置要跟人物相关，所以出现以后就解除了父子关系，消失的时候再添加回来*/
+            if (fxName==skill2FX.name||fxName==skill4FX.name)
+            {
+                go.transform.DetachChildren();
+            }
+            //TODO,要判断必须是2技能和4技能，这里要修改
             timeSvc.AddTimeTask((int tid) =>
             {
+                if (fxName == skill2FX.name)
+                {
+                    skill2Emp.transform.SetParent(go.transform);
+                    skill2Emp.transform.localPosition = Vector3.zero;
+                    skill2Emp.transform.localRotation = Quaternion.identity;
+                }
+                else if (fxName==skill4FX.name)
+                {
+                    skill4Emp.transform.SetParent(go.transform);
+                    skill4Emp.transform.localPosition = Vector3.zero;
+                    skill4Emp.transform.localRotation = Quaternion.identity;
+                }
                 go.SetActive(false);
             }, closeTime);
         }
