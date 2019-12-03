@@ -16,6 +16,7 @@ public class PathDefine
     public const string GuideCfg = "ResCfgs/guideCfg";
     public const string StrengthCfg = "ResCfgs/strengthCfg";
     public const string SkillCfg = "XML/skill";
+    public const string SkillMoveCfg = "XML/skillmove";
     #endregion
 
     #region 强化
@@ -53,4 +54,8 @@ public class PathDefine
     public const string ArcherPrefab = "Character/Archer/Female/Archer_Female_03/Archer_Female_00";
     public const string ArcherBattle = "Character/Archer/Female/Archer_Female_03/ArcherBattle";
     #endregion
+
+    //技能prefab路径
+    public const string skill3Path = "PrefabSkillFX/skill3_ground";
+    public const string skillAreaIcon = "PrefabSkillFX/skillAreaIcon";
 }

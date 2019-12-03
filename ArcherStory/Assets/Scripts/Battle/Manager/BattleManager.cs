@@ -44,6 +44,8 @@ public class BattleManager:MonoBehaviour
             Camera.main.transform.localEulerAngles = mapData.mainCamRote;
 
             LoadPlayer(mapData);
+            entitySelfPlayer.Idle();
+
             audioSvc.PlayBGMusic(Constants.BGFuben);
         });
     }
@@ -70,6 +72,10 @@ public class BattleManager:MonoBehaviour
     //战斗场景角色控制
     public void SetSelfPlayerMoveDir(Vector2 dir)
     {
+        if (!entitySelfPlayer.canControll)
+        {
+            return;
+        }
         if (dir==Vector2.zero)
         {
             entitySelfPlayer.Idle();
@@ -114,7 +120,7 @@ public class BattleManager:MonoBehaviour
     }
     private void ReleaseNormalATK()
     {
-
+        entitySelfPlayer.Attack(101);
     }
     private void ReleaseSkill2()
     {
@@ -122,26 +128,26 @@ public class BattleManager:MonoBehaviour
     }
     private void ReleaseSkill3()
     {
-
+        entitySelfPlayer.Attack(103);
     }
     private void ReleaseSkill4()
     {
-
+        entitySelfPlayer.Attack(104);
     }
     private void ReleaseSkill5()
     {
-
+        entitySelfPlayer.Attack(105);
     }
     private void ReleaseSkill6()
     {
-
+        entitySelfPlayer.Attack(106);
     }
     private void ReleaseSkill7()
     {
-
+        entitySelfPlayer.Attack(107);
     }
     private void ReleaseSkill8()
     {
-
+        entitySelfPlayer.Attack(108);
     }
 }

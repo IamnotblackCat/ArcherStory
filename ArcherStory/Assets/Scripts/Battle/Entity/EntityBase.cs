@@ -18,6 +18,8 @@ public abstract class EntityBase
     public Controller controller = null;
     public SkillManager skillMg = null;
 
+    public bool canControll = true;
+
     public void Idle()
     {
         stateMg.ChangeState(this, AniState.Idle, null);
@@ -60,6 +62,15 @@ public abstract class EntityBase
     }
     public virtual void AttackEffect(int skillID)
     {
+
         skillMg.AttackEffect(this,skillID);
+    }
+    public virtual void SetSkillMoveState(bool move,float skillSpeed=0f)
+    {
+        if (controller!=null)
+        {
+
+            controller.SetSkillMoveState(move, skillSpeed);
+        }
     }
 }

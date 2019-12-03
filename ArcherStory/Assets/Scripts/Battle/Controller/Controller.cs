@@ -12,6 +12,8 @@ using UnityEngine;
 
 public abstract class Controller:MonoBehaviour
 {
+    protected ResSvc resSvc = null;
+
     protected bool isMove;
     protected TimeService timeSvc;
 
@@ -37,11 +39,15 @@ public abstract class Controller:MonoBehaviour
             }
         }
     }
-    
+
+    protected bool skillMove = false;
+    protected float skillMoveSpeed = 0f;
+
     protected Dictionary<string, GameObject> fxDic = new Dictionary<string, GameObject>();
 
     public virtual void Init()
     {
+        resSvc = ResSvc.instance;
         timeSvc = TimeService.instance;
     }
 
@@ -52,9 +58,15 @@ public abstract class Controller:MonoBehaviour
     public virtual void SetAction(int act)
     {
         anim.SetInteger("Action",act);
+        //Debug.Log(anim.GetInteger("Action"));
     }
     public virtual void SetFX(string fxName ,float closeTime)
     {
         
+    }
+    public void SetSkillMoveState(bool move,float skillSpeed=0f)
+    {
+        skillMove = move;
+        skillMoveSpeed = skillSpeed;
     }
 }

@@ -10,10 +10,18 @@ using UnityEngine;
 
 public class PlayerController : Controller 
 {
+    public GameObject skill1FX;
     public GameObject skill2FX;
     public GameObject skill2Emp;
+    public GameObject skill3FX;
     public GameObject skill4FX;
     public GameObject skill4Emp;
+    public GameObject skill5FX;
+    public GameObject skill6FX;
+    public GameObject skill7FX;
+    public GameObject skill8FX;
+    private GameObject skill3Ground;
+    private GameObject skill4Groud;
     public CharacterController ctrl;
 
     #region 相机控制
@@ -37,9 +45,17 @@ public class PlayerController : Controller
         cameraOffset = camMainTrans.transform.position - transform.position;
         if (skill2FX!=null)
         {
+            fxDic.Add(skill1FX.name,skill1FX);
             fxDic.Add(skill2FX.name,skill2FX);
+            fxDic.Add(skill3FX.name,skill3FX);
+            fxDic.Add(skill4FX.name, skill4FX);
+            fxDic.Add(skill5FX.name, skill5FX);
+            fxDic.Add(skill6FX.name, skill6FX);
+            fxDic.Add(skill7FX.name, skill7FX);
+            fxDic.Add(skill8FX.name, skill8FX);
             //fxDic.Add(skill4FX.name,skill4FX);
         }
+        
     }
     private void Update()
     {
@@ -80,6 +96,12 @@ public class PlayerController : Controller
             //相机跟随
             SetCamera();
         }
+        //技能移动位置
+        if (skillMove)
+        {
+            SetSkillMove();
+            SetCamera();
+        }
     }
     private void SetDir()
     {//第二个参数是角色正面朝向，h=0,v=1,这里因为摄像机偏转了，
@@ -95,6 +117,10 @@ public class PlayerController : Controller
         {
             ctrl.Move(-transform.up * Time.deltaTime*10f);
         }
+    }
+    private void SetSkillMove()
+    {
+        ctrl.Move(transform.forward * Time.deltaTime *skillMoveSpeed);
     }
     //重写父类的设置blend，因为玩家角色动画融合，使用了updateBlend进行细腻表现，怪物控制就不用了。
     private void UpdateMixBlend()
@@ -193,5 +219,10 @@ public class PlayerController : Controller
                 go.SetActive(false);
             }, closeTime);
         }
+    }
+    private void InitSkillGroudFX()
+    {
+        skill3Ground = resSvc.LoadPrefab(PathDefine.skill3Path);
+        skill3Ground.SetActive(false);
     }
 }

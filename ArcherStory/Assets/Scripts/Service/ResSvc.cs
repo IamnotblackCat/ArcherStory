@@ -26,6 +26,7 @@ public class ResSvc : MonoBehaviour
         InitMapCfg(PathDefine.MapCfg);
 
         InitSkillCfg(PathDefine.SkillCfg);
+        InitSkillMoveCfg(PathDefine.SkillMoveCfg);
         //读取玩家数据
         GameRoot.instance.ReadPlayerData();
         //InitGuideCfg(PathDefine.GuideCfg);
@@ -316,6 +317,9 @@ public class ResSvc : MonoBehaviour
                         case "fx":
                             skillCfgData.fx = element.InnerText;
                             break;
+                        case "skillMove":
+                            skillCfgData.skillMove = int.Parse(element.InnerText);
+                            break;
                         default:
                             break;
                     }
@@ -336,7 +340,59 @@ public class ResSvc : MonoBehaviour
             return agc;
         }
         return null;
-    } 
+    }
+    #endregion
+    #region 技能移动配置
+    private Dictionary<int, SkillMoveCfg> skillMoveCfgDic = new Dictionary<int, SkillMoveCfg>();
+    private void InitSkillMoveCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+            //选中子节点集合
+            XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
+            for (int i = 0; i < nodList.Count; i++)
+            {
+                XmlElement ele = nodList[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {//不包含ID的节点，直接跳到下一个遍历，安全校验
+                    continue;
+                }
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                SkillMoveCfg SkillMoveCfgData = new SkillMoveCfg();
+                SkillMoveCfgData.ID = ID;
+
+                foreach (XmlElement element in nodList[i].ChildNodes)
+                {
+                    switch (element.Name)
+                    {
+                        case "moveTime":
+                            SkillMoveCfgData.moveTime = int.Parse(element.InnerText);
+                            break;
+                        case "moveDis":
+                            SkillMoveCfgData.moveDis = float.Parse(element.InnerText);
+                            break;
+                    }
+                }
+                skillMoveCfgDic.Add(ID, SkillMoveCfgData);
+            }
+        }
+    }
+    public SkillMoveCfg GetSkillMoveCfgData(int id)
+    {
+        SkillMoveCfg agc = null;
+        if (skillMoveCfgDic.TryGetValue(id, out agc))
+        {
+            return agc;
+        }
+        return null;
+    }
     #endregion
     #region 强化配置
     private Dictionary<int, Dictionary<int, StrengthCfg>> strengthDic = new Dictionary<int, Dictionary<int, StrengthCfg>>();
@@ -460,5 +516,11 @@ public class ResSvc : MonoBehaviour
     }
     #endregion
     #endregion
-    
+    public void InitCfgData()
+    {
+        skillCfgDic.Clear();
+        skillMoveCfgDic.Clear();
+        InitSkillCfg(PathDefine.SkillCfg);
+        InitSkillMoveCfg(PathDefine.SkillMoveCfg);
+    }
 }

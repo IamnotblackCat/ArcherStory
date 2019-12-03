@@ -16,11 +16,15 @@ public class StateAttack : IState
     public void Enter(EntityBase entity, params object[] args)
     {
         //Debug.Log("技能2");
+        entity.canControll = false;
+        entity.SetDir(Vector2.zero);
         entity.currentState = AniState.Attack;
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
+        //Debug.Log("回调");
+        entity.canControll = true;
         entity.SetAction(Constants.ActionDefault);
     }
 

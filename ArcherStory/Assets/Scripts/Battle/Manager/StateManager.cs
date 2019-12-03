@@ -29,6 +29,7 @@ public class StateManager : MonoBehaviour
         {
             if (entity.currentState!=AniState.None)
             {
+                //Debug.Log("退出状态"+fsm[entity.currentState]);
                 fsm[entity.currentState].Exit(entity,args);
             }
             fsm[targetState].Enter(entity,args);

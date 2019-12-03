@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class PlayerCtrlWnd : WindowRoot
 {
     #region Public UI Transform
-    
+
     public GameObject returnGo;
     public Text txtLV;
 
@@ -21,6 +21,11 @@ public class PlayerCtrlWnd : WindowRoot
     public Transform expProgramTrans;
 
     #endregion
+    private RaycastHit hit;
+    private Ray ray;
+    private bool areaSkillIcon = false;
+    public GameObject sprite2D;
+    public GameObject skillArea;
 
     private bool menuState = true;//true是打开，false收起
     private AutoGuideCfg currentTaskData;
@@ -31,18 +36,19 @@ public class PlayerCtrlWnd : WindowRoot
     protected override void InitWnd()
     {
         base.InitWnd();
-        
+
         RefreshUI();
+        InitSkillAreaIcon();
     }
     public void RefreshUI()
     {
         PlayerData pd = GameRoot.instance.Playerdata;
-        
+
         SetText(txtLV, pd.lv);
 
         #region ExpProgress
         int expValPercent = (int)(pd.exp * 1.0f / 100);
-        
+
         int index = expValPercent / 10;
         GridLayoutGroup grid = expProgramTrans.GetComponent<GridLayoutGroup>();
         //得到 标准高度和当前高度的比例，然后乘以当前宽度得到真实宽度，然后减掉间隙计算经验条宽度
@@ -70,9 +76,9 @@ public class PlayerCtrlWnd : WindowRoot
         }
         #endregion
     }
-    
+
     #region Click Events
-    
+
     public void ClickHeadBtn()
     {
         audioSvc.PlayUIAudio(Constants.uiOpenPage);
@@ -131,9 +137,53 @@ public class PlayerCtrlWnd : WindowRoot
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector2 _dir = new Vector2(h, v);
-        if (BattleSys.Instance.battleMg.entitySelfPlayer!=null)
+        if (BattleSys.Instance.battleMg.entitySelfPlayer != null)
         {
             BattleSys.Instance.battleMg.SetSelfPlayerMoveDir(_dir);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ClickSkill2();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            areaSkillIcon = true;
+        }
+        if (areaSkillIcon)
+        {
+            UpdateAreaIcon(KeyCode.Alpha3);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha3))
+        {
+            //Debug.Log("1");
+            skillArea.SetActive(false);
+            areaSkillIcon = false;
+            ClickSkill3();
+        }
+    }
+    public void ClickInitBtn()
+    {
+        resSvc.InitCfgData();
+    }
+    public void UpdateAreaIcon(KeyCode key)
+    {
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider != null)
+            {
+                //var coll = new Vector3(hit.point.x,hit.point.y,hit.point.z);
+                skillArea.SetActive(true);
+                skillArea.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            }
+        }
+    }
+    private void InitSkillAreaIcon()
+    {
+        skillArea = resSvc.LoadPrefab(PathDefine.skillAreaIcon);
+        //skillArea.transform.Rotate(new Vector3(90, 0, 0));
+        skillArea.transform.SetParent(GameRoot.instance.transform);
+        skillArea.SetActive(false);
+        //Debug.Log(skillArea);
     }
 }

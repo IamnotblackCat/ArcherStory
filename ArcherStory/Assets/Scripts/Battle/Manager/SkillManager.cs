@@ -31,9 +31,18 @@ public class SkillManager:MonoBehaviour
 
         entity.SetAction(skillData.aniAction);
         entity.SetFX(skillData.fx,skillData.skillTime);
+
+        SkillMoveCfg skillMoveCfg = resSvc.GetSkillMoveCfgData(skillData.skillMove);
+        float speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
+        entity.SetSkillMoveState(true,speed);
+        timeSvc.AddTimeTask((int tid) =>
+        {//技能移动时间到就设置为不能移动
+            entity.SetSkillMoveState(false);
+        }, skillMoveCfg.moveTime/1000f);
         timeSvc.AddTimeTask((int tid)=>
         {
             entity.Idle();
+            //Debug.Log("转换状态");
             /*不能直接在这里修改action的值是因为，这个攻击可能会被打断，被打断以后不会进入这个状态
             这样就无法设置action了，所以是在退出攻击状态的时候设置action*/
         },skillData.skillTime);

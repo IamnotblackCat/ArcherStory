@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item ID="1011">
+		<moveTime>80</moveTime>
+		<moveDis>5.5</moveDis>
+	</item>
+	<item ID="1012">
+		<moveTime>80</moveTime>
+		<moveDis>10</moveDis>
+	</item>
+	<item ID="1013">
+		<moveTime>0</moveTime>
+		<moveDis>0</moveDis>
+	</item>
+	<item/>
+</root>

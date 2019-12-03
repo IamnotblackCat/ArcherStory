@@ -95,6 +95,5 @@ public class Constants
     public const string jsonPath = "/Resources/Json/playerData.json";
     public const string jsonInitPath = "/Resources/Json/playerInitData.json";
 
-    //技能prefab路径
-    public const string skill2Path = "PrefabSkillFX/skill2";
+    
 }
