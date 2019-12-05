@@ -21,6 +21,49 @@ public abstract class EntityBase
 
     public bool canControll = true;
 
+    private BattleProps battleProps;
+    //血量和攻击力在战斗过程中会变
+    private int hp;
+    private int attackValue;
+    public BattleProps BattleProps
+    {
+        get
+        {
+            return battleProps;
+        }
+
+        protected set
+        {
+            battleProps = value;
+        }
+    }
+
+    public int Hp
+    {
+        get
+        {
+            return hp;
+        }
+
+       protected set
+        {
+            hp = value;
+        }
+    }
+
+    public int AttackValue
+    {
+        get
+        {
+            return attackValue;
+        }
+
+        protected set
+        {
+            attackValue = value;
+        }
+    }
+
     public void Idle()
     {
         stateMg.ChangeState(this, AniState.Idle, null);
@@ -32,6 +75,13 @@ public abstract class EntityBase
     public void Attack(int skillID)
     {
         stateMg.ChangeState(this, AniState.Attack, skillID);
+    }
+    //设置战斗过程中的属性
+    public virtual void SetBattleProps(BattleProps props)
+    {
+        Hp = props.hp;
+        attackValue = props.attackValue;
+        BattleProps = props;
     }
     public virtual void SetBlend(float blend)
     {
@@ -72,5 +122,13 @@ public abstract class EntityBase
 
             controller.SetSkillMoveState(move, skillSpeed);
         }
+    }
+    public virtual Vector3 GetPos()
+    {
+        return controller.transform.position;
+    }
+    public virtual Transform GetTrans()
+    {
+        return controller.transform;
     }
 }

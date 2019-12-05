@@ -62,21 +62,98 @@ public class SkillManager:MonoBehaviour
         {
             SkillActionCfg skillAction = resSvc.GetSkillActionData(actionList[i]);
             sum += skillAction.delayTime;
+            int index = i;
             if (sum>0)//延迟伤害，比如火圈范围持续伤害
             {
                 timeSvc.AddTimeTask((int tid) =>
                 {
-                    SkillAction(entity,skillAction.ID);
+                    SkillAction(entity,skillData,index);
                 },sum);
             }
             else//瞬间伤害
             {
-                SkillAction(entity, skillAction.ID);
+                SkillAction(entity,skillData,index);
             }
         }
     }
-    public void SkillAction(EntityBase entity,int actionID)
+    public void SkillAction(EntityBase caster,SkillCfg skillCfg,int index)
     {
+        SkillActionCfg skillActionCfg = resSvc.GetSkillActionData(skillCfg.skillActionList[index]);
 
+        int damage = skillCfg.skillDamageList[index];
+        //拿到场景中的怪物实体，遍历运算
+        List<EntityMonster> monsterList = caster.battleMg.GetEntityMonsters();
+
+        for (int i = 0; i < monsterList.Count; i++)
+        {
+            EntityMonster target = monsterList[i];
+            //判断距离，角度
+            if (InRange(caster.GetPos(),target.GetPos(),skillActionCfg.radius)
+                &&InAngle(caster.GetTrans(),target.GetPos(),skillActionCfg.angle))
+            {
+                //计算伤害
+                CalcDamage(caster,target,skillCfg, damage);
+            }
+        }
+    }
+    System.Random rd = new System.Random();
+    /// <summary>
+    /// 技能伤害计算
+    /// </summary>
+    /// <param name="caster">施法者</param>
+    /// <param name="target">目标</param>
+    /// <param name="skillCfg">技能数据配置</param>
+    /// <param name="damage">技能原本伤害值</param>
+    private void CalcDamage(EntityBase caster,EntityBase target,SkillCfg skillCfg, int damage)
+    {//伤害除了技能本身伤害，还需要加上自身属性值
+        int dmgSum = damage;
+
+        //计算属性加成
+        dmgSum += caster.BattleProps.attackValue;
+        //暴击
+        int criticalNum = PETools.RDInt(1,100,rd);
+        if (criticalNum<=caster.BattleProps.critical)
+        {
+            //暴击伤害比率在110%~200%之间
+            float criticalRate = 1 + (PETools.RDInt(10, 100, rd) / 100.0f);
+            dmgSum = (int)criticalRate * dmgSum;
+            Debug.Log("暴击伤害率："+criticalRate+" 暴击率："+caster.BattleProps.critical);
+        }
+        //计算防御扣减
+        dmgSum -= target.BattleProps.defend;
+        //最小伤害为0
+        if (dmgSum<0)
+        {
+            dmgSum = 0;
+        }
+    }
+    private bool InRange(Vector3 from,Vector3 to,float range)
+    {
+        float dis = Vector3.Distance(from,to);
+        if (dis<=range)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool InAngle(Transform trans,Vector3 target,float angle)
+    {
+        if (angle==360)
+        {
+            return true;
+        }
+        else//扇形攻击范围，是否在范围内检测。
+        {
+            Vector3 start = trans.forward;
+            Vector3 dir = (target - trans.position).normalized;
+
+            float ang = Vector3.Angle(start,dir);
+            if (ang<=angle/2)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

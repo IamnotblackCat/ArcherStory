@@ -22,6 +22,8 @@ public class BattleManager:MonoBehaviour
     public EntityPlayer entitySelfPlayer;
 
     private MapConfig mapCfg;
+
+    private Dictionary<string, EntityMonster> monsterDic = new Dictionary<string, EntityMonster>();
     public void Init(int mapId)
     {
         resSvc = ResSvc.instance;
@@ -47,6 +49,8 @@ public class BattleManager:MonoBehaviour
 
             LoadPlayer(mapCfg);
             entitySelfPlayer.Idle();
+            //激活第一批怪物
+            ActiveCurrentBatchMonster();
 
             audioSvc.PlayBGMusic(Constants.BGFuben);
         });
@@ -59,6 +63,15 @@ public class BattleManager:MonoBehaviour
         player.transform.position = mapData.playerBornPos;
         player.transform.eulerAngles = mapData.playerBornRote;
         player.transform.localScale = Vector3.one;
+
+        PlayerData pd = GameRoot.instance.Playerdata;
+        BattleProps props = new BattleProps
+        {
+            hp = pd.hp,
+            attackValue=pd.attackValue,
+            defend=pd.defend,
+            critical=pd.critical,
+        };
         /*载入角色以后，把状态管理器、角色控制器注入到逻辑实体里面，通过逻辑实体的状态管理管理状态，然后在状态管理器里面
         又通过逻辑实体里面持有的角色控制器来控制表现*/
         entitySelfPlayer = new EntityPlayer
@@ -67,6 +80,7 @@ public class BattleManager:MonoBehaviour
             stateMg = this.stateMg,
             skillMg = skillMg,
         };
+        entitySelfPlayer.SetBattleProps(props);
         PlayerController playerController = player.GetComponent<PlayerController>();
         playerController.Init();
         entitySelfPlayer.controller = playerController;
@@ -92,13 +106,39 @@ public class BattleManager:MonoBehaviour
                     stateMg = stateMg,
                     skillMg = skillMg,
                 };
+                //设置初始属性
+                em.md = md;
+                //怪物子类重写了这个方法，让怪物在不同地图受等级影响属性
+                em.SetBattleProps(md.mCfg.bps);
+
                 MonsterController mc = monsterPrefab.GetComponent<MonsterController>();
                 mc.Init();
                 em.controller = mc;
 
                 monsterPrefab.SetActive(false);
+                monsterDic.Add(monsterPrefab.name,em);
             }
         }
+    }
+    //进入场景延迟生成怪物
+    public void ActiveCurrentBatchMonster()
+    {
+        TimeService.instance.AddTimeTask((int tid) =>
+        {
+            foreach (var item in monsterDic)
+            {
+                item.Value.controller.gameObject.SetActive(true);
+            }
+        },0.5f);
+    }
+    public List<EntityMonster> GetEntityMonsters()
+    {
+        List<EntityMonster> monsterList = new List<EntityMonster>();
+        foreach (var item in monsterDic)
+        {
+            monsterList.Add(item.Value);
+        }
+        return monsterList;
     }
     #region 技能释放与角色控制
     //战斗场景角色控制

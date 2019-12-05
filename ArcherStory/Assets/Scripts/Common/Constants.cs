@@ -15,6 +15,12 @@ public enum TxtColor
     Yellow,
 
 }
+public enum DamageType
+{
+    None,
+    AD = 1,
+    AP = 2
+}
 public class Constants 
 {
     //字体颜色

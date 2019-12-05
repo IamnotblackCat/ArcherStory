@@ -334,6 +334,7 @@ public class ResSvc : MonoBehaviour
                 {
                     ID = ID,
                     skillActionList = new List<int>(),
+                    skillDamageList = new List<int>(),
                 };
 
                 foreach (XmlElement element in nodList[i].ChildNodes)
@@ -354,16 +355,40 @@ public class ResSvc : MonoBehaviour
                         case "fx":
                             skillCfgData.fx = element.InnerText;
                             break;
+                        case "dmgType":
+                            if (element.InnerText.Equals("1"))
+                            {
+                                skillCfgData.dmgType = DamageType.AD;
+                            }
+                            else
+                            {
+                                Debug.Log("伤害类型错误");
+                            }
+                            break;
                         case "skillMove":
                             skillCfgData.skillMove = int.Parse(element.InnerText);
                             break;
                         case "skillActionList":
-                            string[] valArray = element.InnerText.Split('|');
-                            for (int j = 0; j < valArray.Length; j++)
                             {
-                                if (valArray[j]!="")
+                                string[] valArray = element.InnerText.Split('|');
+                                for (int j = 0; j < valArray.Length; j++)
                                 {
-                                    skillCfgData.skillActionList.Add(int.Parse(valArray[j]));
+                                    if (valArray[j] != "")
+                                    {
+                                        skillCfgData.skillActionList.Add(int.Parse(valArray[j]));
+                                    }
+                                }
+                            }
+                            break;
+                        case "skillDamageList":
+                            {
+                                string[] valArray = element.InnerText.Split('|');
+                                for (int j = 0; j < valArray.Length; j++)
+                                {
+                                    if (valArray[j] != "")
+                                    {
+                                        skillCfgData.skillDamageList.Add(int.Parse(valArray[j]));
+                                    }
                                 }
                             }
                             break;
@@ -525,8 +550,11 @@ public class ResSvc : MonoBehaviour
                     continue;
                 }
                 int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
-                MonsterCfg monsterCfg = new MonsterCfg();
-                monsterCfg.ID = ID;
+                MonsterCfg monsterCfg = new MonsterCfg
+                {
+                    ID = ID,
+                    bps = new BattleProps(),
+                };
 
                 foreach (XmlElement element in nodList[i].ChildNodes)
                 {
@@ -537,6 +565,18 @@ public class ResSvc : MonoBehaviour
                             break;
                         case "resPath":
                             monsterCfg.resPath = element.InnerText;
+                            break;
+                        case "hp":
+                            monsterCfg.bps.hp = int.Parse(element.InnerText);
+                            break;
+                        case "attackValue":
+                            monsterCfg.bps.attackValue = int.Parse(element.InnerText);
+                            break;
+                        case "defend":
+                            monsterCfg.bps.defend = int.Parse(element.InnerText);
+                            break;
+                        case "critical":
+                            monsterCfg.bps.critical = int.Parse(element.InnerText);
                             break;
                     }
                 }

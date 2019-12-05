@@ -5,55 +5,65 @@
 		<skillTime>1.167</skillTime>
 		<aniAction>0</aniAction>
 		<fx>skill1</fx>
+		<dmgType>1</dmgType>
 		<skillMove>1013</skillMove>
+		<skillActionList>1011|1011</skillActionList>
+		<skillDamageList>26|36</skillDamageList>
 	</item>
 	<item ID="102">
 		<skillName>贯通箭</skillName>
 		<skillTime>1.333</skillTime>
 		<aniAction>1</aniAction>
 		<fx>skill2</fx>
-		<skillMove>1013</skillMove>
-	</item>
+    <skillMove>1013</skillMove>
+    <skillActionList>1011|1011</skillActionList>
+    <skillDamageList>26|36</skillDamageList>
+  </item>
 	<item ID="103">
 		<skillName>烈焰矢</skillName>
-		<skillTime>1.25</skillTime>
+		<skillTime>1.833</skillTime>
 		<aniAction>2</aniAction>
 		<fx>skill3</fx>
-		<skillMove>1013</skillMove>
-	</item>
+    <skillMove>1013</skillMove>
+
+  </item>
 	<item ID="104">
 		<skillName>陨石</skillName>
 		<skillTime>2</skillTime>
 		<aniAction>3</aniAction>
 		<fx>skill4</fx>
-		<skillMove>1013</skillMove>
-	</item>
-	<item ID="105">
-		<skillName>治疗</skillName>
-		<skillTime>0.8</skillTime>
-		<aniAction>4</aniAction>
-		<fx>skill5_heal</fx>
-		<skillMove>1013</skillMove>
-	</item>
+    <skillMove>1013</skillMove>
+  </item>
+  <item ID="105">
+    <skillName>治疗</skillName>
+    <skillTime>0.8</skillTime>
+    <aniAction>4</aniAction>
+    <fx>skill5_heal</fx>
+    <skillMove>1013</skillMove>
+	
+</item>
 	<item ID="106">
 		<skillName>变身</skillName>
 		<skillTime>0.876</skillTime>
 		<aniAction>5</aniAction>
 		<fx>skill6_huoBuff</fx>
-		<skillMove>1013</skillMove>
-	</item>
+    <skillMove>1013</skillMove>
+
+  </item>
 	<item ID="107">
 		<skillName>闪现</skillName>
 		<skillTime>0.8</skillTime>
 		<aniAction>6</aniAction>
 		<fx>skill7_blink</fx>
-		<skillMove>1012</skillMove>
-	</item>
+    <skillMove>1012</skillMove>
+
+  </item>
 	<item ID="108">
 		<skillName>闪避</skillName>
 		<skillTime>0.8</skillTime>
 		<aniAction>7</aniAction>
 		<fx>skill8</fx>
-		<skillMove>1011</skillMove>
-	</item>
+    <skillMove>1011</skillMove>
+	
+</item>
 </root>

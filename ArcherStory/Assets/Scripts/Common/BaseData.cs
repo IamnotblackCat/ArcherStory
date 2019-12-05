@@ -41,8 +41,10 @@ public class SkillCfg : BaseData<SkillCfg>
     public float skillTime;
     public int aniAction;
     public string fx;
+    public DamageType dmgType;
     public int skillMove;
     public List<int> skillActionList;
+    public List<int> skillDamageList;
 }
 public class SkillActionCfg : BaseData<SkillActionCfg>
 {
@@ -59,6 +61,7 @@ public class MonsterCfg : BaseData<MonsterCfg>
 {
     public string mName;
     public string resPath;
+    public BattleProps bps;
 }
 //这不是一个单独的配置文件，是monsterCfg对应的数据,数据存在map配置里面
 public class MonsterData : BaseData<MonsterData>
@@ -68,4 +71,14 @@ public class MonsterData : BaseData<MonsterData>
     public MonsterCfg mCfg;
     public Vector3 mBornPos;
     public Vector3 mBornRote;
+    public int mLevel;
 }
+
+public class BattleProps
+{
+    public int hp;
+    public int attackValue;
+    public int defend;
+    public int critical;
+}
+
