@@ -23,10 +23,11 @@ public class ResSvc : MonoBehaviour
     {
         instance = this;
         //InitRDNameCfg(PathDefine.RDName);
+        InitMonsterCfg(PathDefine.MonsterCfg);
         InitMapCfg(PathDefine.MapCfg);
-
         InitSkillCfg(PathDefine.SkillCfg);
         InitSkillMoveCfg(PathDefine.SkillMoveCfg);
+        InitSkillAction(PathDefine.SkillActionCfg);
         //读取玩家数据
         GameRoot.instance.ReadPlayerData();
         //InitGuideCfg(PathDefine.GuideCfg);
@@ -143,8 +144,11 @@ public class ResSvc : MonoBehaviour
                     continue;
                 }
                 int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
-                MapConfig mapCfg = new MapConfig();
-                mapCfg.ID = ID;
+                MapConfig mapCfg = new MapConfig
+                {
+                    ID = ID,
+                    monsterList = new List<MonsterData>(),
+                };
 
                 foreach (XmlElement element in nodList[i].ChildNodes)
                 {
@@ -182,7 +186,37 @@ public class ResSvc : MonoBehaviour
                                 mapCfg.playerBornRote = new Vector3(float.Parse(valArray[0]), float.Parse(valArray[1]), float.Parse(valArray[2]));
                             }
                             break;
-                        default:
+                        case "monsterList":
+                            {
+                                string[] valArray = element.InnerText.Split('#');
+                                for (int waveIndex = 0; waveIndex < valArray.Length; waveIndex++)
+                                {
+                                    if (waveIndex==0)//因为第一个#最前面是没有数据的
+                                    {
+                                        continue;
+                                    }
+                                    string[] tempArr = valArray[waveIndex].Split('|');
+                                    for (int j = 0; j < tempArr.Length; j++)
+                                    {
+                                        if (j==0)
+                                        {
+                                            continue;
+                                        }
+                                        string[] arr = tempArr[j].Split(',');
+                                        MonsterData md = new MonsterData//读取怪物的生成点位置
+                                        {
+                                            ID = int.Parse(arr[0]),
+                                            mWave = waveIndex,
+                                            mIndex = j,
+                                            mCfg = GetMonsterCfgData(int.Parse(arr[0])),
+                                            mBornPos = new Vector3(float.Parse(arr[1]), float.Parse(arr[2]), float.Parse(arr[3])),
+                                            mBornRote = new Vector3(0,float.Parse(arr[4]),0),
+                                        };
+                                        mapCfg.monsterList.Add(md);
+                                    }
+                                }
+
+                            }
                             break;
                     }
                 }
@@ -296,8 +330,11 @@ public class ResSvc : MonoBehaviour
                     continue;
                 }
                 int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
-                SkillCfg skillCfgData = new SkillCfg();
-                skillCfgData.ID = ID;
+                SkillCfg skillCfgData = new SkillCfg
+                {
+                    ID = ID,
+                    skillActionList = new List<int>(),
+                };
 
                 foreach (XmlElement element in nodList[i].ChildNodes)
                 {
@@ -320,6 +357,16 @@ public class ResSvc : MonoBehaviour
                         case "skillMove":
                             skillCfgData.skillMove = int.Parse(element.InnerText);
                             break;
+                        case "skillActionList":
+                            string[] valArray = element.InnerText.Split('|');
+                            for (int j = 0; j < valArray.Length; j++)
+                            {
+                                if (valArray[j]!="")
+                                {
+                                    skillCfgData.skillActionList.Add(int.Parse(valArray[j]));
+                                }
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -335,6 +382,67 @@ public class ResSvc : MonoBehaviour
 
         //Debug.Log(id);
         if (skillCfgDic.TryGetValue(id, out agc))
+        {
+            //Debug.Log(data);
+            return agc;
+        }
+        return null;
+    }
+    #endregion
+    #region 技能伤害配置
+    private Dictionary<int, SkillActionCfg> skillActionDic = new Dictionary<int, SkillActionCfg>();
+    private void InitSkillAction(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            Debug.Log("指定文件不存在，路径：" + path);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+            //选中子节点集合
+            XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
+            for (int i = 0; i < nodList.Count; i++)
+            {
+                XmlElement ele = nodList[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {//不包含ID的节点，直接跳到下一个遍历，安全校验
+                    continue;
+                }
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                SkillActionCfg skillActionData = new SkillActionCfg
+                {
+                    ID = ID,
+                };
+
+                foreach (XmlElement element in nodList[i].ChildNodes)
+                {
+                    switch (element.Name)
+                    {
+                        case "delayTime":
+                            skillActionData.delayTime = int.Parse(element.InnerText);
+                            break;
+                        case "radius":
+                            skillActionData.radius = float.Parse(element.InnerText);
+                            break;
+                        case "angle":
+                            skillActionData.angle = float.Parse(element.InnerText);
+                            break;
+                    }
+                }
+                skillActionDic.Add(ID, skillActionData);
+                //Debug.Log("ID:"+ID+"  mapCfg:"+mapCfg.ToString());
+            }
+        }
+    }
+    public SkillActionCfg GetSkillActionData(int id)
+    {
+        SkillActionCfg agc = null;
+
+        //Debug.Log(id);
+        if (skillActionDic.TryGetValue(id, out agc))
         {
             //Debug.Log(data);
             return agc;
@@ -388,6 +496,58 @@ public class ResSvc : MonoBehaviour
     {
         SkillMoveCfg agc = null;
         if (skillMoveCfgDic.TryGetValue(id, out agc))
+        {
+            return agc;
+        }
+        return null;
+    }
+    #endregion
+    #region 怪物配置
+    private Dictionary<int, MonsterCfg> monsterCfgDic = new Dictionary<int, MonsterCfg>();
+    private void InitMonsterCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            Debug.Log("指定文件不存在，路径：" + path);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+            //选中子节点集合
+            XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
+            for (int i = 0; i < nodList.Count; i++)
+            {
+                XmlElement ele = nodList[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {//不包含ID的节点，直接跳到下一个遍历，安全校验
+                    continue;
+                }
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                MonsterCfg monsterCfg = new MonsterCfg();
+                monsterCfg.ID = ID;
+
+                foreach (XmlElement element in nodList[i].ChildNodes)
+                {
+                    switch (element.Name)
+                    {
+                        case "mName":
+                            monsterCfg.mName = element.InnerText;
+                            break;
+                        case "resPath":
+                            monsterCfg.resPath = element.InnerText;
+                            break;
+                    }
+                }
+                monsterCfgDic.Add(ID, monsterCfg);
+            }
+        }
+    }
+    public MonsterCfg GetMonsterCfgData(int id)
+    {
+        MonsterCfg agc = null;
+        if (monsterCfgDic.TryGetValue(id, out agc))
         {
             return agc;
         }

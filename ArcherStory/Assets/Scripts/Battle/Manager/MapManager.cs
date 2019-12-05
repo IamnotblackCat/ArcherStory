@@ -13,8 +13,12 @@ using UnityEngine;
 
 public class MapManager:MonoBehaviour
 {
-    public void Init()
+    private int waveIndex = 1;//默认生成第一批怪物
+    private BattleManager battleMg;
+    public void Init(BattleManager battle)
     {
-
+        battleMg = battle;
+        //实例化第一批怪物
+        battleMg.LoadMonsterByWaveID(waveIndex);
     }
 }

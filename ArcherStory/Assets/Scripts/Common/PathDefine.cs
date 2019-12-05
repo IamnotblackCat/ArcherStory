@@ -17,6 +17,8 @@ public class PathDefine
     public const string StrengthCfg = "ResCfgs/strengthCfg";
     public const string SkillCfg = "XML/skill";
     public const string SkillMoveCfg = "XML/skillmove";
+    public const string SkillActionCfg = "XML/skillAction";
+    public const string MonsterCfg = "XML/monster";
     #endregion
 
     #region 强化

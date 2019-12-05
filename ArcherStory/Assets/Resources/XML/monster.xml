@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item ID="1001">
+		<mName>赤蟒精</mName>
+		<resPath>PrefabNPC/ChiMangJin_03</resPath>
+	</item>
+	<item ID="1002">
+		<mName>长刀忠魂</mName>
+		<resPath>PrefabNPC/ChangDaoZhongHun_04</resPath>
+	</item>
+	<item ID="1003">
+		<mName>狗头军师</mName>
+		<resPath>PrefabNPC/GouTouJunShi_02</resPath>
+	</item>
+	<item ID="1004">
+		<mName>黑无常</mName>
+		<resPath>PrefabNPC/HeiBaiWuChang_01</resPath>
+	</item>
+	<item ID="1005">
+		<mName>白无常</mName>
+		<resPath>PrefabNPC/HeiBaiWuChang_02</resPath>
+	</item>
+	<item ID="1006">
+		<mName>杨戬</mName>
+		<resPath>PrefabNPC/YangJian_03</resPath>
+	</item>
+</root>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<item ID="1001">
-		<mapname>圣光主城</mapname>
+		<mapName>圣光主城</mapName>
 		<sceneName>SceneMainCity</sceneName>
 		<mainCamPos>125.69,15.59,113.78</mainCamPos>
 		<mainCamRote>33.293,0,0</mainCamRote>
@@ -9,7 +9,7 @@
 		<playerBornRote>0,0,0</playerBornRote>
 	</item>
 	<item ID="1002">
-		<mapname>完美主城</mapname>
+		<mapName>完美主城</mapName>
 		<sceneName>SceneMainCity2</sceneName>
 		<mainCamPos>17.8,52.87,18.97</mainCamPos>
 		<mainCamRote>30.15,46.2,0</mainCamRote>
@@ -17,17 +17,23 @@
 		<playerBornRote>0,0,0</playerBornRote>
 	</item>
 	<item ID="1003">
-		<mapname>应天大牢</mapname>
+		<mapName>应天大牢</mapName>
 		<sceneName>ScenePrison</sceneName>
 		<mainCamPos>30.12,42.29,57.26</mainCamPos>
 		<mainCamRote>13.177,-43.59,0</mainCamRote>
 		<playerBornPos>26.75,39.56,61</playerBornPos>
 		<playerBornRote>0,0,0</playerBornRote>
+		<monsterList>#|1001,44,39.7,43,-175
+#|1002,60,36.4,60,-170
+ |1002,63,36.4,58,-30
+#|1003,76,36.4,42,-180
+ |1003,80,36.4,40,0
+ |1003,80,36.4,45,90
+#|1004,116,42.68,75,-90
+ |1005,111,42.68,80,180
+ |1006,110,42.68,72.5,-145
+</monsterList>
 	</item>
-	<item/>
-	<item/>
-	<item/>
-	<item/>
 	<item/>
 	<item/>
 	<item/>

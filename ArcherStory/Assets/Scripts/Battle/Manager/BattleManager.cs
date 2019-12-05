@@ -21,6 +21,7 @@ public class BattleManager:MonoBehaviour
      
     public EntityPlayer entitySelfPlayer;
 
+    private MapConfig mapCfg;
     public void Init(int mapId)
     {
         resSvc = ResSvc.instance;
@@ -32,18 +33,19 @@ public class BattleManager:MonoBehaviour
         skillMg.Init();
 
         //加载地图
-        MapConfig mapData = resSvc.GetMapCfgData(mapId);
-        resSvc.AsyncLoadScene(mapData.sceneName,()=>
+        mapCfg = resSvc.GetMapCfgData(mapId);
+        resSvc.AsyncLoadScene(mapCfg.sceneName,()=>
         {
             //初始化地图
             GameObject map = GameObject.FindWithTag("MapRoot");
             mapMg = map.GetComponent<MapManager>();
-            mapMg.Init();
+            //在地图管理器里面注入战斗管理器
+            mapMg.Init(this);
 
-            Camera.main.transform.position = mapData.mainCamPos;
-            Camera.main.transform.localEulerAngles = mapData.mainCamRote;
+            Camera.main.transform.position = mapCfg.mainCamPos;
+            Camera.main.transform.localEulerAngles = mapCfg.mainCamRote;
 
-            LoadPlayer(mapData);
+            LoadPlayer(mapCfg);
             entitySelfPlayer.Idle();
 
             audioSvc.PlayBGMusic(Constants.BGFuben);
@@ -61,6 +63,7 @@ public class BattleManager:MonoBehaviour
         又通过逻辑实体里面持有的角色控制器来控制表现*/
         entitySelfPlayer = new EntityPlayer
         {
+            battleMg = this,
             stateMg = this.stateMg,
             skillMg = skillMg,
         };
@@ -69,6 +72,35 @@ public class BattleManager:MonoBehaviour
         entitySelfPlayer.controller = playerController;
     }
 
+    public void LoadMonsterByWaveID(int wave)
+    {
+        for (int i = 0; i < mapCfg.monsterList.Count; i++)
+        {
+            MonsterData md = mapCfg.monsterList[i];
+            if (md.mWave==wave)
+            {
+                GameObject monsterPrefab = resSvc.LoadPrefab(md.mCfg.resPath,true);
+                monsterPrefab.transform.localPosition = md.mBornPos;
+                monsterPrefab.transform.localEulerAngles = md.mBornRote;
+                monsterPrefab.transform.localScale = Vector3.one;
+
+                monsterPrefab.name = "m" + md.mWave + "_" + md.mIndex;
+
+                EntityMonster em = new EntityMonster
+                {
+                    battleMg = this,
+                    stateMg = stateMg,
+                    skillMg = skillMg,
+                };
+                MonsterController mc = monsterPrefab.GetComponent<MonsterController>();
+                mc.Init();
+                em.controller = mc;
+
+                monsterPrefab.SetActive(false);
+            }
+        }
+    }
+    #region 技能释放与角色控制
     //战斗场景角色控制
     public void SetSelfPlayerMoveDir(Vector2 dir)
     {
@@ -76,7 +108,7 @@ public class BattleManager:MonoBehaviour
         {
             return;
         }
-        if (dir==Vector2.zero)
+        if (dir == Vector2.zero)
         {
             entitySelfPlayer.Idle();
         }
@@ -150,4 +182,5 @@ public class BattleManager:MonoBehaviour
     {
         entitySelfPlayer.Attack(108);
     }
-}
+} 
+#endregion

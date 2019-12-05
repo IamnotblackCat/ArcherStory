@@ -14,6 +14,7 @@ public abstract class EntityBase
 {
     public AniState currentState = AniState.None;
 
+    public BattleManager battleMg = null;
     public StateManager stateMg = null;
     public Controller controller = null;
     public SkillManager skillMg = null;
@@ -60,10 +61,9 @@ public abstract class EntityBase
             controller.SetFX(fxName,closeTime);
         }
     }
-    public virtual void AttackEffect(int skillID)
+    public virtual void SkillAttack(int skillID)
     {
-
-        skillMg.AttackEffect(this,skillID);
+        skillMg.SkillAttack(this,skillID);
     }
     public virtual void SetSkillMoveState(bool move,float skillSpeed=0f)
     {

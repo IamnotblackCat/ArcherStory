@@ -20,6 +20,11 @@ public class SkillManager:MonoBehaviour
         resSvc = ResSvc.instance;
         timeSvc = TimeService.instance;
     }
+    public void SkillAttack(EntityBase entity,int skillID)
+    {
+        AttackDamage(entity,skillID);
+        AttackEffect(entity,skillID);
+    }
     /// <summary>
     /// 技能效果表现
     /// </summary>
@@ -46,5 +51,32 @@ public class SkillManager:MonoBehaviour
             /*不能直接在这里修改action的值是因为，这个攻击可能会被打断，被打断以后不会进入这个状态
             这样就无法设置action了，所以是在退出攻击状态的时候设置action*/
         },skillData.skillTime);
+    }
+    public void AttackDamage(EntityBase entity,int skillID)
+    {
+        SkillCfg skillData = resSvc.GetSkillCfgData(skillID);
+        List<int> actionList = skillData.skillActionList;
+
+        int sum = 0;
+        for (int i = 0; i < actionList.Count; i++)
+        {
+            SkillActionCfg skillAction = resSvc.GetSkillActionData(actionList[i]);
+            sum += skillAction.delayTime;
+            if (sum>0)//延迟伤害，比如火圈范围持续伤害
+            {
+                timeSvc.AddTimeTask((int tid) =>
+                {
+                    SkillAction(entity,skillAction.ID);
+                },sum);
+            }
+            else//瞬间伤害
+            {
+                SkillAction(entity, skillAction.ID);
+            }
+        }
+    }
+    public void SkillAction(EntityBase entity,int actionID)
+    {
+
     }
 }
