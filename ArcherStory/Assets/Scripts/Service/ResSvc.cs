@@ -210,7 +210,8 @@ public class ResSvc : MonoBehaviour
                                             mIndex = j,
                                             mCfg = GetMonsterCfgData(int.Parse(arr[0])),
                                             mBornPos = new Vector3(float.Parse(arr[1]), float.Parse(arr[2]), float.Parse(arr[3])),
-                                            mBornRote = new Vector3(0,float.Parse(arr[4]),0),
+                                            mBornRote = new Vector3(0, float.Parse(arr[4]), 0),
+                                            mLevel = int.Parse(arr[5]),
                                         };
                                         mapCfg.monsterList.Add(md);
                                     }

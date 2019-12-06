@@ -68,7 +68,7 @@ public class SkillManager:MonoBehaviour
                 timeSvc.AddTimeTask((int tid) =>
                 {
                     SkillAction(entity,skillData,index);
-                },sum);
+                },sum/1000);
             }
             else//瞬间伤害
             {
@@ -88,8 +88,7 @@ public class SkillManager:MonoBehaviour
         {
             EntityMonster target = monsterList[i];
             //判断距离，角度
-            if (InRange(caster.GetPos(),target.GetPos(),skillActionCfg.radius)
-                &&InAngle(caster.GetTrans(),target.GetPos(),skillActionCfg.angle))
+            if (InRange(caster.GetPos(),target.GetPos(),skillActionCfg.radius) &&InAngle(caster.GetTrans(),target.GetPos(),skillActionCfg.angle))
             {
                 //计算伤害
                 CalcDamage(caster,target,skillCfg, damage);
@@ -125,6 +124,17 @@ public class SkillManager:MonoBehaviour
         if (dmgSum<0)
         {
             dmgSum = 0;
+        }
+        if (target.Hp<=dmgSum)
+        {
+            target.Hp = 0;
+            //死亡
+            target.Die();
+        }
+        else
+        {
+            target.Hp -= dmgSum;
+            target.Wound();
         }
     }
     private bool InRange(Vector3 from,Vector3 to,float range)

@@ -22,4 +22,6 @@ public enum AniState
     Idle,
     Run,
     Attack,
+    Wound,
+    Die
 }

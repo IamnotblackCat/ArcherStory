@@ -18,6 +18,8 @@ public class StateManager : MonoBehaviour
         fsm.Add(AniState.Idle,new StateIdle());
         fsm.Add(AniState.Run,new StateRun());
         fsm.Add(AniState.Attack,new StateAttack());
+        fsm.Add(AniState.Wound,new StateWound());
+        fsm.Add(AniState.Die,new StateDie());
     }
     public void ChangeState(EntityBase entity,AniState targetState, params object[] args)
     {

@@ -4,7 +4,7 @@
 		<mName>赤蟒精</mName>
 		<resPath>PrefabNPC/ChiMangJin_03</resPath>
 		<atkDis>2</atkDis>
-		<hp>2000</hp>
+		<hp>200</hp>
 		<attackValue>100</attackValue>
 		<defend>5</defend>
 		<critical>30</critical>

@@ -45,8 +45,9 @@ public abstract class EntityBase
             return hp;
         }
 
-       protected set
+       set
         {
+            Debug.Log("血量减少："+hp+"/"+value);
             hp = value;
         }
     }
@@ -58,7 +59,7 @@ public abstract class EntityBase
             return attackValue;
         }
 
-        protected set
+        set
         {
             attackValue = value;
         }
@@ -75,6 +76,14 @@ public abstract class EntityBase
     public void Attack(int skillID)
     {
         stateMg.ChangeState(this, AniState.Attack, skillID);
+    }
+    public void Die()
+    {
+        stateMg.ChangeState(this,AniState.Die,null);
+    }
+    public void Wound()
+    {
+        stateMg.ChangeState(this,AniState.Wound,null);
     }
     //设置战斗过程中的属性
     public virtual void SetBattleProps(BattleProps props)

@@ -93,6 +93,10 @@ public class Constants
 
     //Action触发参数
     public const int ActionDefault = -1;
+    public const int ActionDie = 100;
+    public const int ActionWound = 101;
+
+    public const int DieAniLength = 5;
     //混合树动画设定值
     public const float blendIdle = 0;
     public const float blendRun = 1;

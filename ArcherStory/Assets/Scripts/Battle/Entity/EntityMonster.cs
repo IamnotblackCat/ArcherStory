@@ -13,7 +13,7 @@ using System.Text;
 public class EntityMonster:EntityBase
 {
     public MonsterData md;
-    //怪物子类重写了这个方法，让怪物在不同地图受等级影响属性
+    //怪物子类重写了这个方法，让怪物在不同地图受等级影响属性（暂未制作）
     public override void SetBattleProps(BattleProps props)
     {
         int level = md.mLevel;
@@ -25,7 +25,7 @@ public class EntityMonster:EntityBase
             critical=props.critical*level,
             
         };
-        props = p;
+        BattleProps = p;
         Hp = p.hp;
         AttackValue = p.attackValue;
     }
