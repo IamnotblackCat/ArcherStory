@@ -39,6 +39,7 @@ public abstract class Controller:MonoBehaviour
             }
         }
     }
+    public Transform hpRoot;
 
     protected bool skillMove = false;
     protected float skillMoveSpeed = 0f;

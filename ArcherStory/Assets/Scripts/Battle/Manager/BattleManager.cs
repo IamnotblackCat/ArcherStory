@@ -117,6 +117,8 @@ public class BattleManager:MonoBehaviour
 
                 monsterPrefab.SetActive(false);
                 monsterDic.Add(monsterPrefab.name,em);
+                //字典一定要存储已经变更过的HP，配置文件的hp没更新的
+                GameRoot.instance.dynamicWnd.AddHPItemInfo(monsterPrefab.name,em.Hp,em.controller.hpRoot);
             }
         }
     }

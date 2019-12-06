@@ -55,6 +55,8 @@ public class PathDefine
     #region Player
     public const string ArcherPrefab = "Character/Archer/Female/Archer_Female_03/Archer_Female_00";
     public const string ArcherBattle = "Character/Archer/Female/Archer_Female_03/ArcherBattle";
+
+    public const string HPDynamic = "PrefabUI/HPDynamic";
     #endregion
 
     //技能prefab路径

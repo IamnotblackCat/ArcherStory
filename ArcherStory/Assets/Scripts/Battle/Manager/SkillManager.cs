@@ -116,7 +116,8 @@ public class SkillManager:MonoBehaviour
             //暴击伤害比率在110%~200%之间
             float criticalRate = 1 + (PETools.RDInt(10, 100, rd) / 100.0f);
             dmgSum = (int)criticalRate * dmgSum;
-            Debug.Log("暴击伤害率："+criticalRate+" 暴击率："+caster.BattleProps.critical);
+            target.SetCritical(dmgSum);
+            //Debug.Log("暴击伤害率："+criticalRate+" 暴击率："+caster.BattleProps.critical);
         }
         //计算防御扣减
         dmgSum -= target.BattleProps.defend;
@@ -124,7 +125,9 @@ public class SkillManager:MonoBehaviour
         if (dmgSum<0)
         {
             dmgSum = 0;
+            return;
         }
+        target.SetHurt(dmgSum);
         if (target.Hp<=dmgSum)
         {
             target.Hp = 0;

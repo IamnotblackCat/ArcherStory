@@ -16,9 +16,11 @@ public class DynamicWnd : WindowRoot
 {
     public Animation tipsAni;
     public Text tipsTxt;
+    public Transform hpItemRoot;
 
     private bool isTipsShow = false;
     private Queue<string> tipsQueue = new Queue<string>();
+    private Dictionary<string, ItemEntityHP> itemDic = new Dictionary<string, ItemEntityHP>();
     private void Update()
     {
         if (tipsQueue.Count>0&&isTipsShow==false)
@@ -64,6 +66,39 @@ public class DynamicWnd : WindowRoot
         if (cb!=null)
         {
             cb();
+        }
+    }
+    public void AddHPItemInfo(string mName,int hp,Transform trans)
+    {
+        ItemEntityHP item = null;
+        if (itemDic.TryGetValue(mName,out item))
+        {
+            return;
+        }
+        else
+        {
+            GameObject go = resSvc.LoadPrefab(PathDefine.HPDynamic);
+            go.transform.SetParent(hpItemRoot);
+            go.transform.localPosition = new Vector3(-1000,0,0);
+            ItemEntityHP itemCom = go.GetComponent<ItemEntityHP>();
+            itemCom.InitItemInfo(trans, hp);
+            itemDic.Add(mName,itemCom);
+        }
+    }
+    public void SetCritical(string key, int critical)
+    {
+        ItemEntityHP item = null;
+        if (itemDic.TryGetValue(key, out item))
+        {
+            item.SetCritical(critical);
+        }
+    }
+    public void SetHurt(string key, int hurt)
+    {
+        ItemEntityHP item = null;
+        if (itemDic.TryGetValue(key, out item))
+        {
+            item.SetCritical(hurt);
         }
     }
 }

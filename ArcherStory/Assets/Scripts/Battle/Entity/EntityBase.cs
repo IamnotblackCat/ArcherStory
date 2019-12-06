@@ -47,7 +47,7 @@ public abstract class EntityBase
 
        set
         {
-            Debug.Log("血量减少："+hp+"/"+value);
+            //Debug.Log("血量减少："+hp+"/"+value);
             hp = value;
         }
     }
@@ -131,6 +131,14 @@ public abstract class EntityBase
 
             controller.SetSkillMoveState(move, skillSpeed);
         }
+    }
+    public virtual void SetCritical(int critical)
+    {
+        GameRoot.instance.dynamicWnd.SetCritical(controller.gameObject.name,critical);
+    }
+    public virtual void SetHurt(int hurt)
+    {
+        GameRoot.instance.dynamicWnd.SetHurt(controller.gameObject.name,hurt);
     }
     public virtual Vector3 GetPos()
     {

@@ -44,11 +44,12 @@ public class GameRoot : MonoBehaviour
         mainCitySys.InitSys();
         BattleSys battleSys = GetComponent<BattleSys>();
         battleSys.InitSys();
-        //动画系统-老的模型不支持animator
 
+        
+        dynamicWnd.SetWndState();
         //进入登陆场景并加载UI
         //loginSys.EnterLogin();
-        
+
     }
     //初始化的时候确保所有的UI除了提示面板都是隐藏的
     public void ClearUIRoot()
@@ -62,7 +63,6 @@ public class GameRoot : MonoBehaviour
             }
         }
         
-        dynamicWnd.SetWndState();
     }
     public void AddTips(string tips)
     {
