@@ -2,68 +2,90 @@
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<item ID="101">
 		<skillName>普通攻击</skillName>
+		<cdTime>0</cdTime>
 		<skillTime>1.167</skillTime>
+		<animTime>1.167</animTime>
 		<aniAction>0</aniAction>
 		<fx>skill1</fx>
+		<dmgType>1</dmgType>
+		<skillMove>1013</skillMove>
+		<skillActionList>1011</skillActionList>
+		<skillDamageList>0</skillDamageList>
+	</item>
+	<item ID="102">
+		<skillName>贯通箭</skillName>
+		<cdTime>2</cdTime>
+		<skillTime>1.333</skillTime>
+		<animTime>1.333</animTime>
+		<aniAction>1</aniAction>
+		<fx>skill2</fx>
 		<dmgType>1</dmgType>
 		<skillMove>1013</skillMove>
 		<skillActionList>1011|1011</skillActionList>
 		<skillDamageList>26|36</skillDamageList>
 	</item>
-	<item ID="102">
-		<skillName>贯通箭</skillName>
-		<skillTime>1.333</skillTime>
-		<aniAction>1</aniAction>
-		<fx>skill2</fx>
-    <skillMove>1013</skillMove>
-    <skillActionList>1011|1011</skillActionList>
-    <skillDamageList>26|36</skillDamageList>
-  </item>
 	<item ID="103">
 		<skillName>烈焰矢</skillName>
+		<cdTime>3</cdTime>
 		<skillTime>1.833</skillTime>
+		<animTime>1.833</animTime>
 		<aniAction>2</aniAction>
 		<fx>skill3</fx>
-    <skillMove>1013</skillMove>
-
-  </item>
+		<dmgType>2</dmgType>
+		<skillMove>1013</skillMove>
+		<skillActionList>1021|1021|1021</skillActionList>
+		<skillDamageList>40|50|60</skillDamageList>
+	</item>
 	<item ID="104">
 		<skillName>陨石</skillName>
+		<cdTime>4</cdTime>
 		<skillTime>2</skillTime>
+		<animTime>2</animTime>
 		<aniAction>3</aniAction>
 		<fx>skill4</fx>
-    <skillMove>1013</skillMove>
-  </item>
-  <item ID="105">
-    <skillName>治疗</skillName>
-    <skillTime>0.8</skillTime>
-    <aniAction>4</aniAction>
-    <fx>skill5_heal</fx>
-    <skillMove>1013</skillMove>
-	
-</item>
+		<dmgType>2</dmgType>
+		<skillMove>1013</skillMove>
+		<skillActionList>1031</skillActionList>
+		<skillDamageList>100</skillDamageList>
+	</item>
+	<item ID="105">
+		<skillName>治疗</skillName>
+		<cdTime>12</cdTime>
+		<skillTime>0.8</skillTime>
+		<animTime>0.8</animTime>
+		<aniAction>4</aniAction>
+		<fx>skill5_heal</fx>
+		<dmgType>3</dmgType>
+		<skillMove>1013</skillMove>
+	</item>
 	<item ID="106">
 		<skillName>变身</skillName>
-		<skillTime>0.876</skillTime>
+		<cdTime>30</cdTime>
+		<skillTime>15</skillTime>
+		<animTime>0.876</animTime>
 		<aniAction>5</aniAction>
 		<fx>skill6_huoBuff</fx>
-    <skillMove>1013</skillMove>
-
-  </item>
+		<dmgType>3</dmgType>
+		<skillMove>1013</skillMove>
+	</item>
 	<item ID="107">
 		<skillName>闪现</skillName>
+		<cdTime>12</cdTime>
 		<skillTime>0.8</skillTime>
+		<animTime>0.8</animTime>
 		<aniAction>6</aniAction>
 		<fx>skill7_blink</fx>
-    <skillMove>1012</skillMove>
-
-  </item>
+		<dmgType>2</dmgType>
+		<skillMove>1012</skillMove>
+	</item>
 	<item ID="108">
 		<skillName>闪避</skillName>
+		<cdTime>8</cdTime>
 		<skillTime>0.8</skillTime>
+		<animTime>0.8</animTime>
 		<aniAction>7</aniAction>
 		<fx>skill8</fx>
-    <skillMove>1011</skillMove>
-	
-</item>
+		<dmgType>3</dmgType>
+		<skillMove>1011</skillMove>
+	</item>
 </root>

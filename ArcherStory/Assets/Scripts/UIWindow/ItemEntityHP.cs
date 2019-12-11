@@ -28,7 +28,8 @@ public class ItemEntityHP : MonoBehaviour
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(rootTrans.position);
         rect.anchoredPosition = screenPos * scaleRate;
-        //rect.transform.position = screenPos;
+
+        UpdateMixBlend();
     }
     public void InitItemInfo(Transform targetTrans, int hp)
     {
@@ -37,6 +38,22 @@ public class ItemEntityHP : MonoBehaviour
         hpVal = hp;
         ImgHPGreen.fillAmount = 1;
         ImgHPRed.fillAmount = 1;
+    }
+    private void UpdateMixBlend()
+    {
+        if (Mathf.Abs(currentHPProgram - targetHPProgram) < Constants.accelerateHPSpeed * Time.deltaTime)
+        {
+            currentHPProgram = targetHPProgram;
+        }
+        else if (currentHPProgram > targetHPProgram)
+        {
+            currentHPProgram -= Constants.accelerateHPSpeed * Time.deltaTime;
+        }
+        else
+        {
+            currentHPProgram += Constants.accelerateHPSpeed * Time.deltaTime;
+        }
+        ImgHPRed.fillAmount = currentHPProgram;
     }
     //多个数字飘出来的时候，要覆盖掉前面的
     public void SetCritical(int criticalNum)
@@ -50,5 +67,14 @@ public class ItemEntityHP : MonoBehaviour
         animHPDown.Stop();
         txtHPDown.text = "-"+HP;
         animHPDown.Play();
+    }
+    private float currentHPProgram=1;
+    private float targetHPProgram=1;
+    public void SetHPVal(int oldVal,int newVal)
+    {
+        currentHPProgram = 1.0f * oldVal / hpVal;
+        targetHPProgram = 1.0f * newVal / hpVal;
+        //当前实际血量绿色显示，红色渐变消失
+        ImgHPGreen.fillAmount = targetHPProgram;
     }
 }

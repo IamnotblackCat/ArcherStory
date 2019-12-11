@@ -28,14 +28,33 @@ public class SkillManager:MonoBehaviour
     /// <summary>
     /// 技能效果表现
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="entity">。。。</param>
     /// <param name="skillID"></param>
     public void AttackEffect(EntityBase entity,int skillID)
     {
         SkillCfg skillData = resSvc.GetSkillCfgData(skillID);
 
+        //如果是指向技能，自动转向最近目标，如果是范围技能，朝向区域方向，如果是辅助技能，方向不变
+        if (skillData.dmgType==DamageType.TargetSkill)
+        {
+            Vector2 dir = entity.CalculateTargetDir();
+            if (dir!=Vector2.zero)
+            {
+                entity.SetAtkRotation(dir);
+            }
+        }
+        else if (skillData.dmgType==DamageType.AreaSkill)
+        {
+            Vector2 dir = entity.AreaSkillTargetDir();
+            if (dir!=Vector2.zero)
+            {
+                entity.SetAtkRotation(dir);
+            }
+        }
         entity.SetAction(skillData.aniAction);
-        entity.SetFX(skillData.fx,skillData.skillTime);
+        entity.SetFX(skillData.fx,skillData.skillFXTime);
+        //TODO,如果是范围技能，在动画播放快结束的时候播放对应延迟特效,持续时间后消失。
+        entity.SetAreaSkillFX(skillData.targetFX,skillData.delayFXTime,skillData.animationTime);
 
         SkillMoveCfg skillMoveCfg = resSvc.GetSkillMoveCfgData(skillData.skillMove);
         float speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
@@ -50,8 +69,9 @@ public class SkillManager:MonoBehaviour
             //Debug.Log("转换状态");
             /*不能直接在这里修改action的值是因为，这个攻击可能会被打断，被打断以后不会进入这个状态
             这样就无法设置action了，所以是在退出攻击状态的时候设置action*/
-        },skillData.skillTime);
+        },skillData.animationTime);
     }
+    //技能伤害
     public void AttackDamage(EntityBase entity,int skillID)
     {
         SkillCfg skillData = resSvc.GetSkillCfgData(skillID);
@@ -88,10 +108,22 @@ public class SkillManager:MonoBehaviour
         {
             EntityMonster target = monsterList[i];
             //判断距离，角度
-            if (InRange(caster.GetPos(),target.GetPos(),skillActionCfg.radius) &&InAngle(caster.GetTrans(),target.GetPos(),skillActionCfg.angle))
+            //如果是范围技能，施法者位置变更为鼠标指定区域位置，角度固定为360度
+            if (skillCfg.dmgType==DamageType.AreaSkill)
             {
-                //计算伤害
-                CalcDamage(caster,target,skillCfg, damage);
+                if (InRange(BattleSys.Instance.playerCtrlWnd.pos, target.GetPos(), skillActionCfg.radius))
+                {
+                    CalcDamage(caster, target, skillCfg, damage);
+                }
+            }
+            else
+            {
+                if (InRange(caster.GetPos(), target.GetPos(), skillActionCfg.radius) && InAngle(caster.GetTrans(), target.GetPos(), skillActionCfg.angle))
+                {
+                    //计算伤害
+                    CalcDamage(caster, target, skillCfg, damage);
+                }
+
             }
         }
     }
@@ -133,6 +165,7 @@ public class SkillManager:MonoBehaviour
             target.Hp = 0;
             //死亡
             target.Die();
+            target.battleMg.RemoveMonster(target.Name);
         }
         else
         {

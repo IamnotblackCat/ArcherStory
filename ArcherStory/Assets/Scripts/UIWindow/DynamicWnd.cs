@@ -85,6 +85,17 @@ public class DynamicWnd : WindowRoot
             itemDic.Add(mName,itemCom);
         }
     }
+    public void RemoveHPItemInfo(string mName)
+    {
+        ItemEntityHP item = null;
+        if (itemDic.TryGetValue(mName,out item))
+        {
+            //在面板中摧毁血条UI
+            Destroy(item.gameObject);
+            //字典移除血条
+            itemDic.Remove(mName);
+        }
+    }
     public void SetCritical(string key, int critical)
     {
         ItemEntityHP item = null;
@@ -98,7 +109,15 @@ public class DynamicWnd : WindowRoot
         ItemEntityHP item = null;
         if (itemDic.TryGetValue(key, out item))
         {
-            item.SetCritical(hurt);
+            item.SetHPDownTxt(hurt);
+        }
+    }
+    public void SetHPVal(string key,int oldVal,int newVal)
+    {
+        ItemEntityHP item = null;
+        if (itemDic.TryGetValue(key,out item))
+        {
+            item.SetHPVal(oldVal,newVal);
         }
     }
 }

@@ -38,10 +38,15 @@ public class MapConfig : BaseData<MapConfig>
 public class SkillCfg : BaseData<SkillCfg>
 {
     public string skillName;
-    public float skillTime;
+    public float skillFXTime;
+    public float animationTime;
+    public float delayFXTime;
+    public float delayCloseFXTime;
+    public float skillCDTime;   
     public int aniAction;
     public string fx;
-    public DamageType dmgType;
+    public string targetFX;
+    public DamageType dmgType;//技能类型，包括指定技能，范围技能，辅助技能
     public int skillMove;
     public List<int> skillActionList;
     public List<int> skillDamageList;

@@ -16,6 +16,7 @@ public abstract class Controller:MonoBehaviour
 
     protected bool isMove;
     protected TimeService timeSvc;
+    protected Transform camMainTrans;
 
     private Vector2 dir = Vector2.zero;
 
@@ -65,9 +66,28 @@ public abstract class Controller:MonoBehaviour
     {
         
     }
+    public virtual void SetAreaSkillFX(string fxName,float beginTime,float closeTime)
+    {
+
+    }
     public void SetSkillMoveState(bool move,float skillSpeed=0f)
     {
         skillMove = move;
         skillMoveSpeed = skillSpeed;
     }
+    //不加上摄像机偏转
+    public virtual void SetAtkRotationLocal(Vector2 dir)
+    {
+        float angle = Vector2.SignedAngle(dir, new Vector2(0, 1));
+        Vector3 eulerAngle = new Vector3(0, angle, 0);
+        transform.eulerAngles = eulerAngle;
+    }
+    //加上了摄像机偏转
+    public virtual void SetAtkRotationCam(Vector2 dir)
+    {
+        float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) + camMainTrans.eulerAngles.y;
+        Vector3 eulerAngle = new Vector3(0, angle, 0);
+        transform.eulerAngles = eulerAngle;
+    }
+
 }

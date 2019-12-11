@@ -27,7 +27,7 @@ public class StateDie : IState
         entity.SetAction(Constants.ActionDie);
         TimeService.instance.AddTimeTask((int tid)=>
         {
-            entity.controller.gameObject.SetActive(false);
+            entity.SetCtrlActive(false);
         },Constants.DieAniLength);
     }
 }

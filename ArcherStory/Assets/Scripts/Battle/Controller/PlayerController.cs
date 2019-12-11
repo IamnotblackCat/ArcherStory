@@ -25,7 +25,7 @@ public class PlayerController : Controller
     public CharacterController ctrl;
 
     #region 相机控制
-    private Transform camMainTrans;
+    //private Transform camMainTrans;
     private float camRotSmooth = 3f;
     private bool isRotate;
     private float distance;
@@ -118,9 +118,10 @@ public class PlayerController : Controller
             ctrl.Move(-transform.up * Time.deltaTime*10f);
         }
     }
+    //TODO，如果指定了目标位置，则朝向指定位置方向移动，否则后退
     private void SetSkillMove()
     {
-        ctrl.Move(transform.forward * Time.deltaTime *skillMoveSpeed);
+        ctrl.Move(-transform.forward * Time.deltaTime *skillMoveSpeed);
     }
     //重写父类的设置blend，因为玩家角色动画融合，使用了updateBlend进行细腻表现，怪物控制就不用了。
     private void UpdateMixBlend()
@@ -219,6 +220,10 @@ public class PlayerController : Controller
                 go.SetActive(false);
             }, closeTime);
         }
+    }
+    public override void SetAreaSkillFX(string fxName, float beginTime, float closeTime)
+    {
+        
     }
     private void InitSkillGroudFX()
     {

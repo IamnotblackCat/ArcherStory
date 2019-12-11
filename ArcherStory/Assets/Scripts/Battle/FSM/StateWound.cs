@@ -36,7 +36,7 @@ public class StateWound : IState
     }
     private float GetWoundAnimationLength(EntityBase entity)
     {
-        AnimationClip[] clips = entity.controller.anim.runtimeAnimatorController.animationClips;
+        AnimationClip[] clips = entity.GetAniClips();
         //查找动画名称包含wound的动画长度，如果没找到设置一个默认保护值
         for (int i = 0; i < clips.Length; i++)
         {

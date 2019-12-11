@@ -2,17 +2,19 @@
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<item ID="1011">
 		<delayTime>100</delayTime>
-		<radius>2.5</radius>
-		<angle>360</angle>
+		<radius>8</radius>
+		<angle>10</angle>
 	</item>
 	<item ID="1021">
-		<delayTime>350</delayTime>
-		<radius>2.5</radius>
+		<delayTime>1833</delayTime>
+		<radius>3.0</radius>
 		<angle>360</angle>
 	</item>
 	<item ID="1031">
-		<delayTime>400</delayTime>
+		<delayTime>2000</delayTime>
 		<radius>4.5</radius>
 		<angle>360</angle>
 	</item>
+	<item/>
+	<item/>
 </root>

@@ -83,7 +83,7 @@ public class BattleManager:MonoBehaviour
         entitySelfPlayer.SetBattleProps(props);
         PlayerController playerController = player.GetComponent<PlayerController>();
         playerController.Init();
-        entitySelfPlayer.controller = playerController;
+        entitySelfPlayer.SetController(playerController);
     }
 
     public void LoadMonsterByWaveID(int wave)
@@ -113,12 +113,13 @@ public class BattleManager:MonoBehaviour
 
                 MonsterController mc = monsterPrefab.GetComponent<MonsterController>();
                 mc.Init();
-                em.controller = mc;
+                em.SetController(mc);
+                em.Name = monsterPrefab.name;
 
                 monsterPrefab.SetActive(false);
                 monsterDic.Add(monsterPrefab.name,em);
                 //字典一定要存储已经变更过的HP，配置文件的hp没更新的
-                GameRoot.instance.dynamicWnd.AddHPItemInfo(monsterPrefab.name,em.Hp,em.controller.hpRoot);
+                GameRoot.instance.dynamicWnd.AddHPItemInfo(em.Name,em.Hp,mc.hpRoot);
             }
         }
     }
@@ -129,7 +130,7 @@ public class BattleManager:MonoBehaviour
         {
             foreach (var item in monsterDic)
             {
-                item.Value.controller.gameObject.SetActive(true);
+                item.Value.SetCtrlActive();
             }
         },0.5f);
     }
@@ -141,6 +142,16 @@ public class BattleManager:MonoBehaviour
             monsterList.Add(item.Value);
         }
         return monsterList;
+    }
+
+    public void RemoveMonster(string key)
+    {
+        EntityMonster entityMonster ;
+        if (monsterDic.TryGetValue(key,out entityMonster))
+        {
+            monsterDic.Remove(key);
+            GameRoot.instance.dynamicWnd.RemoveHPItemInfo(key);
+        }
     }
     #region 技能释放与角色控制
     //战斗场景角色控制
@@ -157,6 +168,7 @@ public class BattleManager:MonoBehaviour
         else
         {
             entitySelfPlayer.Move();
+            //Debug.Log(dir);
             entitySelfPlayer.SetDir(dir);
         }
     }

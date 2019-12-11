@@ -18,8 +18,9 @@ public enum TxtColor
 public enum DamageType
 {
     None,
-    AD = 1,
-    AP = 2
+    TargetSkill = 1,
+    AreaSkill = 2,
+    SupportSkill=3
 }
 public class Constants 
 {
@@ -90,6 +91,8 @@ public class Constants
 
     //动画混合树平滑加快速率
     public const float accelerateSpeed = 5;
+    //血量渐变速率
+    public const float accelerateHPSpeed = 0.3f;
 
     //Action触发参数
     public const int ActionDefault = -1;

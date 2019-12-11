@@ -16,15 +16,13 @@ public abstract class EntityBase
 
     public BattleManager battleMg = null;
     public StateManager stateMg = null;
-    public Controller controller = null;
     public SkillManager skillMg = null;
 
     public bool canControll = true;
 
+    protected Controller controller = null;
+
     private BattleProps battleProps;
-    //血量和攻击力在战斗过程中会变
-    private int hp;
-    private int attackValue;
     public BattleProps BattleProps
     {
         get
@@ -37,7 +35,8 @@ public abstract class EntityBase
             battleProps = value;
         }
     }
-
+    //血量和攻击力在战斗过程中会变
+    private int hp;
     public int Hp
     {
         get
@@ -48,10 +47,11 @@ public abstract class EntityBase
        set
         {
             //Debug.Log("血量减少："+hp+"/"+value);
+            SetHPVal(hp,value);
             hp = value;
         }
     }
-
+    private int attackValue;
     public int AttackValue
     {
         get
@@ -64,7 +64,33 @@ public abstract class EntityBase
             attackValue = value;
         }
     }
+    public string Name
+    {
+        get
+        {
+            return name;
+        }
 
+        set
+        {
+            name = value;
+        }
+    }
+
+
+    private string name;
+    public void SetController(Controller ctrl)
+    {
+        if (ctrl!=null)
+        {
+
+            controller = ctrl;
+        }
+    }
+    public void SetCtrlActive(bool active = true)
+    {
+        controller.gameObject.SetActive(active);
+    }
     public void Idle()
     {
         stateMg.ChangeState(this, AniState.Idle, null);
@@ -120,9 +146,31 @@ public abstract class EntityBase
             controller.SetFX(fxName,closeTime);
         }
     }
+    public virtual void SetAreaSkillFX(string fxName,float beginTime,float closeTime)
+    {
+        if (controller!=null)
+        {
+            controller.SetAreaSkillFX(fxName,beginTime,closeTime);
+        }
+    }
     public virtual void SkillAttack(int skillID)
     {
         skillMg.SkillAttack(this,skillID);
+    }
+    //bool参数表示，是否需要摄像机偏转
+    public virtual void SetAtkRotation(Vector2 dir,bool offset=false)
+    {
+        if (controller!=null)
+        {
+            if (offset)
+            {
+                controller.SetAtkRotationCam(dir);
+            }
+            else
+            {
+                controller.SetAtkRotationLocal(dir);
+            }
+        }
     }
     public virtual void SetSkillMoveState(bool move,float skillSpeed=0f)
     {
@@ -134,18 +182,56 @@ public abstract class EntityBase
     }
     public virtual void SetCritical(int critical)
     {
-        GameRoot.instance.dynamicWnd.SetCritical(controller.gameObject.name,critical);
+        if (controller != null)
+        {
+
+            GameRoot.instance.dynamicWnd.SetCritical(Name, critical);
+        }
     }
     public virtual void SetHurt(int hurt)
     {
-        GameRoot.instance.dynamicWnd.SetHurt(controller.gameObject.name,hurt);
+        if (controller != null)
+        {
+
+            GameRoot.instance.dynamicWnd.SetHurt(Name, hurt);
+        }
+    }
+    public virtual void SetHPVal(int oldVal, int newVal)
+    {
+        if (controller != null)
+        {
+
+            GameRoot.instance.dynamicWnd.SetHPVal(Name, oldVal, newVal);
+        }
     }
     public virtual Vector3 GetPos()
     {
+        if (controller!=null)
+        {
         return controller.transform.position;
+        }
+        Debug.Log("无法获取位置");
+        return Vector3.zero;
     }
     public virtual Transform GetTrans()
     {
         return controller.transform;
+    }
+    public AnimationClip[] GetAniClips()
+    {
+        if (controller!=null)
+        {
+            return controller.anim.runtimeAnimatorController.animationClips;
+        }
+        return null;
+    }
+
+    public virtual Vector2 CalculateTargetDir()
+    {
+        return Vector2.zero;
+    }
+    public virtual Vector2 AreaSkillTargetDir()
+    {
+        return Vector2.zero;
     }
 }

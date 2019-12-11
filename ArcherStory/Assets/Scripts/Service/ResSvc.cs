@@ -348,7 +348,19 @@ public class ResSvc : MonoBehaviour
                             }
                             break;
                         case "skillTime":
-                            skillCfgData.skillTime = float.Parse(element.InnerText);
+                            skillCfgData.skillFXTime = float.Parse(element.InnerText);
+                            break;
+                        case "cdTime":
+                            skillCfgData.skillCDTime = float.Parse(element.InnerText);
+                            break;
+                        case "animTime":
+                            skillCfgData.animationTime = float.Parse(element.InnerText);
+                            break;
+                        case "delayFXTime":
+                            skillCfgData.delayFXTime = float.Parse(element.InnerText);
+                            break;
+                        case "delayCloseFXTime":
+                            skillCfgData.delayCloseFXTime = float.Parse(element.InnerText);
                             break;
                         case "aniAction":
                             skillCfgData.aniAction = int.Parse(element.InnerText);
@@ -356,10 +368,21 @@ public class ResSvc : MonoBehaviour
                         case "fx":
                             skillCfgData.fx = element.InnerText;
                             break;
+                        case "targetFX":
+                            skillCfgData.targetFX = element.InnerText;
+                            break;
                         case "dmgType":
                             if (element.InnerText.Equals("1"))
                             {
-                                skillCfgData.dmgType = DamageType.AD;
+                                skillCfgData.dmgType = DamageType.TargetSkill;
+                            }
+                            else if (element.InnerText.Equals("2"))
+                            {
+                                skillCfgData.dmgType = DamageType.AreaSkill;
+                            }
+                            else if (element.InnerText.Equals("3"))
+                            {
+                                skillCfgData.dmgType = DamageType.SupportSkill;
                             }
                             else
                             {
