@@ -50,15 +50,30 @@ public class SkillManager:MonoBehaviour
             {
                 entity.SetAtkRotation(dir);
             }
+            //TODO,如果是范围技能，且不是瞬移，在动画播放快结束的时候播放对应延迟特效,持续时间后消失。
+            if (skillData.ID!=107)
+            {
+            entity.SetAreaSkillFX(skillData.targetFX, skillData.delayFXTime, skillData.delayCloseFXTime);
+
+            }
         }
         entity.SetAction(skillData.aniAction);
         entity.SetFX(skillData.fx,skillData.skillFXTime);
-        //TODO,如果是范围技能，在动画播放快结束的时候播放对应延迟特效,持续时间后消失。
-        entity.SetAreaSkillFX(skillData.targetFX,skillData.delayFXTime,skillData.animationTime);
+       
 
         SkillMoveCfg skillMoveCfg = resSvc.GetSkillMoveCfgData(skillData.skillMove);
-        float speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
-        entity.SetSkillMoveState(true,speed);
+        float speed = 0;
+        if (skillData.ID==107)//是瞬移技能，不是闪避
+        {
+            float dis = Vector3.Distance(entity.GetPos(),BattleSys.Instance.playerCtrlWnd.pos);
+            speed = dis / (skillMoveCfg.moveTime/1000f);
+            entity.SetSkillMoveState(true,false,speed);
+        }
+        else
+        {
+            speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
+            entity.SetSkillMoveState(true,true,speed);
+        }
         timeSvc.AddTimeTask((int tid) =>
         {//技能移动时间到就设置为不能移动
             entity.SetSkillMoveState(false);

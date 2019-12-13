@@ -172,12 +172,12 @@ public abstract class EntityBase
             }
         }
     }
-    public virtual void SetSkillMoveState(bool move,float skillSpeed=0f)
+    public virtual void SetSkillMoveState(bool move,bool isBlink=true,float skillSpeed=0f)
     {
         if (controller!=null)
         {
 
-            controller.SetSkillMoveState(move, skillSpeed);
+            controller.SetSkillMoveState(move,isBlink,skillSpeed);
         }
     }
     public virtual void SetCritical(int critical)

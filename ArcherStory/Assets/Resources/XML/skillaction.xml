@@ -6,12 +6,12 @@
 		<angle>10</angle>
 	</item>
 	<item ID="1021">
-		<delayTime>1833</delayTime>
+		<delayTime>500</delayTime>
 		<radius>3.0</radius>
 		<angle>360</angle>
 	</item>
 	<item ID="1031">
-		<delayTime>2000</delayTime>
+		<delayTime>250</delayTime>
 		<radius>4.5</radius>
 		<angle>360</angle>
 	</item>

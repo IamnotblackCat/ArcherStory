@@ -108,5 +108,12 @@ public class Constants
     public const string jsonPath = "/Resources/Json/playerData.json";
     public const string jsonInitPath = "/Resources/Json/playerInitData.json";
 
-    
+    //技能特效名字
+    public const string skill3Name = "skill3_ground";
+    public const string skill4Name = "skill4_ground";
+
+    //范围技能最大施法范围
+    public const float skill3MaxArea = 10;
+    public const float skill4MaxArea = 15;
+    public const float skill7MaxArea = 10;
 }

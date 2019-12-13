@@ -317,7 +317,7 @@ ParticleAnimator:
   force: {x: 0, y: -8, z: 0}
   damping: 0.1
   stopSimulation: 0
-  autodestruct: 1
+  autodestruct: 0
 --- !u!12 &12736615321719198
 ParticleAnimator:
   m_ObjectHideFlags: 1
@@ -347,7 +347,7 @@ ParticleAnimator:
   force: {x: 0, y: -1, z: 0}
   damping: 0.1
   stopSimulation: 0
-  autodestruct: 1
+  autodestruct: 0
 --- !u!12 &12750946604424610
 ParticleAnimator:
   m_ObjectHideFlags: 1
@@ -377,7 +377,7 @@ ParticleAnimator:
   force: {x: 0, y: 0, z: 0}
   damping: 0.1
   stopSimulation: 0
-  autodestruct: 1
+  autodestruct: 0
 --- !u!15 &15263581402437470
 EllipsoidParticleEmitter:
   m_ObjectHideFlags: 1

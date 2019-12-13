@@ -8,7 +8,7 @@
 
 using UnityEngine;
 
-public class PlayerController : Controller 
+public class PlayerController : Controller
 {
     public GameObject skill1FX;
     public GameObject skill2FX;
@@ -20,8 +20,10 @@ public class PlayerController : Controller
     public GameObject skill6FX;
     public GameObject skill7FX;
     public GameObject skill8FX;
+    //public GameObject skill4DelayFX;//这两个特效是范围技能会延迟生效
+    //public GameObject skill3DelayFX;//这两个特效是范围技能会延迟生效
     private GameObject skill3Ground;
-    private GameObject skill4Groud;
+    private GameObject skill4Ground;
     public CharacterController ctrl;
 
     #region 相机控制
@@ -36,26 +38,29 @@ public class PlayerController : Controller
     //平滑动画混合树用到的值
     private float currentBlend = 0;
     private float targetBlend = 0;
-    
+
 
     public override void Init()
     {
         base.Init();
         camMainTrans = Camera.main.transform;
         cameraOffset = camMainTrans.transform.position - transform.position;
-        if (skill2FX!=null)
+        InitSkillGroudFX();
+        if (skill2FX != null)
         {
-            fxDic.Add(skill1FX.name,skill1FX);
-            fxDic.Add(skill2FX.name,skill2FX);
-            fxDic.Add(skill3FX.name,skill3FX);
+            fxDic.Add(skill1FX.name, skill1FX);
+            fxDic.Add(skill2FX.name, skill2FX);
+            fxDic.Add(skill3FX.name, skill3FX);
             fxDic.Add(skill4FX.name, skill4FX);
             fxDic.Add(skill5FX.name, skill5FX);
             fxDic.Add(skill6FX.name, skill6FX);
             fxDic.Add(skill7FX.name, skill7FX);
             fxDic.Add(skill8FX.name, skill8FX);
             //fxDic.Add(skill4FX.name,skill4FX);
+            fxDic.Add(skill3Ground.name, skill3Ground);
+            fxDic.Add(skill4Ground.name, skill4Ground);
         }
-        
+
     }
     private void Update()
     {
@@ -99,29 +104,43 @@ public class PlayerController : Controller
         //技能移动位置
         if (skillMove)
         {
-            SetSkillMove();
+            if (isBlinkSkill)
+            {
+                SetSkillMove();
+            }
+            else
+            {
+                SetSkillBigMove();
+            }
             SetCamera();
         }
     }
     private void SetDir()
     {//第二个参数是角色正面朝向，h=0,v=1,这里因为摄像机偏转了，
         //所以人物的朝向也需要加上摄像机的偏转，不然会出现朝向不一致
-        float angle = Vector2.SignedAngle(Dir,new Vector2(0,1))+camMainTrans.eulerAngles.y;
-        Vector3 eulerAngle = new Vector3(0,angle,0);
+        float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) + camMainTrans.eulerAngles.y;
+        Vector3 eulerAngle = new Vector3(0, angle, 0);
         transform.eulerAngles = eulerAngle;
     }
     private void SetMove()
     {
-        ctrl.Move(transform.forward*Time.deltaTime*Constants.playerMoveSpeed);
+        ctrl.Move(transform.forward * Time.deltaTime * Constants.playerMoveSpeed);
         if (!ctrl.isGrounded)
         {
-            ctrl.Move(-transform.up * Time.deltaTime*10f);
+            ctrl.Move(-transform.up * Time.deltaTime * 10f);
         }
     }
     //TODO，如果指定了目标位置，则朝向指定位置方向移动，否则后退
     private void SetSkillMove()
     {
-        ctrl.Move(-transform.forward * Time.deltaTime *skillMoveSpeed);
+        ctrl.Move(-transform.forward * Time.deltaTime * skillMoveSpeed);
+    }
+    //大位移技能，瞬移
+    private void SetSkillBigMove()
+    {
+        //Vector3 dir = BattleSys.Instance.playerCtrlWnd.pos-transform.position;
+
+        ctrl.Move(transform.forward*Time.deltaTime*skillMoveSpeed);
     }
     //重写父类的设置blend，因为玩家角色动画融合，使用了updateBlend进行细腻表现，怪物控制就不用了。
     private void UpdateMixBlend()
@@ -200,6 +219,7 @@ public class PlayerController : Controller
              但是出现的时候位置要跟人物相关，所以出现以后就解除了父子关系，消失的时候再添加回来*/
             if (fxName==skill2FX.name||fxName==skill4FX.name)
             {
+                go.transform.GetChild(0).gameObject.SetActive(true);
                 go.transform.DetachChildren();
             }
             //TODO,要判断必须是2技能和4技能，这里要修改
@@ -207,12 +227,14 @@ public class PlayerController : Controller
             {
                 if (fxName == skill2FX.name)
                 {
+                    skill2Emp.SetActive(false);
                     skill2Emp.transform.SetParent(go.transform);
                     skill2Emp.transform.localPosition = Vector3.zero;
                     skill2Emp.transform.localRotation = Quaternion.identity;
                 }
                 else if (fxName==skill4FX.name)
                 {
+                    skill4Emp.SetActive(false);
                     skill4Emp.transform.SetParent(go.transform);
                     skill4Emp.transform.localPosition = Vector3.zero;
                     skill4Emp.transform.localRotation = Quaternion.identity;
@@ -223,11 +245,28 @@ public class PlayerController : Controller
     }
     public override void SetAreaSkillFX(string fxName, float beginTime, float closeTime)
     {
-        
+        GameObject go;
+        if (fxDic.TryGetValue(fxName,out go))
+        {
+            timeSvc.AddTimeTask((int tid) =>
+            {
+                go.SetActive(true);
+                go.transform.position = BattleSys.Instance.playerCtrlWnd.pos;
+
+            },beginTime);
+            timeSvc.AddTimeTask((int tid) =>
+            {
+                go.SetActive(false);
+            },closeTime+beginTime);
+        }
     }
     private void InitSkillGroudFX()
     {
         skill3Ground = resSvc.LoadPrefab(PathDefine.skill3Path);
+        skill3Ground.name = Constants.skill3Name;
         skill3Ground.SetActive(false);
+        skill4Ground = resSvc.LoadPrefab(PathDefine.skill4Path);
+        skill4Ground.name = Constants.skill4Name;
+        skill4Ground.SetActive(false);
     }
 }

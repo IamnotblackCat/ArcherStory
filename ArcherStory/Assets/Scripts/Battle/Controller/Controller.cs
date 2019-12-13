@@ -15,6 +15,7 @@ public abstract class Controller:MonoBehaviour
     protected ResSvc resSvc = null;
 
     protected bool isMove;
+    protected bool isBlinkSkill;
     protected TimeService timeSvc;
     protected Transform camMainTrans;
 
@@ -70,9 +71,10 @@ public abstract class Controller:MonoBehaviour
     {
 
     }
-    public void SetSkillMoveState(bool move,float skillSpeed=0f)
+    public void SetSkillMoveState(bool move,bool isBlink,float skillSpeed=0f)
     {
         skillMove = move;
+        isBlinkSkill = isBlink;
         skillMoveSpeed = skillSpeed;
     }
     //不加上摄像机偏转
@@ -85,7 +87,7 @@ public abstract class Controller:MonoBehaviour
     //加上了摄像机偏转
     public virtual void SetAtkRotationCam(Vector2 dir)
     {
-        float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) + camMainTrans.eulerAngles.y;
+        float angle = Vector2.SignedAngle(dir, new Vector2(0, 1)) + camMainTrans.eulerAngles.y;
         Vector3 eulerAngle = new Vector3(0, angle, 0);
         transform.eulerAngles = eulerAngle;
     }

@@ -38,15 +38,46 @@ public class PlayerCtrlWnd : WindowRoot
 
     private float sk2FillCount;//记录imgCD图数据，用来计算显示fillAmount属性
     private float sk2NumCount;//记录冷却时间的文本，用来计算显示剩余冷却时间
-    private bool isSkl2CD = false;
-    private float skl2CDTime;
+    private bool isSk2CD = false;
+    private float sk2CDTime;
 
+    private float sk3FillCount;//记录imgCD图数据，用来计算显示fillAmount属性
+    private float sk3NumCount;//记录冷却时间的文本，用来计算显示剩余冷却时间
+    private bool isSk3CD = false;
+    private float sk3CDTime;
+
+    private float sk4FillCount;//记录imgCD图数据，用来计算显示fillAmount属性
+    private float sk4NumCount;//记录冷却时间的文本，用来计算显示剩余冷却时间
+    private bool isSk4CD = false;
+    private float sk4CDTime;
+
+    private float sk5FillCount;//记录imgCD图数据，用来计算显示fillAmount属性
+    private float sk5NumCount;//记录冷却时间的文本，用来计算显示剩余冷却时间
+    private bool isSk5CD = false;
+    private float sk5CDTime;
+
+    private float sk6FillCount;//记录imgCD图数据，用来计算显示fillAmount属性
+    private float sk6NumCount;//记录冷却时间的文本，用来计算显示剩余冷却时间
+    private bool isSk6CD = false;
+    private float sk6CDTime;
+
+    private float sk7FillCount;//记录imgCD图数据，用来计算显示fillAmount属性
+    private float sk7NumCount;//记录冷却时间的文本，用来计算显示剩余冷却时间
+    private bool isSk7CD = false;
+    private float sk7CDTime;
+
+    private float sk8FillCount;//记录imgCD图数据，用来计算显示fillAmount属性
+    private float sk8NumCount;//记录冷却时间的文本，用来计算显示剩余冷却时间
+    private bool isSk8CD = false;
+    private float sk8CDTime;
     #endregion
 
     #region 范围技能区域显示相关
     private RaycastHit hit;
     private Ray ray;
-    private bool areaSkillIcon = false;
+    private bool areaSkill3Icon = false;//3技能射线开关
+    private bool areaSkill4Icon = false;//4技能射线检测开关
+    private bool areaSkill7Icon = false;//7技能射线检测开关
     public GameObject sprite2D;
     public Vector3 pos;
     //范围技能区域显示
@@ -67,7 +98,13 @@ public class PlayerCtrlWnd : WindowRoot
         base.InitWnd();
 
         RefreshUI();
-        skl2CDTime = resSvc.GetSkillCfgData(102).skillCDTime;
+        sk2CDTime = resSvc.GetSkillCfgData(102).skillCDTime;
+        sk3CDTime = resSvc.GetSkillCfgData(103).skillCDTime;
+        sk4CDTime = resSvc.GetSkillCfgData(104).skillCDTime;
+        sk5CDTime = resSvc.GetSkillCfgData(105).skillCDTime;
+        sk6CDTime = resSvc.GetSkillCfgData(106).skillCDTime;
+        sk7CDTime = resSvc.GetSkillCfgData(107).skillCDTime;
+        sk8CDTime = resSvc.GetSkillCfgData(108).skillCDTime;
         InitSkillAreaIcon();
     }
     public void RefreshUI()
@@ -136,39 +173,81 @@ public class PlayerCtrlWnd : WindowRoot
     }
     public void ClickSkill2()
     {
-        if (!isSkl2CD)
+        if (!isSk2CD)
         {
             BattleSys.Instance.ReleaseSkill(2);
-            isSkl2CD = true;
+            isSk2CD = true;
             SetActive(imgSk2CD);
             imgSk2CD.fillAmount = 1;
-            SetText(txtSk2CD,skl2CDTime.ToString());
+            SetText(txtSk2CD,sk2CDTime.ToString());
         }
 
     }
     public void ClickSkill3()
     {
-        BattleSys.Instance.ReleaseSkill(3);
+        if (!isSk3CD)
+        {
+            BattleSys.Instance.ReleaseSkill(3);
+            isSk3CD = true;
+            SetActive(imgSk3CD);
+            imgSk3CD.fillAmount = 1;
+            SetText(txtSk3CD,sk3CDTime.ToString());
+        }
     }
     public void ClickSkill4()
     {
-        BattleSys.Instance.ReleaseSkill(4);
+        if (!isSk4CD)
+        {
+            BattleSys.Instance.ReleaseSkill(4);
+            isSk4CD = true;
+            SetActive(imgSk4CD);
+            imgSk4CD.fillAmount = 1;
+            SetText(txtSk4CD, sk4CDTime.ToString());
+        }
     }
     public void ClickSkill5()
     {
-        BattleSys.Instance.ReleaseSkill(5);
+        if (!isSk5CD)
+        {
+            BattleSys.Instance.ReleaseSkill(5);
+            isSk5CD = true;
+            SetActive(imgSk5CD);
+            imgSk5CD.fillAmount = 1;
+            SetText(txtSk5CD, sk5CDTime.ToString());
+        }
     }
     public void ClickSkill6()
     {
-        BattleSys.Instance.ReleaseSkill(6);
+        if (!isSk6CD)
+        {
+            BattleSys.Instance.ReleaseSkill(6);
+            isSk6CD = true;
+            SetActive(imgSk6CD);
+            imgSk6CD.fillAmount = 1;
+            SetText(txtSk6CD, sk6CDTime.ToString());
+        }
     }
     public void ClickSkill7()
     {
-        BattleSys.Instance.ReleaseSkill(7);
+        if (!isSk7CD)
+        {
+            BattleSys.Instance.ReleaseSkill(7);
+            isSk7CD = true;
+            SetActive(imgSk7CD);
+            imgSk7CD.fillAmount = 1;
+            SetText(txtSk7CD, sk7CDTime.ToString());
+        }
     }
     public void ClickSkill8()
     {
-        BattleSys.Instance.ReleaseSkill(8);
+        if (!isSk8CD)
+        {
+            BattleSys.Instance.ReleaseSkill(8);
+            isSk8CD = true;
+            SetActive(imgSk8CD);
+            imgSk8CD.fillAmount = 1;
+            SetText(txtSk8CD, sk8CDTime.ToString());
+        }
     }
     private void Update()
     {
@@ -176,54 +255,242 @@ public class PlayerCtrlWnd : WindowRoot
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector2 _dir = new Vector2(h, v);
+        #region 技能冷却显示
+
+        float delta = Time.deltaTime;
+        if (isSk2CD)
+        {
+            sk2FillCount += delta;
+            if (sk2FillCount >= sk2CDTime)
+            {
+                isSk2CD = false;
+                sk2FillCount = 0;
+                SetActive(imgSk2CD, false);
+            }
+            else
+            {
+                imgSk2CD.fillAmount = 1 - sk2FillCount / sk2CDTime;
+            }
+            sk2NumCount += delta;
+            if (sk2NumCount >= sk2CDTime)
+            {
+                sk2NumCount = 0;
+            }
+            float val = sk2CDTime - sk2NumCount;
+            SetText(txtSk2CD, val.ToString("0.0"));
+        }
+        if (isSk3CD)
+        {
+            sk3FillCount += delta;
+            if (sk3FillCount >= sk3CDTime)
+            {
+                //Debug.Log("sk3FillCount:"+sk3FillCount+"--sk3CDTime:"+sk3CDTime);
+                isSk3CD = false;
+                sk3FillCount = 0;
+                SetActive(imgSk3CD, false);
+            }
+            else
+            {
+                imgSk3CD.fillAmount = 1 - sk3FillCount / sk3CDTime;
+            }
+            sk3NumCount += delta;
+            if (sk3NumCount >= sk3CDTime)
+            {
+                sk3NumCount = 0;
+            }
+            float val = sk3CDTime - sk3NumCount;
+            SetText(txtSk3CD, val.ToString("0.0"));
+        }
+        if (isSk4CD)
+        {
+            sk4FillCount += delta;
+            if (sk4FillCount >= sk4CDTime)
+            {
+                isSk4CD = false;
+                sk4FillCount = 0;
+                SetActive(imgSk4CD, false);
+            }
+            else
+            {
+                imgSk4CD.fillAmount = 1 - sk4FillCount / sk4CDTime;
+            }
+            sk4NumCount += delta;
+            if (sk4NumCount >= sk4CDTime)
+            {
+                sk4NumCount = 0;
+            }
+            float val = sk4CDTime - sk4NumCount;
+            SetText(txtSk4CD, val.ToString("0.0"));
+        }
+        if (isSk5CD)
+        {
+            sk5FillCount += delta;
+            if (sk5FillCount >= sk5CDTime)
+            {
+                isSk5CD = false;
+                sk5FillCount = 0;
+                SetActive(imgSk5CD, false);
+            }
+            else
+            {
+                imgSk5CD.fillAmount = 1 - sk5FillCount / sk5CDTime;
+            }
+            sk5NumCount += delta;
+            if (sk5NumCount >= sk5CDTime)
+            {
+                sk5NumCount = 0;
+            }
+            float val = sk5CDTime - sk5NumCount;
+            SetText(txtSk5CD, val.ToString("0.0"));
+        }
+        if (isSk6CD)
+        {
+            sk6FillCount += delta;
+            if (sk6FillCount >= sk6CDTime)
+            {
+                isSk6CD = false;
+                sk6FillCount = 0;
+                SetActive(imgSk6CD, false);
+            }
+            else
+            {
+                imgSk6CD.fillAmount = 1 - sk6FillCount / sk6CDTime;
+            }
+            sk6NumCount += delta;
+            if (sk6NumCount >= sk6CDTime)
+            {
+                sk6NumCount = 0;
+            }
+            float val = sk6CDTime - sk6NumCount;
+            SetText(txtSk6CD, val.ToString("0.0"));
+        }
+        if (isSk7CD)
+        {
+            sk7FillCount += delta;
+            if (sk7FillCount >= sk7CDTime)
+            {
+                isSk7CD = false;
+                sk7FillCount = 0;
+                SetActive(imgSk7CD, false);
+            }
+            else
+            {
+                imgSk7CD.fillAmount = 1 - sk7FillCount / sk7CDTime;
+            }
+            sk7NumCount += delta;
+            if (sk7NumCount >= sk7CDTime)
+            {
+                sk7NumCount = 0;
+            }
+            float val = sk7CDTime - sk7NumCount;
+            SetText(txtSk7CD, val.ToString("0.0"));
+        }
+        if (isSk8CD)
+        {
+            sk8FillCount += delta;
+            if (sk8FillCount >= sk8CDTime)
+            {
+                isSk8CD = false;
+                sk8FillCount = 0;
+                SetActive(imgSk8CD, false);
+            }
+            else
+            {
+                imgSk8CD.fillAmount = 1 - sk8FillCount / sk8CDTime;
+            }
+            sk8NumCount += delta;
+            if (sk8NumCount >= sk8CDTime)
+            {
+                sk8NumCount = 0;
+            }
+            float val = sk8CDTime - sk8NumCount;
+            SetText(txtSk8CD, val.ToString("0.0"));
+        }
+        #endregion
         if (BattleSys.Instance.battleMg.entitySelfPlayer != null)
         {
             BattleSys.Instance.battleMg.SetSelfPlayerMoveDir(_dir);
+            if (!BattleSys.Instance.battleMg.entitySelfPlayer.canControll)
+            {
+                return;
+            }
+           
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+       
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ClickSkill1();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ClickSkill2();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Q))
         {
-            areaSkillIcon = true;
+            ClickSkill5();
         }
-        if (areaSkillIcon)
+        else if (Input.GetKeyDown(KeyCode.E))
         {
-            UpdateAreaIcon(KeyCode.Alpha3,5f);
+            ClickSkill6();
+        }
+        else if (Input.GetKeyDown(KeyCode.V))
+        {
+            ClickSkill8();
+        }
+        #region 范围技能
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            areaSkill3Icon = true;
+        }
+        if (areaSkill3Icon)
+        {
+            UpdateAreaIcon(KeyCode.Alpha3,Constants.skill3MaxArea);
         }
         if (Input.GetKeyUp(KeyCode.Alpha3))
         {
             skillArea.SetActive(false);
-            areaSkillIcon = false;
+            areaSkill3Icon = false;
             if (canRealseSkill)//超出范围无法释放
             {
                 ClickSkill3();
             }
         }
-        #endregion
-        float delta = Time.deltaTime;
-        if (isSkl2CD)
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            sk2FillCount += delta;
-            if (sk2FillCount>=skl2CDTime)
-            {
-                isSkl2CD = false;
-                sk2FillCount = 0;
-                SetActive(imgSk2CD,false);
-            }
-            else
-            {
-                imgSk2CD.fillAmount = 1 - sk2FillCount / skl2CDTime;
-            }
-            sk2NumCount+=delta;
-            if (sk2NumCount>=skl2CDTime)
-            {
-                sk2NumCount = 0;
-            }
-            float val = skl2CDTime - sk2NumCount;
-            SetText(txtSk2CD,val.ToString("0.0"));
+            areaSkill4Icon = true;
         }
+        if (areaSkill4Icon)
+        {
+            UpdateAreaIcon(KeyCode.Alpha4, Constants.skill4MaxArea);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha4))
+        {
+            skillArea.SetActive(false);
+            areaSkill4Icon = false;
+            if (canRealseSkill)//超出范围无法释放
+            {
+                ClickSkill4();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.F))
+        {
+            areaSkill7Icon = true;
+        }
+        if (areaSkill7Icon)
+        {
+            UpdateAreaIcon(KeyCode.F, Constants.skill7MaxArea);
+        }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            skillArea.SetActive(false);
+            areaSkill7Icon = false;
+            if (canRealseSkill)//超出范围无法释放
+            {
+                ClickSkill7();
+            }
+        }
+        #endregion
+        #endregion
     }
     public void ClickInitBtn()
     {

@@ -29,6 +29,9 @@
 		<cdTime>3</cdTime>
 		<skillTime>1.833</skillTime>
 		<animTime>1.833</animTime>
+		<targetFX>skill3_ground</targetFX>
+		<delayFXTime>1.19</delayFXTime>
+		<delayCloseFXTime>1.5</delayCloseFXTime>
 		<aniAction>2</aniAction>
 		<fx>skill3</fx>
 		<dmgType>2</dmgType>
@@ -41,6 +44,9 @@
 		<cdTime>4</cdTime>
 		<skillTime>2</skillTime>
 		<animTime>2</animTime>
+		<targetFX>skill4_ground</targetFX>
+		<delayFXTime>2</delayFXTime>
+		<delayCloseFXTime>1</delayCloseFXTime>
 		<aniAction>3</aniAction>
 		<fx>skill4</fx>
 		<dmgType>2</dmgType>
