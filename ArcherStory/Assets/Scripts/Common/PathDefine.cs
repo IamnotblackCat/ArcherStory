@@ -61,6 +61,6 @@ public class PathDefine
 
     //技能prefab路径
     public const string skill3Path = "PrefabSkillFX/skill3_ground";
-    public const string skill4Path = "PrefabSkillFX/skill4_ground";
+    public const string skill4Path = "PrefabSkillFX/skill4_groundNew";
     public const string skillAreaIcon = "PrefabSkillFX/skillAreaIcon";
 }
