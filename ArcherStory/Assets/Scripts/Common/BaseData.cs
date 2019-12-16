@@ -66,7 +66,16 @@ public class MonsterCfg : BaseData<MonsterCfg>
 {
     public string mName;
     public string resPath;
+    public int skillID;
+    public float atkDis;
     public BattleProps bps;
+}
+public class BattleProps
+{
+    public int hp;
+    public int attackValue;
+    public int defend;
+    public int critical;
 }
 //这不是一个单独的配置文件，是monsterCfg对应的数据,数据存在map配置里面
 public class MonsterData : BaseData<MonsterData>
@@ -79,11 +88,5 @@ public class MonsterData : BaseData<MonsterData>
     public int mLevel;
 }
 
-public class BattleProps
-{
-    public int hp;
-    public int attackValue;
-    public int defend;
-    public int critical;
-}
+
 

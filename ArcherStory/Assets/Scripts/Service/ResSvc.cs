@@ -590,6 +590,12 @@ public class ResSvc : MonoBehaviour
                         case "resPath":
                             monsterCfg.resPath = element.InnerText;
                             break;
+                        case "skillID":
+                            monsterCfg.skillID = int.Parse(element.InnerText);
+                            break;
+                        case "atkDis":
+                            monsterCfg.atkDis = float.Parse(element.InnerText);
+                            break;
                         case "hp":
                             monsterCfg.bps.hp = int.Parse(element.InnerText);
                             break;

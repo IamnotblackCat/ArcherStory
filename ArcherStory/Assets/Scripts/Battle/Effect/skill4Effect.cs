@@ -11,18 +11,13 @@ using UnityEngine;
 public class skill4Effect : MonoBehaviour 
 {
     private float speed = 300f;
-    private Vector3 beginPos;
     private Vector3 targetPos;
-    private Vector3 dir;
-    private float dis;
     private bool canMove = false;
 
     private void OnEnable()
     {
-        beginPos = transform.position;
         targetPos = BattleSys.Instance.playerCtrlWnd.pos;
-        dir = targetPos - beginPos;
-        //SetAtkDir(dir);
+        transform.LookAt(targetPos);
         //1.5秒以后开始向目标地点移动
         TimeService.instance.AddTimeTask((int tid)=>
         {
@@ -37,12 +32,11 @@ public class skill4Effect : MonoBehaviour
     private void Update()
     {
         transform.Rotate(Vector3.forward*speed*Time.deltaTime);
-        transform.LookAt(targetPos);
         if (canMove)
         {
             transform.position = Vector3.MoveTowards(transform.position,targetPos,speed/4*Time.deltaTime);
-            
         }
     }
-    
 }
+    
+            

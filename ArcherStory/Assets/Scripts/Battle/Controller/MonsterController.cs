@@ -8,8 +8,27 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using UnityEngine;
 
 public class MonsterController:Controller
 {
+    private void Update()
+    {
+        if (isMove)
+        {
+            SetDir();
+            SetMove();
+        }
+    }
+    private void SetDir()
+    {
+        float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1));
+        Vector3 eulerAngle = new Vector3(0, angle, 0);
+        transform.eulerAngles = eulerAngle;
+    }
+    private void SetMove()
+    {
+        ctrl.Move(transform.forward * Time.deltaTime * Constants.monsterMoveSpeed);
+        ctrl.Move(Vector3.down * Time.deltaTime * Constants.monsterMoveSpeed);
+    }
 }

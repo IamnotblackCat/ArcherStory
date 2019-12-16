@@ -24,7 +24,6 @@ public class PlayerController : Controller
     //public GameObject skill3DelayFX;//这两个特效是范围技能会延迟生效
     private GameObject skill3Ground;
     private GameObject skill4Ground;
-    public CharacterController ctrl;
 
     #region 相机控制
     //private Transform camMainTrans;
@@ -125,10 +124,8 @@ public class PlayerController : Controller
     private void SetMove()
     {
         ctrl.Move(transform.forward * Time.deltaTime * Constants.playerMoveSpeed);
-        if (!ctrl.isGrounded)
-        {
-            ctrl.Move(-transform.up * Time.deltaTime * 10f);
-        }
+        //解决不落地的问题，之前的检测到没落地才给方向的解决方案如果不运动的话还是有可能穿帮
+        ctrl.Move(Vector3.down*Time.deltaTime*Constants.playerMoveSpeed);
     }
     //TODO，如果指定了目标位置，则朝向指定位置方向移动，否则后退
     private void SetSkillMove()

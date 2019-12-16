@@ -94,4 +94,25 @@
 		<dmgType>3</dmgType>
 		<skillMove>1011</skillMove>
 	</item>
+	<item ID="201">
+		<skillName>普通怪物攻击</skillName>
+		<cdTime>0</cdTime>
+		<skillTime>1.2</skillTime>
+		<animTime>1.2</animTime>
+		<aniAction>11</aniAction>
+		<skillMove>1013</skillMove>
+		<skillActionList>2111</skillActionList>
+		<skillDamageList>26</skillDamageList>
+	</item>
+	<item ID="301">
+		<skillName>精英怪物攻击</skillName>
+		<cdTime>0</cdTime>
+		<skillTime>1.2</skillTime>
+		<animTime>1.2</animTime>
+		<aniAction>11</aniAction>
+		<skillMove>1013</skillMove>
+		<skillActionList>2211</skillActionList>
+		<skillDamageList>65</skillDamageList>
+	</item>
+	<item/>
 </root>

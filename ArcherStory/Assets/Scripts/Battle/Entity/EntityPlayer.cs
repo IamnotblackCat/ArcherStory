@@ -25,7 +25,7 @@ public class EntityPlayer:EntityBase
         dir = dir.normalized;
         return dir;
     }
-    private EntityMonster FindClosedMonster()
+    public EntityMonster FindClosedMonster()
     {
         List<EntityMonster> list = battleMg.GetEntityMonsters();
         if (list==null||list.Count==0)

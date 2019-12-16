@@ -22,6 +22,7 @@ public abstract class Controller:MonoBehaviour
     private Vector2 dir = Vector2.zero;
 
     public Animator anim;
+    public CharacterController ctrl;
     public Vector2 Dir
     {
         get

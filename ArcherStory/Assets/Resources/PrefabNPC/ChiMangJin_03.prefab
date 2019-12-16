@@ -2192,4 +2192,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 95401081458506174}
+  ctrl: {fileID: 14300000}
   hpRoot: {fileID: 4343416304945070}

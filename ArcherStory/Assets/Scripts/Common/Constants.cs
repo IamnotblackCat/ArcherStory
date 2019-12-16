@@ -87,7 +87,7 @@ public class Constants
 
     //移动速度
     public const float playerMoveSpeed = 8;
-    public const float monsterMoveSpeed = 4;
+    public const float monsterMoveSpeed = 3;
 
     //动画混合树平滑加快速率
     public const float accelerateSpeed = 5;

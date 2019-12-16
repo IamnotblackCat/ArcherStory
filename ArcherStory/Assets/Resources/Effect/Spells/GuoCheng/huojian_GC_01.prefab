@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400000}
-  - component: {fileID: 11400000}
   m_Layer: 0
   m_Name: huojian_GC_01
   m_TagString: Untagged
@@ -881,27 +880,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1dbe2f7f09b6343afae2fc7c6db5c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_bAutoSetLifeTime: 0
-  m_fLifeTime: 0
-  m_fSmoothDestroyTime: 0
-  m_bDisableEmit: 1
-  m_bSmoothHide: 1
-  m_CollisionType: 0
-  m_CollisionLayer:
-    m_Bits: 4294967295
-  m_fCollisionRadius: 0.3
-  m_fDestructPosY: 0.2
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

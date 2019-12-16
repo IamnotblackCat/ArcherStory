@@ -56,6 +56,14 @@ public class BattleManager:MonoBehaviour
         });
     }
 
+    public void Update()
+    {
+        foreach (var item in monsterDic)
+        {
+            EntityMonster em = item.Value;
+            em.TickAILogic();
+        }
+    }
     private void LoadPlayer(MapConfig mapData)
     {
         GameObject player = resSvc.LoadPrefab(PathDefine.ArcherBattle);

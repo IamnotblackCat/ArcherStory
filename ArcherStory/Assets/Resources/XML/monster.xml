@@ -3,8 +3,9 @@
 	<item ID="1001">
 		<mName>赤蟒精</mName>
 		<resPath>PrefabNPC/ChiMangJin_03</resPath>
+		<skillID>201</skillID>
 		<atkDis>2</atkDis>
-		<hp>500</hp>
+		<hp>2000</hp>
 		<attackValue>100</attackValue>
 		<defend>5</defend>
 		<critical>30</critical>
@@ -12,6 +13,7 @@
 	<item ID="1002">
 		<mName>长刀忠魂</mName>
 		<resPath>PrefabNPC/ChangDaoZhongHun_04</resPath>
+		<skillID>201</skillID>
 		<atkDis>2</atkDis>
 		<hp>2000</hp>
 		<attackValue>100</attackValue>
@@ -21,6 +23,7 @@
 	<item ID="1003">
 		<mName>狗头军师</mName>
 		<resPath>PrefabNPC/GouTouJunShi_02</resPath>
+		<skillID>201</skillID>
 		<atkDis>2</atkDis>
 		<hp>2000</hp>
 		<attackValue>100</attackValue>
@@ -30,6 +33,7 @@
 	<item ID="1004">
 		<mName>黑无常</mName>
 		<resPath>PrefabNPC/HeiBaiWuChang_01</resPath>
+		<skillID>201</skillID>
 		<atkDis>2</atkDis>
 		<hp>2000</hp>
 		<attackValue>100</attackValue>
@@ -39,6 +43,7 @@
 	<item ID="1005">
 		<mName>白无常</mName>
 		<resPath>PrefabNPC/HeiBaiWuChang_02</resPath>
+		<skillID>201</skillID>
 		<atkDis>2</atkDis>
 		<hp>3500</hp>
 		<attackValue>150</attackValue>
@@ -48,6 +53,7 @@
 	<item ID="1006">
 		<mName>杨戬</mName>
 		<resPath>PrefabNPC/YangJian_03</resPath>
+		<skillID>301</skillID>
 		<atkDis>4.5</atkDis>
 		<hp>10000</hp>
 		<attackValue>250</attackValue>

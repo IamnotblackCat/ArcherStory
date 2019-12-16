@@ -234,4 +234,8 @@ public abstract class EntityBase
     {
         return Vector2.zero;
     }
+    public virtual void TickAILogic()
+    {
+
+    }
 }

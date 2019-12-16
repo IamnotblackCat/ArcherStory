@@ -103,7 +103,7 @@ public class SkillManager:MonoBehaviour
                 timeSvc.AddTimeTask((int tid) =>
                 {
                     SkillAction(entity,skillData,index);
-                },sum/1000);
+                },sum*1.0f/1000);
             }
             else//瞬间伤害
             {
@@ -138,7 +138,10 @@ public class SkillManager:MonoBehaviour
                     //计算伤害
                     CalcDamage(caster, target, skillCfg, damage);
                 }
-
+                else
+                {
+                    GameRoot.instance.AddTips("超出攻击范围");
+                }
             }
         }
     }
