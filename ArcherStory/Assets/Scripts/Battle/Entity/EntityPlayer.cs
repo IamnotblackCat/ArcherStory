@@ -12,6 +12,10 @@ using UnityEngine;
 
 public class EntityPlayer:EntityBase
 {
+    public EntityPlayer()
+    {
+        entityType = EntityType.Player;
+    }
     public override Vector2 CalculateTargetDir()
     {
         EntityMonster monster = FindClosedMonster();
@@ -61,5 +65,9 @@ public class EntityPlayer:EntityBase
         Vector3 target= BattleSys.Instance.playerCtrlWnd.pos;
         Vector2 dir = new Vector2(target.x-self.x,target.z-self.z);
         return dir;
+    }
+    public override void SetHPVal(int oldVal, int newVal)
+    {
+        BattleSys.Instance.playerCtrlWnd.SetSelfHPBarVal(newVal);
     }
 }

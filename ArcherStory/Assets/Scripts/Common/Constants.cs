@@ -22,6 +22,12 @@ public enum DamageType
     AreaSkill = 2,
     SupportSkill=3
 }
+public enum EntityType
+{
+    None,
+    Player,
+    Monster
+}
 public class Constants 
 {
     //字体颜色
@@ -74,7 +80,15 @@ public class Constants
     public const string uiExtenBtn = "uiExtenBtn";
     public const string uiOpenPage = "uiOpenPage";
     public const string strengthSuccess = "fbitem";
-
+    public const string archerWound = "wound";
+    public const string skill1 = "skill1";
+    public const string skill2 = "skill2";
+    public const string skill3 = "skill3";
+    public const string skill4 = "skill4";
+    public const string skill5 = "skill5";
+    public const string skill6 = "skill6";
+    public const string skill7 = "skill7";
+    public const string skill8 = "skill8";
     //登陆音效
     public const string uiLogin = "uiLoginBtn";
 

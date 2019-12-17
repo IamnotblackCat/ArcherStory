@@ -22,8 +22,8 @@ public class SkillManager:MonoBehaviour
     }
     public void SkillAttack(EntityBase entity,int skillID)
     {
-        AttackDamage(entity,skillID);
         AttackEffect(entity,skillID);
+        AttackDamage(entity,skillID);
     }
     /// <summary>
     /// 技能效果表现
@@ -33,28 +33,49 @@ public class SkillManager:MonoBehaviour
     public void AttackEffect(EntityBase entity,int skillID)
     {
         SkillCfg skillData = resSvc.GetSkillCfgData(skillID);
-
-        //如果是指向技能，自动转向最近目标，如果是范围技能，朝向区域方向，如果是辅助技能，方向不变
-        if (skillData.dmgType==DamageType.TargetSkill)
+        if (entity.entityType==EntityType.Player)
         {
-            Vector2 dir = entity.CalculateTargetDir();
-            if (dir!=Vector2.zero)
+            /*如果是指向技能，自动转向最近目标，如果是范围技能，朝向区域方向，
+             *如果是辅助技能，方向不变,闪避技能被设定为指向技能，因为永远朝向
+             *目标并且背向移动*/
+            if (skillData.dmgType == DamageType.TargetSkill)
             {
-                entity.SetAtkRotation(dir);
+                Vector2 dir = entity.CalculateTargetDir();
+                if (dir != Vector2.zero)
+                {
+                    entity.SetAtkRotation(dir);
+                }
             }
-        }
-        else if (skillData.dmgType==DamageType.AreaSkill)
-        {
-            Vector2 dir = entity.AreaSkillTargetDir();
-            if (dir!=Vector2.zero)
+            else if (skillData.dmgType == DamageType.AreaSkill)
             {
-                entity.SetAtkRotation(dir);
-            }
-            //TODO,如果是范围技能，且不是瞬移，在动画播放快结束的时候播放对应延迟特效,持续时间后消失。
-            if (skillData.ID!=107)
-            {
-            entity.SetAreaSkillFX(skillData.targetFX, skillData.delayFXTime, skillData.delayCloseFXTime);
+                Vector2 dir = entity.AreaSkillTargetDir();
+                if (dir != Vector2.zero)
+                {
+                    entity.SetAtkRotation(dir);
+                }
+                //如果是范围技能，且不是瞬移，在动画播放快结束的时候播放对应延迟特效,持续时间后消失。
+                if (skillData.ID != 107)
+                {
+                    entity.SetAreaSkillFX(skillData.targetFX, skillData.delayFXTime, skillData.delayCloseFXTime);
 
+                }
+            }
+            else//辅助技能
+            {
+                if (skillData.ID==105)//治疗技能
+                {
+                    entity.Hp += GameRoot.instance.Playerdata.hp / 3;
+                }
+                else if (skillData.ID==106)//攻击力+50%，进入霸体状态
+                {
+                    entity.AttackValue += GameRoot.instance.Playerdata.attackValue / 2;
+                    entity.unBreakable = true;
+                    TimeService.instance.AddTimeTask((int tid)=>
+                    {
+                        entity.AttackValue -= GameRoot.instance.Playerdata.attackValue/2;
+                        entity.unBreakable = false;
+                    },15f);
+                }
             }
         }
         entity.SetAction(skillData.aniAction);
@@ -69,7 +90,7 @@ public class SkillManager:MonoBehaviour
             speed = dis / (skillMoveCfg.moveTime/1000f);
             entity.SetSkillMoveState(true,false,speed);
         }
-        else
+        else//闪避技能
         {
             speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
             entity.SetSkillMoveState(true,true,speed);
@@ -81,7 +102,7 @@ public class SkillManager:MonoBehaviour
         timeSvc.AddTimeTask((int tid)=>
         {
             entity.Idle();
-            //Debug.Log("转换状态");
+            
             /*不能直接在这里修改action的值是因为，这个攻击可能会被打断，被打断以后不会进入这个状态
             这样就无法设置action了，所以是在退出攻击状态的时候设置action*/
         },skillData.animationTime);
@@ -116,32 +137,45 @@ public class SkillManager:MonoBehaviour
         SkillActionCfg skillActionCfg = resSvc.GetSkillActionData(skillCfg.skillActionList[index]);
 
         int damage = skillCfg.skillDamageList[index];
-        //拿到场景中的怪物实体，遍历运算
-        List<EntityMonster> monsterList = caster.battleMg.GetEntityMonsters();
-
-        for (int i = 0; i < monsterList.Count; i++)
+        if (caster.entityType==EntityType.Player)
         {
-            EntityMonster target = monsterList[i];
-            //判断距离，角度
-            //如果是范围技能，施法者位置变更为鼠标指定区域位置，角度固定为360度
-            if (skillCfg.dmgType==DamageType.AreaSkill)
+            //拿到场景中的怪物实体，遍历运算
+            List<EntityMonster> monsterList = caster.battleMg.GetEntityMonsters();
+
+            for (int i = 0; i < monsterList.Count; i++)
             {
-                if (InRange(BattleSys.Instance.playerCtrlWnd.pos, target.GetPos(), skillActionCfg.radius))
+                EntityMonster target = monsterList[i];
+                //判断距离，角度
+                //如果是范围技能，施法者位置变更为鼠标指定区域位置，角度固定为360度
+                if (skillCfg.dmgType == DamageType.AreaSkill)
                 {
-                    CalcDamage(caster, target, skillCfg, damage);
-                }
-            }
-            else
-            {
-                if (InRange(caster.GetPos(), target.GetPos(), skillActionCfg.radius) && InAngle(caster.GetTrans(), target.GetPos(), skillActionCfg.angle))
-                {
-                    //计算伤害
-                    CalcDamage(caster, target, skillCfg, damage);
+                    if (InRange(BattleSys.Instance.playerCtrlWnd.pos, target.GetPos(), skillActionCfg.radius))
+                    {
+                        CalcDamage(caster, target, skillCfg, damage);
+                    }
                 }
                 else
                 {
-                    GameRoot.instance.AddTips("超出攻击范围");
+                    if (InRange(caster.GetPos(), target.GetPos(), skillActionCfg.radius) && InAngle(caster.GetTrans(), target.GetPos(), skillActionCfg.angle))
+                    {
+                        //计算伤害
+                        CalcDamage(caster, target, skillCfg, damage);
+                    }
+                    else
+                    {
+                        GameRoot.instance.AddTips("超出攻击范围");
+                    }
                 }
+            }
+
+        }
+        else if (caster.entityType==EntityType.Monster)//如果是怪物只能攻击玩家
+        {
+            EntityPlayer target = caster.battleMg.entitySelfPlayer;
+            //判断距离角度
+            if (InRange(caster.GetPos(),target.GetPos(),skillActionCfg.radius)&&InAngle(caster.GetTrans(), target.GetPos(), skillActionCfg.angle))
+            {
+                CalcDamage(caster, target, skillCfg, damage);
             }
         }
     }
@@ -158,7 +192,7 @@ public class SkillManager:MonoBehaviour
         int dmgSum = damage;
 
         //计算属性加成
-        dmgSum += caster.BattleProps.attackValue;
+        dmgSum += caster.AttackValue;
         //暴击
         int criticalNum = PETools.RDInt(1,100,rd);
         if (criticalNum<=caster.BattleProps.critical)
@@ -188,7 +222,10 @@ public class SkillManager:MonoBehaviour
         else
         {
             target.Hp -= dmgSum;
-            target.Wound();
+            if (!target.unBreakable)
+            {
+                target.Wound();
+            }
         }
     }
     private bool InRange(Vector3 from,Vector3 to,float range)

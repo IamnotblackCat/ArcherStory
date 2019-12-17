@@ -14,19 +14,27 @@ public class StateWound : IState
 {
     public void Enter(EntityBase entity, params object[] args)
     {
+        //背击僵直
+        entity.canControll = false;
         entity.currentState = AniState.Wound;
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
-        
+        entity.canControll = true;
     }
 
     public void Process(EntityBase entity, params object[] args)
     {
-        //背击僵直
         entity.SetDir(Vector2.zero);
         entity.SetAction(Constants.ActionWound);
+
+        //音效
+        if (entity.entityType==EntityType.Player)
+        {
+            AudioSource characterAudio = entity.GetAudio();
+            AudioSvc.instance.PlayCharacterAudio(Constants.archerWound,characterAudio);
+        }
 
         //需要考虑到每一个模型的被攻击动画是不一样长度的
         TimeService.instance.AddTimeTask((int tid)=> {
@@ -48,7 +56,7 @@ public class StateWound : IState
                 return clips[i].length;
             }
         }
-        //保护之
+        //保护值
         return 1;
     }
 }

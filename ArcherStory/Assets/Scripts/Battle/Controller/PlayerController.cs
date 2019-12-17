@@ -45,7 +45,8 @@ public class PlayerController : Controller
         camMainTrans = Camera.main.transform;
         cameraOffset = camMainTrans.transform.position - transform.position;
         InitSkillGroudFX();
-        if (skill2FX != null)
+
+        if (skill1FX!=null)
         {
             fxDic.Add(skill1FX.name, skill1FX);
             fxDic.Add(skill2FX.name, skill2FX);
@@ -55,10 +56,11 @@ public class PlayerController : Controller
             fxDic.Add(skill6FX.name, skill6FX);
             fxDic.Add(skill7FX.name, skill7FX);
             fxDic.Add(skill8FX.name, skill8FX);
-            //fxDic.Add(skill4FX.name,skill4FX);
             fxDic.Add(skill3Ground.name, skill3Ground);
             fxDic.Add(skill4Ground.name, skill4Ground);
+
         }
+        
 
     }
     private void Update()

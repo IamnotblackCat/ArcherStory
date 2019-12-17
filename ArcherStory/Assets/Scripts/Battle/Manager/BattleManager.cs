@@ -22,6 +22,7 @@ public class BattleManager:MonoBehaviour
     public EntityPlayer entitySelfPlayer;
 
     private MapConfig mapCfg;
+    private AudioSource playerAudioSource;
 
     private Dictionary<string, EntityMonster> monsterDic = new Dictionary<string, EntityMonster>();
     public void Init(int mapId)
@@ -89,9 +90,11 @@ public class BattleManager:MonoBehaviour
             skillMg = skillMg,
         };
         entitySelfPlayer.SetBattleProps(props);
+        entitySelfPlayer.Name = player.name;
         PlayerController playerController = player.GetComponent<PlayerController>();
         playerController.Init();
         entitySelfPlayer.SetController(playerController);
+        playerAudioSource = entitySelfPlayer.GetAudio();
     }
 
     public void LoadMonsterByWaveID(int wave)
@@ -214,34 +217,47 @@ public class BattleManager:MonoBehaviour
     }
     private void ReleaseNormalATK()
     {
+        audioSvc.PlayCharacterAudio(Constants.skill1,playerAudioSource);
         entitySelfPlayer.Attack(101);
     }
     private void ReleaseSkill2()
     {
+        audioSvc.PlayCharacterAudio(Constants.skill2, playerAudioSource);
         entitySelfPlayer.Attack(102);
     }
     private void ReleaseSkill3()
-    {
+    {//这里使用UI播放音效是因为这个音效会和其他音效共存，避免音效被打断
+        audioSvc.PlayUIAudio(Constants.skill3);
         entitySelfPlayer.Attack(103);
     }
     private void ReleaseSkill4()
-    {
+    {//这里使用UI播放音效是因为这个音效会和其他音效共存，避免音效被打断
+        audioSvc.PlayUIAudio(Constants.skill4);
         entitySelfPlayer.Attack(104);
     }
     private void ReleaseSkill5()
     {
+        audioSvc.PlayCharacterAudio(Constants.skill5, playerAudioSource);
         entitySelfPlayer.Attack(105);
     }
     private void ReleaseSkill6()
     {
+        //这里使用UI播放音效是因为这个音效会和其他音效共存，长时间的火焰音效
+        //这行代码有一个神奇的BUG，第一次使用会转两圈。重启数次，并且尝试了一切方法，完全找不到原因
+        //通过改名修复的，所以名字就它一个是大写.
+        //新发现：这是一个特别神奇的bug，改名字就能好一段时间，然后又出来，改名又好
+        audioSvc.PlayUIAudio(Constants.skill6);
+        //audioSvc.PlayCharacterAudio(Constants.Skill6,playerAudioSource);
         entitySelfPlayer.Attack(106);
     }
     private void ReleaseSkill7()
     {
+        audioSvc.PlayCharacterAudio(Constants.skill7, playerAudioSource);
         entitySelfPlayer.Attack(107);
     }
     private void ReleaseSkill8()
     {
+        audioSvc.PlayCharacterAudio(Constants.skill8, playerAudioSource);
         entitySelfPlayer.Attack(108);
     }
 } 

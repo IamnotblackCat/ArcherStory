@@ -794,7 +794,7 @@ GameObject:
   - component: {fileID: 400104}
   - component: {fileID: 9500000}
   - component: {fileID: 14300000}
-  - component: {fileID: 11100000}
+  - component: {fileID: 114195113887167202}
   m_Layer: 0
   m_Name: GouTouJunShi_02
   m_TagString: Untagged
@@ -1557,7 +1557,7 @@ Animator:
   m_GameObject: {fileID: 100104}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1b278ba02159de542ad79ca53648a1b7, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 409953850d82f1c4f8fd2e95b5dd7874, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1566,29 +1566,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!111 &11100000
-Animation:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100104}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 6b00c24628eba2e44840eb458346eff2, type: 3}
-  - {fileID: 7400000, guid: 3572db2bedd1bd64f86277d14f7cc804, type: 3}
-  - {fileID: 7400000, guid: 0d243f059e18a9c458b43886dd3b7547, type: 3}
-  - {fileID: 7400000, guid: 6a82e93613e142947b4c5a059302d390, type: 3}
-  - {fileID: 7400000, guid: 3c6d06d788b8146449b38993ec314254, type: 3}
-  - {fileID: 7400000, guid: 808db3d5a7fbbed4fb9198ca361069ec, type: 3}
-  - {fileID: 7400000, guid: 8816e3765e358a24f9ab86155c41c9a3, type: 3}
-  - {fileID: 7400000, guid: bb8c685b2c0cbe441b2b3acc65665b9a, type: 3}
-  - {fileID: 7400000, guid: 94c0781d24316f34d995afd62f143045, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1849,3 +1826,17 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100104}
   m_IsPrefabAsset: 1
+--- !u!114 &114195113887167202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c4df811929f3345b56c814c8388157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  ctrl: {fileID: 0}
+  hpRoot: {fileID: 0}

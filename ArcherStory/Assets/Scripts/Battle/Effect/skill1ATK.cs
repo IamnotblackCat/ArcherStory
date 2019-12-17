@@ -24,26 +24,26 @@ public class skill1ATK : MonoBehaviour
     }
     private void OnEnable()
     {
-        EntityMonster monster = BattleSys.Instance.battleMg.entitySelfPlayer.FindClosedMonster();
-        //拿到当前攻击目标的位置，位置稍微上调一点，不然是射脚的
-        //没有目标的时候，箭就向前飞
-        Vector3 pos;
-        if (monster==null)
-        {
-            isHaveTarget = false;
-            pos = Vector3.zero;
-        }
-        else
-        {
-            isHaveTarget = true;
-            pos = monster.GetPos();
-        }
-        monsterPos = new Vector3(pos.x,pos.y+2f,pos.z);
-
+        
         TimeService.instance.AddTimeTask((int tid)=>
         {
+            EntityMonster monster = BattleSys.Instance.battleMg.entitySelfPlayer.FindClosedMonster();
+            //拿到当前攻击目标的位置，位置稍微上调一点，不然是射脚的
+            //没有目标的时候，箭就向前飞
+            Vector3 pos;
+            if (monster == null)
+            {
+                isHaveTarget = false;
+                pos = Vector3.zero;
+            }
+            else
+            {
+                isHaveTarget = true;
+                pos = monster.GetPos();
+            }
+            monsterPos = new Vector3(pos.x, pos.y + 2f, pos.z);
             canFly = true;
-        },0.6f);
+        }, 0.6f);
         TimeService.instance.AddTimeTask((int tid)=>
         {
             canFly = false;

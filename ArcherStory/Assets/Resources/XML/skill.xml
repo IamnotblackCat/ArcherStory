@@ -91,7 +91,7 @@
 		<animTime>0.8</animTime>
 		<aniAction>7</aniAction>
 		<fx>skill8</fx>
-		<dmgType>3</dmgType>
+		<dmgType>1</dmgType>
 		<skillMove>1011</skillMove>
 	</item>
 	<item ID="201">

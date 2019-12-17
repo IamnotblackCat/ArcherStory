@@ -17,9 +17,11 @@ public abstract class EntityBase
     public BattleManager battleMg = null;
     public StateManager stateMg = null;
     public SkillManager skillMg = null;
+    public EntityType entityType = EntityType.None;
 
     public bool canControll = true;
-
+    public bool unBreakable = false;//是否为霸体状态，不可打断
+    
     protected Controller controller = null;
 
     private BattleProps battleProps;
@@ -115,7 +117,7 @@ public abstract class EntityBase
     public virtual void SetBattleProps(BattleProps props)
     {
         Hp = props.hp;
-        attackValue = props.attackValue;
+        AttackValue = props.attackValue;
         BattleProps = props;
     }
     public virtual void SetBlend(float blend)
@@ -200,7 +202,6 @@ public abstract class EntityBase
     {
         if (controller != null)
         {
-
             GameRoot.instance.dynamicWnd.SetHPVal(Name, oldVal, newVal);
         }
     }
@@ -237,5 +238,9 @@ public abstract class EntityBase
     public virtual void TickAILogic()
     {
 
+    }
+    public virtual AudioSource GetAudio()
+    {
+        return controller.GetComponent<AudioSource>();
     }
 }

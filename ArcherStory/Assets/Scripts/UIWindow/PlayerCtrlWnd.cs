@@ -32,8 +32,11 @@ public class PlayerCtrlWnd : WindowRoot
     public Image imgSk6CD;
     public Image imgSk7CD;
     public Image imgSk8CD;
-    #endregion
 
+    public Text txtSelfHP;
+    public Image imgSelfHP;
+    #endregion
+    private int HPSum;
     #region 技能冷却相关变量
 
     private float sk2FillCount;//记录imgCD图数据，用来计算显示fillAmount属性
@@ -96,6 +99,10 @@ public class PlayerCtrlWnd : WindowRoot
     protected override void InitWnd()
     {
         base.InitWnd();
+
+        HPSum = GameRoot.instance.Playerdata.hp;
+        SetText(txtSelfHP,HPSum+"/"+HPSum);
+        imgSelfHP.fillAmount = 1;
 
         RefreshUI();
         sk2CDTime = resSvc.GetSkillCfgData(102).skillCDTime;
@@ -533,5 +540,11 @@ public class PlayerCtrlWnd : WindowRoot
         skillArea.transform.SetParent(GameRoot.instance.transform);
         skillArea.SetActive(false);
         //Debug.Log(skillArea);
+    }
+
+    public void SetSelfHPBarVal(int val)
+    {
+        SetText(txtSelfHP,val+"/"+HPSum);
+        imgSelfHP.fillAmount = val * 1.0f / HPSum;
     }
 }

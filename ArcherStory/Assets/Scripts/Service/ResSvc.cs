@@ -73,6 +73,7 @@ public class ResSvc : MonoBehaviour
         if (!audioDic.TryGetValue(path,out au))
         {
             au = Resources.Load<AudioClip>(path);
+            
             if (cache)//如果需要缓存
             {
                 audioDic.Add(path, au);

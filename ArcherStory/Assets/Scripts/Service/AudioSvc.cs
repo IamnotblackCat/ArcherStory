@@ -13,7 +13,7 @@ public class AudioSvc : MonoBehaviour
     public static AudioSvc instance = null;
     public AudioSource bgAudio;
     public AudioSource uiAudio;
-
+    
     public void InitSvc()
     {
         instance = this;
@@ -33,8 +33,14 @@ public class AudioSvc : MonoBehaviour
     }
     public void PlayUIAudio(string name)
     {
-        AudioClip audio = ResSvc.instance.LoadAudio("Audio/ArcherAudio/" + name);
+        AudioClip audio = ResSvc.instance.LoadAudio("Audio/ArcherAudio/" + name,true);
         uiAudio.clip = audio;
         uiAudio.Play();
+    }
+    public void PlayCharacterAudio(string name,AudioSource audioSource)
+    {
+        AudioClip audio = ResSvc.instance.LoadAudio("Audio/ArcherAudio/" + name,true);
+        audioSource.clip = audio;
+        audioSource.Play();
     }
 }

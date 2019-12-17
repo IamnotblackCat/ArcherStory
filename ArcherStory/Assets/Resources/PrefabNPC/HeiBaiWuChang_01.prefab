@@ -1016,7 +1016,7 @@ GameObject:
   - component: {fileID: 400134}
   - component: {fileID: 9500000}
   - component: {fileID: 14300000}
-  - component: {fileID: 11100000}
+  - component: {fileID: 114238671457604926}
   m_Layer: 0
   m_Name: HeiBaiWuChang_01
   m_TagString: Untagged
@@ -1989,7 +1989,7 @@ Animator:
   m_GameObject: {fileID: 100134}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5d2ba88347895d94e94a650f5d20e68f, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 3eb7d8cae4d6fe2448af129864a05b5f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1998,29 +1998,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!111 &11100000
-Animation:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100134}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 6f0c850bff44045429f7d1a9319ddc0e, type: 3}
-  - {fileID: 7400000, guid: 4a2e9a51084b3af49a69efc5d61e2cf9, type: 3}
-  - {fileID: 7400000, guid: ecdb4016d86dcb74694c50b9e26af2ea, type: 3}
-  - {fileID: 7400000, guid: 301f409cbf0a0644784756b505c978e5, type: 3}
-  - {fileID: 7400000, guid: 2ef4796dec730eb429faae32e7aa8aed, type: 3}
-  - {fileID: 7400000, guid: b31987f099cfbb14e9eb4f4919ea52ed, type: 3}
-  - {fileID: 7400000, guid: 0ca2d4462a93a4a4193a8d86db2daa34, type: 3}
-  - {fileID: 7400000, guid: 4597d44c2c832ea4992c8c6585912568, type: 3}
-  - {fileID: 7400000, guid: 7a0413023e1e9524e85dd10a99c2c979, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2145,3 +2122,17 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100134}
   m_IsPrefabAsset: 1
+--- !u!114 &114238671457604926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c4df811929f3345b56c814c8388157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  ctrl: {fileID: 0}
+  hpRoot: {fileID: 0}
