@@ -7,34 +7,23 @@
 *****************************************************/
 using UnityEngine.UI;
 using UnityEngine;
-using PEProtocol;
 using UnityEngine.EventSystems;
 
 public class MainCityWnd : WindowRoot 
 {
     #region Public UI Transform
-    //public Image imgTouch;
-    //public Image imgDirBg;
-    //public Image imgDirPoint;
-
-    //public Text txtFight;
+    
     public GameObject goFuben;
     public Text txtLV;
-   // public Text txtPower;
-   //public Image imgPowerPrg;
-    //public Text txtName;
     public Text txtExpPrg;
 
     public Button btnGuide;
 
     public Transform expProgramTrans;
-    //public Animation menuAnim;
 
     #endregion
 
     private bool menuState = true;//true是打开，false收起
-    //private Vector2 clickPos = Vector2.zero;//点击的位置-摇杆背景图位置
-    //private Vector2 defaultPos = Vector2.zero;//摇杆背景图的初始位置。
     private AutoGuideCfg currentTaskData;
 
     //UI自适应不能使用固定距离，要计算得出比率距离
@@ -43,22 +32,14 @@ public class MainCityWnd : WindowRoot
     protected override void InitWnd()
     {
         base.InitWnd();
-
-        //defaultPos = imgDirBg.transform.position;//默认位置为世界坐标
-        //SetActive(imgDirPoint,false);
-        //RegistrTouchEvts();
+        
         RefreshUI();
     }
     public void RefreshUI()
     {
         PlayerData pd = GameRoot.instance.Playerdata;
-
-        //SetText(txtFight, PECommon.GetFightByPlayerData(pd));
+        
         SetText(txtLV,pd.lv);
-        //SetText(txtPower,"体力："+pd.power+"/"+PECommon.GetPowerLimit(pd.lv));
-        //需要限制不要超出范围吗？
-        //imgPowerPrg.fillAmount = pd.power * 1.0f / PECommon.GetPowerLimit(pd.lv);
-        //SetText(txtName,pd.name);
 
         #region ExpProgress
         int expValPercent = (int)(pd.exp * 1.0f /100);

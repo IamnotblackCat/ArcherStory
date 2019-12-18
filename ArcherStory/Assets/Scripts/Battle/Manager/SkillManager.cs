@@ -65,6 +65,10 @@ public class SkillManager:MonoBehaviour
                 if (skillData.ID==105)//治疗技能
                 {
                     entity.Hp += GameRoot.instance.Playerdata.hp / 3;
+                    if (entity.Hp>GameRoot.instance.Playerdata.hp)
+                    {
+                        entity.Hp = GameRoot.instance.Playerdata.hp;
+                    }
                 }
                 else if (skillData.ID==106)//攻击力+50%，进入霸体状态
                 {

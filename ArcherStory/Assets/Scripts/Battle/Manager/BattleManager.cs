@@ -215,29 +215,33 @@ public class BattleManager:MonoBehaviour
                 break;
         }
     }
+
+    //技能释放特效声音修改为特效出现时的audiosource组件播放
+    #region 技能释放
+
     private void ReleaseNormalATK()
     {
-        audioSvc.PlayCharacterAudio(Constants.skill1,playerAudioSource);
+        //audioSvc.PlayCharacterAudio(Constants.skill1,playerAudioSource);
         entitySelfPlayer.Attack(101);
     }
     private void ReleaseSkill2()
     {
-        audioSvc.PlayCharacterAudio(Constants.skill2, playerAudioSource);
+        //audioSvc.PlayCharacterAudio(Constants.skill2, playerAudioSource);
         entitySelfPlayer.Attack(102);
     }
     private void ReleaseSkill3()
     {//这里使用UI播放音效是因为这个音效会和其他音效共存，避免音效被打断
-        audioSvc.PlayUIAudio(Constants.skill3);
+        //audioSvc.PlayUIAudio(Constants.skill3);
         entitySelfPlayer.Attack(103);
     }
     private void ReleaseSkill4()
     {//这里使用UI播放音效是因为这个音效会和其他音效共存，避免音效被打断
-        audioSvc.PlayUIAudio(Constants.skill4);
+        //audioSvc.PlayUIAudio(Constants.skill4);
         entitySelfPlayer.Attack(104);
     }
     private void ReleaseSkill5()
     {
-        audioSvc.PlayCharacterAudio(Constants.skill5, playerAudioSource);
+        //audioSvc.PlayCharacterAudio(Constants.skill5, playerAudioSource);
         entitySelfPlayer.Attack(105);
     }
     private void ReleaseSkill6()
@@ -252,13 +256,14 @@ public class BattleManager:MonoBehaviour
     }
     private void ReleaseSkill7()
     {
-        audioSvc.PlayCharacterAudio(Constants.skill7, playerAudioSource);
+        //audioSvc.PlayCharacterAudio(Constants.skill7, playerAudioSource);
         entitySelfPlayer.Attack(107);
     }
     private void ReleaseSkill8()
     {
-        audioSvc.PlayCharacterAudio(Constants.skill8, playerAudioSource);
+        //audioSvc.PlayCharacterAudio(Constants.skill8, playerAudioSource);
         entitySelfPlayer.Attack(108);
     }
-} 
+}  
+#endregion
 #endregion
