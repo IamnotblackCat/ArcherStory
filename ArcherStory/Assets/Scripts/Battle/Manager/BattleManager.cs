@@ -230,12 +230,12 @@ public class BattleManager:MonoBehaviour
         entitySelfPlayer.Attack(102);
     }
     private void ReleaseSkill3()
-    {//这里使用UI播放音效是因为这个音效会和其他音效共存，避免音效被打断
+    {
         //audioSvc.PlayUIAudio(Constants.skill3);
         entitySelfPlayer.Attack(103);
     }
     private void ReleaseSkill4()
-    {//这里使用UI播放音效是因为这个音效会和其他音效共存，避免音效被打断
+    {
         //audioSvc.PlayUIAudio(Constants.skill4);
         entitySelfPlayer.Attack(104);
     }
@@ -250,7 +250,8 @@ public class BattleManager:MonoBehaviour
         //这行代码有一个神奇的BUG，第一次使用会转两圈。重启数次，并且尝试了一切方法，完全找不到原因
         //通过改名修复的，所以名字就它一个是大写.
         //新发现：这是一个特别神奇的bug，改名字就能好一段时间，然后又出来，改名又好
-        audioSvc.PlayUIAudio(Constants.skill6);
+        //这个bug彻底解决了，因为我换成了在特效上独立的audiosource播放
+        //audioSvc.PlayUIAudio(Constants.skill6);
         //audioSvc.PlayCharacterAudio(Constants.Skill6,playerAudioSource);
         entitySelfPlayer.Attack(106);
     }

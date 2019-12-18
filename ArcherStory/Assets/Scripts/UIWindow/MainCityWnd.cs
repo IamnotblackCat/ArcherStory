@@ -151,6 +151,18 @@ public class MainCityWnd : WindowRoot
     {
         goFuben.SetActive(true);
     }
+    public void ClickKnapsackBtn()
+    {
+        Knapsack.Instance.DisplaySwitch();
+    }
+    public void ClickSkillBtn()
+    {
+
+    }
+    public void ClickSystemBtn()
+    {
+
+    }
     public void ClickConfirm()
     {
         GameRoot.instance.ClearUIRoot();
@@ -207,4 +219,5 @@ public class MainCityWnd : WindowRoot
     //}
 
     #endregion
+
 }
