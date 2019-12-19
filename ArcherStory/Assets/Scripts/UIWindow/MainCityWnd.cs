@@ -14,6 +14,7 @@ public class MainCityWnd : WindowRoot
     #region Public UI Transform
     
     public GameObject goFuben;
+    public GameObject skillPanel;
     public Text txtLV;
     public Text txtExpPrg;
 
@@ -157,7 +158,7 @@ public class MainCityWnd : WindowRoot
     }
     public void ClickSkillBtn()
     {
-
+        skillPanel.SetActive(true);
     }
     public void ClickSystemBtn()
     {
@@ -180,6 +181,10 @@ public class MainCityWnd : WindowRoot
         float v = Input.GetAxis("Vertical");
         Vector2 _dir = new Vector2(h, v);
         MainCitySys.Instance.SetMoveDir(_dir);
+    }
+    public void CloseSkillPanel()
+    {
+        skillPanel.SetActive(false);
     }
     //public void RegistrTouchEvts()
     //{

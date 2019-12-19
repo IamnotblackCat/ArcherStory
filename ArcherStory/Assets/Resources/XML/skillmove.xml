@@ -6,7 +6,7 @@
 	</item>
 	<item ID="1012">
 		<moveTime>80</moveTime>
-		<moveDis>10</moveDis>
+		<moveDis>20</moveDis>
 	</item>
 	<item ID="1013">
 		<moveTime>0</moveTime>

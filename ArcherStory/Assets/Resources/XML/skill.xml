@@ -14,7 +14,7 @@
 	</item>
 	<item ID="102">
 		<skillName>贯通箭</skillName>
-		<cdTime>2</cdTime>
+		<cdTime>3</cdTime>
 		<skillTime>1.333</skillTime>
 		<animTime>1.333</animTime>
 		<aniAction>1</aniAction>
@@ -26,7 +26,7 @@
 	</item>
 	<item ID="103">
 		<skillName>烈焰矢</skillName>
-		<cdTime>3</cdTime>
+		<cdTime>5</cdTime>
 		<skillTime>1.833</skillTime>
 		<animTime>1.833</animTime>
 		<targetFX>skill3_ground</targetFX>
@@ -41,7 +41,7 @@
 	</item>
 	<item ID="104">
 		<skillName>陨石</skillName>
-		<cdTime>4</cdTime>
+		<cdTime>9</cdTime>
 		<skillTime>2</skillTime>
 		<animTime>2</animTime>
 		<targetFX>skill4_ground</targetFX>

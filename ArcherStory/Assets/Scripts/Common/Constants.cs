@@ -127,7 +127,7 @@ public class Constants
     public const string skill4Name = "skill4_ground";
 
     //范围技能最大施法范围
-    public const float skill3MaxArea = 10;
+    public const float skill3MaxArea = 12;
     public const float skill4MaxArea = 15;
-    public const float skill7MaxArea = 10;
+    public const float skill7MaxArea = 20;
 }

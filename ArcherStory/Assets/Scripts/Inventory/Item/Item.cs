@@ -87,7 +87,7 @@ public class Item  {
                 color = "red";
                 break;
         }
-        string text = string.Format("<color={4}>{0}</color>\n<size=10><color=green>购买价格：{1} 出售价格：{2}</color></size>\n<color=yellow><size=10>{3}</size></color>", Name, BuyPrice, SellPrice, Description, color);
+        string text = string.Format("<color={4}>{0}</color>\n<size=25><color=green>购买价格：{1} 出售价格：{2}</color></size>\n<color=yellow><size=25>{3}</size></color>", Name, BuyPrice, SellPrice, Description, color);
         return text;
     }
 }

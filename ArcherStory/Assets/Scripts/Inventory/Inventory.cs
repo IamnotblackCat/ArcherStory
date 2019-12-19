@@ -3,22 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Text;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour, IInitializePotentialDragHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+
+{
 
     protected Slot[] slotList;
+    protected RectTransform rect;
 
     private float targetAlpha = 0;
 
     private float smoothing = 4;
 
     private CanvasGroup canvasGroup;
+    private Vector3 uiOffset;
 
 	// Use this for initialization
 	public virtual void Start () {
         slotList = GetComponentsInChildren<Slot>();
         canvasGroup = GetComponent<CanvasGroup>();
-	}
+        rect = GetComponent<RectTransform>();
+    }
 
 
     void Update()
@@ -174,4 +181,30 @@ public class Inventory : MonoBehaviour {
         }
     }
     #endregion
+
+    public void OnInitializePotentialDrag(PointerEventData eventData)
+    {//这个偏移量用来避免鼠标点击以后UI位置弹跳到中心
+        Vector3 mouseGlobalPos;
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rect,eventData.position,null,out mouseGlobalPos))
+        {
+            uiOffset = rect.position - mouseGlobalPos;
+        }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        Vector3 pos = Vector3.zero;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, eventData.position, eventData.enterEventCamera, out pos);
+        rect.position = pos+uiOffset;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+
+    }
 }
