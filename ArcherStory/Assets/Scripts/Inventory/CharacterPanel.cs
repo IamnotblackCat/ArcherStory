@@ -10,10 +10,6 @@ public class CharacterPanel : Inventory
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = GameObject.Find("CharacterPanel").GetComponent<CharacterPanel>();
-            }
             return _instance;
         }
     }
@@ -23,13 +19,13 @@ public class CharacterPanel : Inventory
 
     private Player player;
 
+    private ChangeSkinSys skinChange;
     public override void Start()
     {
         base.Start();
-        propertyText = transform.Find("PropertyPanel/Text").GetComponent<Text>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        UpdatePropertyText();
-        Hide();
+        _instance = transform.GetComponent<CharacterPanel>();
+        player = GameObject.Find("MainCityWnd").GetComponent<Player>();
+        skinChange = ChangeSkinSys.Instance;
     }
 
 
@@ -56,45 +52,21 @@ public class CharacterPanel : Inventory
         }
         if(exitItem!=null)
             Knapsack.Instance.StoreItem(exitItem);
-
-        UpdatePropertyText();
+        if (item is Weapon)
+        {
+            skinChange.ChangeWeaponSkinToNew();
+            GameRoot.instance.isNewBow = true;
+        }
     }
     
     public void PutOff(Item item)
     {
         Knapsack.Instance.StoreItem(item);
-        UpdatePropertyText();
-    }
-
-    private void UpdatePropertyText()
-    {
-        //Debug.Log("UpdatePropertyText");
-        int strength = 0, intellect = 0, agility = 0, stamina = 0, damage = 0;
-        foreach(EquipmentSlot slot in slotList){
-            if (slot.transform.childCount > 0)
-            {
-                Item item = slot.transform.GetChild(0).GetComponent<ItemUI>().Item;
-                if (item is Equipment)
-                {
-                    Equipment e = (Equipment)item;
-                    strength += e.Strength;
-                    intellect += e.Intellect;
-                    agility += e.Agility;
-                    stamina += e.Stamina;
-                }
-                else if (item is Weapon)
-                {
-                    damage += ((Weapon)item).Damage;
-                }
-            }
+        if (item is Weapon)
+        {
+            skinChange.ChangeWeaponSkinToOld();
+            GameRoot.instance.isNewBow = false;
         }
-        strength += player.BasicStrength;
-        intellect += player.BasicIntellect;
-        agility += player.BasicAgility;
-        stamina += player.BasicStamina;
-        damage += player.BasicDamage;
-        string text = string.Format("力量：{0}\n智力：{1}\n敏捷：{2}\n体力：{3}\n攻击力：{4} ", strength, intellect, agility, stamina, damage);
-        propertyText.text = text;
     }
-
+    
 }

@@ -3,7 +3,7 @@
 	作者：Echo
     邮箱: 350383921@qq.com
     日期：2019/10/30 11:45:54
-	功能：Nothing
+	功能：角色面板信息
 *****************************************************/
 
 using PEProtocol;
@@ -11,17 +11,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InfoWnd : WindowRoot 
+public class InfoWnd : WindowRoot/*, IInitializePotentialDragHandler, IBeginDragHandler, IDragHandler, IEndDragHandler*/
 {
     public RawImage imgCharactor;
-
-    //public Text txtCharactor;
+    
     public Text txtExp;
     public Image imgExp;
-    //public Text txtPower;
-    //public Image imgPower;
     public Text txtJob;
-   //public Text txtFight;
     public Text txtHP;
     public Text txtDamage;
     public Text txtDefend;
@@ -33,21 +29,21 @@ public class InfoWnd : WindowRoot
     public Button CloseDetailBtn;
     public Text hpValue;
     public Text adValue;
-    //public Text apValue;
     public Text addValue;
-   // public Text apdValue;
-   // public Text dodgeValue;
     public Text pierceValue;
 
     #endregion
     public Text criticalValue;
 
     private Vector2 startPos;
+    private RectTransform rect;
+    private Vector3 uiOffset = Vector3.zero;
     protected override void InitWnd()
     {
         base.InitWnd();
         RegistTouchEvts();
         RefreshUI();
+        rect = GetComponent<RectTransform>();
         SetActive(transDetail,false);
     }
     private void RegistTouchEvts()
@@ -67,17 +63,10 @@ public class InfoWnd : WindowRoot
     private void RefreshUI()
     {
         PlayerData pd = GameRoot.instance.Playerdata;
-        //SetText(txtCharactor,pd.name+" LV"+pd.lv);
         SetText(txtExp,pd.exp+"/"+100);
         imgExp.fillAmount = (pd.exp*1.0f/100);
-        //SetText(txtPower,pd.power);
-        //imgPower.fillAmount = (pd.power*1.0f/PECommon.GetPowerLimit(pd.lv));
         SetText(txtJob, " 职业  弓箭手");
-        //SetText(txtFight, " 战力  "+PECommon.GetFightByPlayerData(pd));
-        SetText(txtHP, " 生命  " + pd.hp);
-        SetText(txtDamage, " 伤害  "+(pd.attackValue));
-        SetText(txtDefend, " 防御  " + (pd.defend));
-
+        
         //detail
         SetText(hpValue,pd.hp);
         SetText(adValue,pd.attackValue);

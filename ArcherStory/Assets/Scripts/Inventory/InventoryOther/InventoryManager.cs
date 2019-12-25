@@ -128,9 +128,10 @@ public class InventoryManager : MonoBehaviour
             switch (type)
             {
                 case Item.ItemType.Consumable:
-                    int hp = (int)(temp["hp"].n);
-                    int mp = (int)(temp["mp"].n);
-                    item = new Consumable(id, name, type, quality, description, capacity, buyPrice, sellPrice, sprite, hp, mp);
+                    //int hp = (int)(temp["hp"].n);
+                    //int mp = (int)(temp["mp"].n);
+                    int exp = (int)(temp["exp"].n);
+                    item = new Consumable(id, name, type, quality, description, capacity, buyPrice, sellPrice, sprite,exp);
                     break;
                 case Item.ItemType.Equipment:
                     //
@@ -143,9 +144,9 @@ public class InventoryManager : MonoBehaviour
                     break;
                 case Item.ItemType.Weapon:
                     //
-                    int damage = (int) temp["damage"].n;
-                    Weapon.WeaponType wpType = (Weapon.WeaponType)System.Enum.Parse(typeof(Weapon.WeaponType), temp["weaponType"].str);
-                    item = new Weapon(id, name, type, quality, description, capacity, buyPrice, sellPrice, sprite, damage, wpType);
+                    //int damage = (int) temp["damage"].n;
+                    //Weapon.WeaponType wpType = (Weapon.WeaponType)System.Enum.Parse(typeof(Weapon.WeaponType), temp["weaponType"].str);
+                    item = new Weapon(id, name, type, quality, description, capacity, buyPrice, sellPrice, sprite);
                     break;
                 case Item.ItemType.Material:
                     //

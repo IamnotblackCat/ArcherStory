@@ -43,7 +43,7 @@ public class ToolTip : MonoBehaviour {
     }
     public void SetLocalPotion(Vector3 position)
     {
-        transform.localPosition = position;
+        transform.localPosition = position + new Vector3(40,0,0); ;
     }
 	
 }

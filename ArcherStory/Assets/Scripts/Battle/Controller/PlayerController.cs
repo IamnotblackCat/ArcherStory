@@ -150,12 +150,10 @@ public class PlayerController : Controller
         {
             currentBlend = targetBlend;
         }
-        //由运动状态转向idle状态
         else if (currentBlend > targetBlend)
         {
             currentBlend -= Constants.accelerateSpeed * Time.deltaTime;
         }
-        //由idle转化为运动
         else
         {
             currentBlend += Constants.accelerateSpeed * Time.deltaTime;

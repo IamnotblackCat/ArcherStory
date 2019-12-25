@@ -30,13 +30,17 @@ public class Inventory : MonoBehaviour, IInitializePotentialDragHandler, IBeginD
 
     void Update()
     {
-        if (canvasGroup.alpha != targetAlpha)
+        if (canvasGroup!=null)
         {
-            canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, targetAlpha, smoothing * Time.deltaTime);
-            if (Mathf.Abs(canvasGroup.alpha - targetAlpha) < .01f)
+            if (canvasGroup.alpha != targetAlpha)
             {
-                canvasGroup.alpha = targetAlpha;
+                canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, targetAlpha, smoothing * Time.deltaTime);
+                if (Mathf.Abs(canvasGroup.alpha - targetAlpha) < .01f)
+                {
+                    canvasGroup.alpha = targetAlpha;
+                }
             }
+
         }
     }
 

@@ -24,7 +24,7 @@ public class BattleManager:MonoBehaviour
     private MapConfig mapCfg;
     private AudioSource playerAudioSource;
 
-    private Dictionary<string, EntityMonster> monsterDic = new Dictionary<string, EntityMonster>();
+    public Dictionary<string, EntityMonster> monsterDic = new Dictionary<string, EntityMonster>();
     public void Init(int mapId)
     {
         resSvc = ResSvc.instance;
@@ -95,6 +95,14 @@ public class BattleManager:MonoBehaviour
         playerController.Init();
         entitySelfPlayer.SetController(playerController);
         playerAudioSource = entitySelfPlayer.GetAudio();
+        if (GameRoot.instance.isNewBow)
+        {
+            playerController.GetComponent<ChangeSkinSys>().ChangeWeaponSkinToNew();
+        }
+        else
+        {
+            playerController.GetComponent<ChangeSkinSys>().ChangeWeaponSkinToOld();
+        }
     }
 
     public void LoadMonsterByWaveID(int wave)
@@ -251,6 +259,7 @@ public class BattleManager:MonoBehaviour
         //通过改名修复的，所以名字就它一个是大写.
         //新发现：这是一个特别神奇的bug，改名字就能好一段时间，然后又出来，改名又好
         //这个bug彻底解决了，因为我换成了在特效上独立的audiosource播放
+        //12.21新发现。。。bug复现了，找不到原因，但是只要重新编译任何该技能相关的代码，又会恢复。
         //audioSvc.PlayUIAudio(Constants.skill6);
         //audioSvc.PlayCharacterAudio(Constants.Skill6,playerAudioSource);
         entitySelfPlayer.Attack(106);

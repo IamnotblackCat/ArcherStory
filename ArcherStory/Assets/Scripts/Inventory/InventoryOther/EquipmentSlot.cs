@@ -17,7 +17,7 @@ public class EquipmentSlot : Slot {
                 Item itemTemp = currentItemUI.Item;
                 DestroyImmediate(currentItemUI.gameObject);
                 //脱掉放到背包里面
-                transform.parent.SendMessage("PutOff", itemTemp);
+                transform.parent.parent.SendMessage("PutOff", itemTemp);
                 InventoryManager.Instance.HideToolTip();
             }
         }
@@ -67,15 +67,16 @@ public class EquipmentSlot : Slot {
         }
         if (isUpdateProperty)
         {
-            transform.parent.SendMessage("UpdatePropertyText");
+            //transform.parent.SendMessage("UpdatePropertyText");
         }
     }
 
     //判断item是否适合放在这个位置
     public bool IsRightItem(Item item)
     {
-        if ((item is Equipment && ((Equipment)(item)).EquipType == this.equipType) ||
-                    (item is Weapon && ((Weapon)(item)).WpType == this.wpType))
+        if ((item is Equipment && ((Equipment)(item)).EquipType == this.equipType) 
+                    ||(item is Weapon /*&& ((Weapon)(item)).WpType == this.wpType*/)
+                    )
         {
             return true;
         }

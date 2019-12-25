@@ -6,6 +6,7 @@
 	功能：战斗场景界面
 *****************************************************/
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -166,7 +167,14 @@ public class PlayerCtrlWnd : WindowRoot
     {
         GameRoot.instance.ClearUIRoot();
         returnGo.SetActive(false);
+        Transform temp = GameRoot.instance.dynamicWnd.transform;
         MainCitySys.Instance.EnterMainCity();
+        //for (int i = 0; i < temp.childCount; i++)
+        //{
+        //    Destroy(temp.GetChild(0).GetChild(0).GetChild(i));
+
+        //}
+        
     }
     public void ClickConcel()
     {
