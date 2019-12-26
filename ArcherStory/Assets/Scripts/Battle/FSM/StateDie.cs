@@ -14,6 +14,7 @@ public class StateDie : IState
 {
     public void Enter(EntityBase entity, params object[] args)
     {
+        entity.canControll = false;
         entity.currentState = AniState.Die;
     }
 

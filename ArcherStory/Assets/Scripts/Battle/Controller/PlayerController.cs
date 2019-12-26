@@ -240,21 +240,24 @@ public class PlayerController : Controller
             }, closeTime);
         }
     }
-    public override void SetAreaSkillFX(string fxName, float beginTime, float closeTime)
+    public override void SetAreaSkillFX(EntityBase entity, string fxName, float beginTime, float closeTime)
     {
         GameObject go;
         if (fxDic.TryGetValue(fxName,out go))
         {
-            timeSvc.AddTimeTask((int tid) =>
+           int effectID= timeSvc.AddTimeTask((int tid) =>
             {
                 go.SetActive(true);
                 go.transform.position = BattleSys.Instance.playerCtrlWnd.pos;
-
+                entity.RemoveEffectCallBake(tid);
             },beginTime);
-            timeSvc.AddTimeTask((int tid) =>
+            entity.skillEffectCallBackList.Add(effectID);
+            int stopEffectID= timeSvc.AddTimeTask((int tid) =>
             {
                 go.SetActive(false);
+                entity.RemoveEffectCallBake(tid);
             },closeTime+beginTime);
+            entity.skillEffectCallBackList.Add(effectID);
         }
     }
     private void InitSkillGroudFX()

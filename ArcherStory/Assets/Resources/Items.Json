@@ -53,7 +53,7 @@
     "capacity": 1,
     "buyPrice": 50,
     "sellPrice": 20,
-    "sprite": "Sprites/Items/Bow"
+    "sprite": "Sprites/Items/BowNew"
   },
   {
     "id": 6,

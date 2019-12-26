@@ -22,6 +22,8 @@ public class SkillManager:MonoBehaviour
     }
     public void SkillAttack(EntityBase entity,int skillID)
     {
+        entity.skillActionCallBackList.Clear();
+        entity.skillEffectCallBackList.Clear();
         AttackEffect(entity,skillID);
         AttackDamage(entity,skillID);
     }
@@ -33,6 +35,7 @@ public class SkillManager:MonoBehaviour
     public void AttackEffect(EntityBase entity,int skillID)
     {
         SkillCfg skillData = resSvc.GetSkillCfgData(skillID);
+        //分技能类型调整角色行为
         if (entity.entityType==EntityType.Player)
         {
             /*如果是指向技能，自动转向最近目标，如果是范围技能，朝向区域方向，
@@ -84,8 +87,11 @@ public class SkillManager:MonoBehaviour
         }
         entity.SetAction(skillData.aniAction);
         entity.SetFX(skillData.fx,skillData.skillFXTime);
-       
 
+        if (skillData.unBreakable)
+        {
+            entity.unBreakable = true;
+        }
         SkillMoveCfg skillMoveCfg = resSvc.GetSkillMoveCfgData(skillData.skillMove);
         float speed = 0;
         if (skillData.ID==107)//是瞬移技能，不是闪避
@@ -125,10 +131,12 @@ public class SkillManager:MonoBehaviour
             int index = i;
             if (sum>0)//延迟伤害，比如火圈范围持续伤害
             {
-                timeSvc.AddTimeTask((int tid) =>
+                int attackid= timeSvc.AddTimeTask((int tid) =>
                 {
                     SkillAction(entity,skillData,index);
+                    entity.RemoveActionCallBake(tid);
                 },sum*1.0f/1000);
+                entity.skillActionCallBackList.Add(attackid);
             }
             else//瞬间伤害
             {

@@ -1796,6 +1796,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: cc6a5f4e89b3fe541bdf88150ec3289f, type: 2}
+  - {fileID: 2100000, guid: cc6a5f4e89b3fe541bdf88150ec3289f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2325,6 +2326,9 @@ MonoBehaviour:
   bowOld: {fileID: 2100000, guid: b665b1dc4c3a5b14ebac31846e83df2c, type: 2}
   weaponMesh: {fileID: 137529089540219256}
   flashFX: {fileID: 1749838097510306}
+  smrClose: {fileID: 13700000}
+  closeNew: {fileID: 2100000, guid: 240da69d9593a2d47a8f1f17234f4117, type: 2}
+  isNew: 0
 --- !u!114 &114620223943363010
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -260,6 +260,7 @@ public class BattleManager:MonoBehaviour
         //新发现：这是一个特别神奇的bug，改名字就能好一段时间，然后又出来，改名又好
         //这个bug彻底解决了，因为我换成了在特效上独立的audiosource播放
         //12.21新发现。。。bug复现了，找不到原因，但是只要重新编译任何该技能相关的代码，又会恢复。
+        //12.26发现，bug原因是技能设置动画时间过长，原动画时长0.867，设置文本写错0.876，修改为0.8以后暂时恢复正常
         //audioSvc.PlayUIAudio(Constants.skill6);
         //audioSvc.PlayCharacterAudio(Constants.Skill6,playerAudioSource);
         entitySelfPlayer.Attack(106);

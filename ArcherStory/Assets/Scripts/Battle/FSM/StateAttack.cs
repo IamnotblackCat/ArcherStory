@@ -19,6 +19,8 @@ public class StateAttack : IState
         entity.canControll = false;
         entity.SetDir(Vector2.zero);
         entity.currentState = AniState.Attack;
+        //得到当前技能数据
+        entity.currentSkillCfg = ResSvc.instance.GetSkillCfgData((int)args[0]);
     }
 
     public void Exit(EntityBase entity, params object[] args)
@@ -26,6 +28,7 @@ public class StateAttack : IState
         //Debug.Log("回调");
         entity.canControll = true;
         entity.SetAction(Constants.ActionDefault);
+        entity.ExitSkill();
     }
 
     public void Process(EntityBase entity, params object[] args)

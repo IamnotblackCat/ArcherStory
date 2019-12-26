@@ -7,6 +7,7 @@
 		<animTime>1.167</animTime>
 		<aniAction>0</aniAction>
 		<fx>skill1</fx>
+		<isBreak>0</isBreak>
 		<dmgType>1</dmgType>
 		<skillMove>1013</skillMove>
 		<skillActionList>1011</skillActionList>
@@ -19,9 +20,10 @@
 		<animTime>1.333</animTime>
 		<aniAction>1</aniAction>
 		<fx>skill2</fx>
+		<isBreak>0</isBreak>
 		<dmgType>1</dmgType>
 		<skillMove>1013</skillMove>
-		<skillActionList>1011|1011</skillActionList>
+		<skillActionList>1011|1051</skillActionList>
 		<skillDamageList>26|36</skillDamageList>
 	</item>
 	<item ID="103">
@@ -34,9 +36,10 @@
 		<delayCloseFXTime>1.5</delayCloseFXTime>
 		<aniAction>2</aniAction>
 		<fx>skill3</fx>
+		<isBreak>0</isBreak>
 		<dmgType>2</dmgType>
 		<skillMove>1013</skillMove>
-		<skillActionList>1021|1021|1021</skillActionList>
+		<skillActionList>1021|1041|1041</skillActionList>
 		<skillDamageList>40|50|60</skillDamageList>
 	</item>
 	<item ID="104">
@@ -49,6 +52,7 @@
 		<delayCloseFXTime>1</delayCloseFXTime>
 		<aniAction>3</aniAction>
 		<fx>skill4</fx>
+		<isBreak>0</isBreak>
 		<dmgType>2</dmgType>
 		<skillMove>1013</skillMove>
 		<skillActionList>1031</skillActionList>
@@ -61,6 +65,7 @@
 		<animTime>0.8</animTime>
 		<aniAction>4</aniAction>
 		<fx>skill5_heal</fx>
+		<isBreak>1</isBreak>
 		<dmgType>3</dmgType>
 		<skillMove>1013</skillMove>
 	</item>
@@ -68,9 +73,10 @@
 		<skillName>变身</skillName>
 		<cdTime>30</cdTime>
 		<skillTime>15</skillTime>
-		<animTime>0.876</animTime>
+		<animTime>0.8</animTime>
 		<aniAction>5</aniAction>
 		<fx>skill6_huoBuff</fx>
+		<isBreak>1</isBreak>
 		<dmgType>3</dmgType>
 		<skillMove>1013</skillMove>
 	</item>
@@ -81,6 +87,7 @@
 		<animTime>0.8</animTime>
 		<aniAction>6</aniAction>
 		<fx>skill7_blink</fx>
+		<isBreak>1</isBreak>
 		<dmgType>2</dmgType>
 		<skillMove>1012</skillMove>
 	</item>
@@ -91,6 +98,7 @@
 		<animTime>0.8</animTime>
 		<aniAction>7</aniAction>
 		<fx>skill8</fx>
+		<isBreak>1</isBreak>
 		<dmgType>1</dmgType>
 		<skillMove>1011</skillMove>
 	</item>

@@ -32,5 +32,8 @@ public class TimeService : SystemRoot
     {
         return pt.AddTimeTask(callback,delay,timeUnit,count);
     }
-
+    public void DeleteTask(int tid)
+    {
+        pt.DeleteTimeTask(tid);
+    }
 }

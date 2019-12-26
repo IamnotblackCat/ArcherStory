@@ -366,6 +366,9 @@ public class ResSvc : MonoBehaviour
                         case "aniAction":
                             skillCfgData.aniAction = int.Parse(element.InnerText);
                             break;
+                        case "isBreak":
+                            skillCfgData.unBreakable = element.InnerText.Equals("1");
+                            break;
                         case "fx":
                             skillCfgData.fx = element.InnerText;
                             break;

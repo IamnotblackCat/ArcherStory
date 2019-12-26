@@ -199,7 +199,7 @@ Prefab:
     - target: {fileID: 224175254359885256, guid: 0e7e34e6abb0f7c449d466b34e777ccd,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224175254359885256, guid: 0e7e34e6abb0f7c449d466b34e777ccd,
         type: 2}
@@ -1912,6 +1912,11 @@ Prefab:
       propertyPath: skillPanel
       value: 
       objectReference: {fileID: 41598677}
+    - target: {fileID: 224125410118035266, guid: 0e7e34e6abb0f7c449d466b34e777ccd,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 385
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e7e34e6abb0f7c449d466b34e777ccd, type: 2}
   m_IsPrefabAsset: 0
@@ -2002,8 +2007,8 @@ RectTransform:
   m_Children:
   - {fileID: 796318522}
   - {fileID: 638775787}
-  - {fileID: 1792557793}
   - {fileID: 1542402471}
+  - {fileID: 1792557793}
   - {fileID: 2052832967}
   - {fileID: 825179512}
   - {fileID: 337482003}
@@ -3314,6 +3319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingWnd: {fileID: 337482005}
   dynamicWnd: {fileID: 638775790}
+  isNewBow: 0
 --- !u!114 &921273517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3447,7 +3453,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4102,7 +4108,7 @@ Prefab:
     - target: {fileID: 224351538341134088, guid: 0c811d957b817fd44986aacfe4fc6199,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224351538341134088, guid: 0c811d957b817fd44986aacfe4fc6199,
         type: 2}

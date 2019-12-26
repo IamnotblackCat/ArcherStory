@@ -68,7 +68,7 @@ public abstract class Controller:MonoBehaviour
     {
         
     }
-    public virtual void SetAreaSkillFX(string fxName,float beginTime,float closeTime)
+    public virtual void SetAreaSkillFX(EntityBase entity, string fxName,float beginTime,float closeTime)
     {
 
     }

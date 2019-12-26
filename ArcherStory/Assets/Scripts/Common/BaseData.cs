@@ -42,7 +42,8 @@ public class SkillCfg : BaseData<SkillCfg>
     public float animationTime;
     public float delayFXTime;
     public float delayCloseFXTime;
-    public float skillCDTime;   
+    public float skillCDTime;
+    public bool unBreakable;//技能是否可以打断,1表示不可打断，0可以
     public int aniAction;
     public string fx;
     public string targetFX;

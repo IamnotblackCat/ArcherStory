@@ -19,6 +19,8 @@ public abstract class EntityBase
     public SkillManager skillMg = null;
     public EntityType entityType = EntityType.None;
 
+    public SkillCfg currentSkillCfg;
+
     public bool canControll = true;
     public bool unBreakable = false;//是否为霸体状态，不可打断
     
@@ -78,8 +80,9 @@ public abstract class EntityBase
             name = value;
         }
     }
-
-
+    //这两行是用来存储被打断的技能的回调数据
+    public List<int> skillActionCallBackList = new List<int>();
+    public List<int> skillEffectCallBackList = new List<int>();
     private string name;
     public void SetController(Controller ctrl)
     {
@@ -152,7 +155,7 @@ public abstract class EntityBase
     {
         if (controller!=null)
         {
-            controller.SetAreaSkillFX(fxName,beginTime,closeTime);
+            controller.SetAreaSkillFX(this,fxName,beginTime,closeTime);
         }
     }
     public virtual void SkillAttack(int skillID)
@@ -242,5 +245,45 @@ public abstract class EntityBase
     public virtual AudioSource GetAudio()
     {
         return controller.GetComponent<AudioSource>();
+    }
+    //移除回调伤害列表对应值，打断以后不产生伤害 
+    public void RemoveActionCallBake(int tid)
+    {
+        int index = -1;
+        for (int i = 0; i < skillActionCallBackList.Count; i++)
+        {
+            if (skillActionCallBackList[i]==tid)
+            {
+                index = i;
+                break;
+            }
+        }
+        if (index!=-1)
+        {
+            skillActionCallBackList.RemoveAt(index);
+        }
+    }
+    public void RemoveEffectCallBake(int tid)
+    {
+        int index = -1;
+        for (int i = 0; i < skillActionCallBackList.Count; i++)
+        {
+            if (skillEffectCallBackList[i] == tid)
+            {
+                index = i;
+                break;
+            }
+        }
+        if (index != -1)
+        {
+            skillEffectCallBackList.RemoveAt(index);
+        }
+    }
+    public void ExitSkill()
+    {
+        if (currentSkillCfg.unBreakable)
+        {
+            unBreakable = false;
+        }
     }
 }
