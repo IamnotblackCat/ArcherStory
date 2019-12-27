@@ -591,6 +591,16 @@ public class ResSvc : MonoBehaviour
                         case "mName":
                             monsterCfg.mName = element.InnerText;
                             break;
+                        case "mType":
+                            if (element.InnerText.Equals("1"))
+                            {
+                                monsterCfg.mType =MonsterType.None ;
+                            }
+                            else
+                            {
+                                monsterCfg.mType = MonsterType.Boss;
+                            }
+                            break;
                         case "resPath":
                             monsterCfg.resPath = element.InnerText;
                             break;

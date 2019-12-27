@@ -280,10 +280,28 @@ public abstract class EntityBase
         }
     }
     public void ExitSkill()
-    {
+    {//如果当前技能是带霸体的，释放完成以后解除霸体状态
         if (currentSkillCfg.unBreakable)
         {
             unBreakable = false;
+        }
+    }
+    public virtual void GetUnBreakState()
+    {
+       
+    }
+    //被打断移除技能伤害及特效
+    public void RemoveSkillCallBack()
+    {
+        for (int i = 0; i < skillActionCallBackList.Count; i++)
+        {
+            int tid = skillActionCallBackList[i];
+            TimeService.instance.DeleteTask(tid);
+        }
+        for (int i = 0; i < skillEffectCallBackList.Count; i++)
+        {
+            int tid = skillEffectCallBackList[i];
+            TimeService.instance.DeleteTask(tid);
         }
     }
 }

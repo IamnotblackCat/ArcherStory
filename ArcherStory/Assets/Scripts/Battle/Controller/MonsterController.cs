@@ -12,6 +12,7 @@ using UnityEngine;
 
 public class MonsterController:Controller
 {
+    public GameObject unBreakableFX;
     private void Update()
     {
         if (isMove)
@@ -30,5 +31,10 @@ public class MonsterController:Controller
     {
         ctrl.Move(transform.forward * Time.deltaTime * Constants.monsterMoveSpeed);
         ctrl.Move(Vector3.down * Time.deltaTime * Constants.monsterMoveSpeed);
+    }
+    //TODO,设置霸体特效的显示
+    public override void SetFX(string fxName, float closeTime)
+    {
+        
     }
 }

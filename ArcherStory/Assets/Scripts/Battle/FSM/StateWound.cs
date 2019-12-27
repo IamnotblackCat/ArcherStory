@@ -18,16 +18,7 @@ public class StateWound : IState
         entity.canControll = false;
         entity.currentState = AniState.Wound;
         //被击移除该次技能的伤害和特效
-        for (int i = 0; i < entity.skillActionCallBackList.Count; i++)
-        {
-            int tid = entity.skillActionCallBackList[i];
-            TimeService.instance.DeleteTask(tid);
-        }
-        for (int i = 0; i < entity.skillEffectCallBackList.Count; i++)
-        {
-            int tid = entity.skillEffectCallBackList[i];
-            TimeService.instance.DeleteTask(tid);
-        }
+        entity.RemoveSkillCallBack();
     }
 
     public void Exit(EntityBase entity, params object[] args)

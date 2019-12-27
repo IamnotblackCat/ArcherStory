@@ -15,7 +15,9 @@ public class StateDie : IState
     public void Enter(EntityBase entity, params object[] args)
     {
         entity.canControll = false;
+        entity.SetDir(Vector2.zero);
         entity.currentState = AniState.Die;
+        entity.RemoveSkillCallBack();
     }
 
     public void Exit(EntityBase entity, params object[] args)

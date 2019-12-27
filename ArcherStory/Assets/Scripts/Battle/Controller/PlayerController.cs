@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class PlayerController : Controller
 {
+    #region 技能特效
     public GameObject skill1FX;
     public GameObject skill2FX;
     public GameObject skill2Emp;
@@ -20,11 +21,10 @@ public class PlayerController : Controller
     public GameObject skill6FX;
     public GameObject skill7FX;
     public GameObject skill8FX;
-    //public GameObject skill4DelayFX;//这两个特效是范围技能会延迟生效
-    //public GameObject skill3DelayFX;//这两个特效是范围技能会延迟生效
     private GameObject skill3Ground;
     private GameObject skill4Ground;
 
+    #endregion
     #region 相机控制
     //private Transform camMainTrans;
     private float camRotSmooth = 3f;
@@ -219,7 +219,7 @@ public class PlayerController : Controller
                 go.transform.GetChild(0).gameObject.SetActive(true);
                 go.transform.DetachChildren();
             }
-            //TODO,要判断必须是2技能和4技能，这里要修改
+            //要判断必须是2技能和4技能，这里要修改
             timeSvc.AddTimeTask((int tid) =>
             {
                 if (fxName == skill2FX.name)

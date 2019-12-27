@@ -28,6 +28,12 @@ public enum EntityType
     Player,
     Monster
 }
+public enum MonsterType
+{
+    None,
+    Normal,
+    Boss
+}
 public class Constants 
 {
     //字体颜色

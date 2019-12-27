@@ -28,7 +28,6 @@ public class AudioSvc : MonoBehaviour
             bgAudio.clip = audio;
             bgAudio.loop = isLoop;
             bgAudio.Play();
-            
         }
     }
     public void PlayUIAudio(string name)

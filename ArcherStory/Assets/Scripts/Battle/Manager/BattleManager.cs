@@ -20,6 +20,8 @@ public class BattleManager:MonoBehaviour
     private MapManager mapMg;
      
     public EntityPlayer entitySelfPlayer;
+   // public bool isExist;//是否通关
+    public bool triggerCheck = true;//每次只检测一扇门
 
     private MapConfig mapCfg;
     private AudioSource playerAudioSource;
@@ -63,6 +65,19 @@ public class BattleManager:MonoBehaviour
         {
             EntityMonster em = item.Value;
             em.TickAILogic();
+        }
+        //当前批次怪物是否全部死亡
+        if (mapMg!=null)
+        {
+            if (triggerCheck&&monsterDic.Count==0)
+            {
+                bool isExist = mapMg.SetNextTriggerOn();
+                triggerCheck = false;
+                if (!isExist)
+                {
+                    //通关了，战斗结算
+                }
+            }
         }
     }
     private void LoadPlayer(MapConfig mapData)
@@ -225,31 +240,26 @@ public class BattleManager:MonoBehaviour
     }
 
     //技能释放特效声音修改为特效出现时的audiosource组件播放
-    #region 技能释放
+    #region 角色技能释放
 
     private void ReleaseNormalATK()
     {
-        //audioSvc.PlayCharacterAudio(Constants.skill1,playerAudioSource);
         entitySelfPlayer.Attack(101);
     }
     private void ReleaseSkill2()
     {
-        //audioSvc.PlayCharacterAudio(Constants.skill2, playerAudioSource);
         entitySelfPlayer.Attack(102);
     }
     private void ReleaseSkill3()
     {
-        //audioSvc.PlayUIAudio(Constants.skill3);
         entitySelfPlayer.Attack(103);
     }
     private void ReleaseSkill4()
     {
-        //audioSvc.PlayUIAudio(Constants.skill4);
         entitySelfPlayer.Attack(104);
     }
     private void ReleaseSkill5()
     {
-        //audioSvc.PlayCharacterAudio(Constants.skill5, playerAudioSource);
         entitySelfPlayer.Attack(105);
     }
     private void ReleaseSkill6()
@@ -261,18 +271,15 @@ public class BattleManager:MonoBehaviour
         //这个bug彻底解决了，因为我换成了在特效上独立的audiosource播放
         //12.21新发现。。。bug复现了，找不到原因，但是只要重新编译任何该技能相关的代码，又会恢复。
         //12.26发现，bug原因是技能设置动画时间过长，原动画时长0.867，设置文本写错0.876，修改为0.8以后暂时恢复正常
-        //audioSvc.PlayUIAudio(Constants.skill6);
-        //audioSvc.PlayCharacterAudio(Constants.Skill6,playerAudioSource);
+        
         entitySelfPlayer.Attack(106);
     }
     private void ReleaseSkill7()
     {
-        //audioSvc.PlayCharacterAudio(Constants.skill7, playerAudioSource);
         entitySelfPlayer.Attack(107);
     }
     private void ReleaseSkill8()
     {
-        //audioSvc.PlayCharacterAudio(Constants.skill8, playerAudioSource);
         entitySelfPlayer.Attack(108);
     }
 }  

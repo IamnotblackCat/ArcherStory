@@ -100,7 +100,7 @@ public class SkillManager:MonoBehaviour
             speed = dis / (skillMoveCfg.moveTime/1000f);
             entity.SetSkillMoveState(true,false,speed);
         }
-        else//闪避技能
+        else if(skillData.ID==108)//闪避技能
         {
             speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
             entity.SetSkillMoveState(true,true,speed);
@@ -131,18 +131,28 @@ public class SkillManager:MonoBehaviour
             int index = i;
             if (sum>0)//延迟伤害，比如火圈范围持续伤害
             {
-                int attackid= timeSvc.AddTimeTask((int tid) =>
-                {
-                    SkillAction(entity,skillData,index);
-                    entity.RemoveActionCallBake(tid);
-                },sum*1.0f/1000);
-                entity.skillActionCallBackList.Add(attackid);
+                    int attackid = timeSvc.AddTimeTask((int tid) =>
+                     {
+                         SkillAction(entity, skillData, index);
+                         entity.RemoveActionCallBake(tid);
+                         //LoopSkill(entity,skillData,index,sum);
+                     }, sum * 1.0f / 1000);
+                    entity.skillActionCallBackList.Add(attackid);
             }
             else//瞬间伤害
             {
                 SkillAction(entity,skillData,index);
             }
         }
+    }
+    //永久存在的技能
+    private void LoopSkill(EntityBase entity,SkillCfg skillData,int index,int sum)
+    {
+        timeSvc.AddTimeTask((int temp) =>
+        {
+            SkillAction(entity, skillData, index);
+            LoopSkill(entity,skillData,index,sum);
+        }, sum * 1.0f / 1000);
     }
     public void SkillAction(EntityBase caster,SkillCfg skillCfg,int index)
     {
@@ -173,7 +183,7 @@ public class SkillManager:MonoBehaviour
                         //计算伤害
                         CalcDamage(caster, target, skillCfg, damage);
                     }
-                    else
+                    else if(!InRange(caster.GetPos(), target.GetPos(), skillActionCfg.radius))
                     {
                         GameRoot.instance.AddTips("超出攻击范围");
                     }
@@ -234,6 +244,9 @@ public class SkillManager:MonoBehaviour
         else
         {
             target.Hp -= dmgSum;
+            //判断是否符合获取霸体条件
+            target.GetUnBreakState();
+            //TODO,是否处于剑刃风暴状态，是则反弹伤害
             if (!target.unBreakable)
             {
                 target.Wound();
