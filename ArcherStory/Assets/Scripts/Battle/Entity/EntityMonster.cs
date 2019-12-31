@@ -151,8 +151,19 @@ public class EntityMonster:EntityBase
             {
                 unBreakable = true;
                 //TODO，霸体特效
-                //SetFX();
+                
             }
+        }
+    }
+    public override void SetHPVal(int oldVal, int newVal)
+    {
+        if (md.mCfg.mType==MonsterType.Boss)
+        {
+            BattleSys.Instance.playerCtrlWnd.SetBossHPBarVal(oldVal,newVal,BattleProps.hp);
+        }
+        else
+        {
+            base.SetHPVal(oldVal,newVal);
         }
     }
 }

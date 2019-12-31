@@ -76,9 +76,15 @@ public class BattleManager:MonoBehaviour
                 if (!isExist)
                 {
                     //通关了，战斗结算
+                    EndBattle(true,entitySelfPlayer.Hp);
                 }
             }
         }
+    }
+    public void EndBattle(bool isWin,int restHP)//剩余血量
+    {
+        audioSvc.StopBGMusic();
+        BattleSys.Instance.EndBatlle(isWin,restHP);
     }
     private void LoadPlayer(MapConfig mapData)
     {
@@ -152,8 +158,16 @@ public class BattleManager:MonoBehaviour
 
                 monsterPrefab.SetActive(false);
                 monsterDic.Add(monsterPrefab.name,em);
-                //字典一定要存储已经变更过的HP，配置文件的hp没更新的
-                GameRoot.instance.dynamicWnd.AddHPItemInfo(em.Name,em.Hp,mc.hpRoot);
+                if (md.mCfg.mType==MonsterType.Normal)
+                {
+                    //字典一定要存储已经变更过的HP，配置文件的hp没更新的
+                    GameRoot.instance.dynamicWnd.AddHPItemInfo(em.Name,em.Hp,mc.hpRoot);
+
+                }
+                else if (md.mCfg.mType==MonsterType.Boss)
+                {
+                    BattleSys.Instance.playerCtrlWnd.SetBossHPTransform(true);
+                }
             }
         }
     }

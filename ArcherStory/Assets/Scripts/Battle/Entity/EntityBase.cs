@@ -280,8 +280,8 @@ public abstract class EntityBase
         }
     }
     public void ExitSkill()
-    {//如果当前技能是带霸体的，释放完成以后解除霸体状态
-        if (currentSkillCfg.unBreakable)
+    {//如果当前技能是带霸体的且不是状态技能，释放完成以后解除霸体状态
+        if (currentSkillCfg.unBreakable&&currentSkillCfg.ID!=106)
         {
             unBreakable = false;
         }

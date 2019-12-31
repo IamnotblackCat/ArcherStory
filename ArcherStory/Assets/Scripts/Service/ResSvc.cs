@@ -594,7 +594,7 @@ public class ResSvc : MonoBehaviour
                         case "mType":
                             if (element.InnerText.Equals("1"))
                             {
-                                monsterCfg.mType =MonsterType.None ;
+                                monsterCfg.mType =MonsterType.Normal ;
                             }
                             else
                             {

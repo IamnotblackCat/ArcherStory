@@ -39,22 +39,6 @@ public class ItemEntityHP : MonoBehaviour
         ImgHPGreen.fillAmount = 1;
         ImgHPRed.fillAmount = 1;
     }
-    private void UpdateMixBlend()
-    {
-        if (Mathf.Abs(currentHPProgram - targetHPProgram) < Constants.accelerateHPSpeed * Time.deltaTime)
-        {
-            currentHPProgram = targetHPProgram;
-        }
-        else if (currentHPProgram > targetHPProgram)
-        {
-            currentHPProgram -= Constants.accelerateHPSpeed * Time.deltaTime;
-        }
-        else
-        {
-            currentHPProgram += Constants.accelerateHPSpeed * Time.deltaTime;
-        }
-        ImgHPRed.fillAmount = currentHPProgram;
-    }
     //多个数字飘出来的时候，要覆盖掉前面的
     public void SetCritical(int criticalNum)
     {
@@ -76,5 +60,21 @@ public class ItemEntityHP : MonoBehaviour
         targetHPProgram = 1.0f * newVal / hpVal;
         //当前实际血量绿色显示，红色渐变消失
         ImgHPGreen.fillAmount = targetHPProgram;
+    }
+    private void UpdateMixBlend()
+    {
+        if (Mathf.Abs(currentHPProgram - targetHPProgram) < Constants.accelerateHPSpeed * Time.deltaTime)
+        {
+            currentHPProgram = targetHPProgram;
+        }
+        else if (currentHPProgram > targetHPProgram)
+        {
+            currentHPProgram -= Constants.accelerateHPSpeed * Time.deltaTime;
+        }
+        else
+        {
+            currentHPProgram += Constants.accelerateHPSpeed * Time.deltaTime;
+        }
+        ImgHPRed.fillAmount = currentHPProgram;
     }
 }

@@ -19,6 +19,13 @@ public class AudioSvc : MonoBehaviour
         instance = this;
 
     }
+    public void StopBGMusic()
+    {
+        if (bgAudio!=null)
+        {
+            bgAudio.Stop();
+        }
+    }
     public void PlayBGMusic(string name, bool isLoop = true)
     {
         AudioClip audio = ResSvc.instance.LoadAudio("Audio/ArcherAudio/"+name,true);

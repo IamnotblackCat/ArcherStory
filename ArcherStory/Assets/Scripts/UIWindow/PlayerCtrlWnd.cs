@@ -36,6 +36,10 @@ public class PlayerCtrlWnd : WindowRoot
 
     public Text txtSelfHP;
     public Image imgSelfHP;
+
+    public Transform bossHPTrans;
+    public Image hpRed;
+    public Image hpYellow;
     #endregion
     private int HPSum;
     #region 技能冷却相关变量
@@ -154,7 +158,7 @@ public class PlayerCtrlWnd : WindowRoot
 
     #region Click Events
 
-    public void ClickHeadBtn()
+    public void ClickCharacterBtn()
     {
         audioSvc.PlayUIAudio(Constants.uiOpenPage);
         MainCitySys.Instance.OpenInfoWnd();
@@ -169,12 +173,6 @@ public class PlayerCtrlWnd : WindowRoot
         returnGo.SetActive(false);
         Transform temp = GameRoot.instance.dynamicWnd.transform;
         MainCitySys.Instance.EnterMainCity();
-        //for (int i = 0; i < temp.childCount; i++)
-        //{
-        //    Destroy(temp.GetChild(0).GetChild(0).GetChild(i));
-
-        //}
-        
     }
     public void ClickConcel()
     {
@@ -270,6 +268,11 @@ public class PlayerCtrlWnd : WindowRoot
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector2 _dir = new Vector2(h, v);
+        //boss血条激活了就启动血条渐变
+        if (bossHPTrans.gameObject.activeSelf)
+        {
+            BlendBossHP();
+        }
         #region 技能冷却显示
 
         float delta = Time.deltaTime;
@@ -511,6 +514,10 @@ public class PlayerCtrlWnd : WindowRoot
     {
         resSvc.InitCfgData();
     }
+    public void ClickHeadBtn()
+    {
+        BattleSys.Instance.SetBattleEndWndState(FubenEndType.Pause);
+    }
     //实时显示技能范围图标
     //传入一个距离，判断如果角色自身与射线检测目标地点超出距离，超出变换图片，且无法释放技能
     public void UpdateAreaIcon(KeyCode key,float distance)
@@ -550,9 +557,43 @@ public class PlayerCtrlWnd : WindowRoot
         //Debug.Log(skillArea);
     }
 
+    //玩家血球显示 TODO，修改为渐变
     public void SetSelfHPBarVal(int val)
     {
         SetText(txtSelfHP,val+"/"+HPSum);
         imgSelfHP.fillAmount = val * 1.0f / HPSum;
+    }
+    
+    public void SetBossHPTransform(bool state,float prg=1)
+    {
+        SetActive(bossHPTrans,state);
+        hpRed.fillAmount = prg;
+        hpYellow.fillAmount = prg;
+    }
+
+    //boss血条渐变
+    private float currentHPProgram = 1f;
+    private float targetHPProgram = 1f;
+    public void SetBossHPBarVal(int oldVal,int newVal,int sumVal)
+    {
+        currentHPProgram = oldVal * 1.0f / sumVal;
+        targetHPProgram = newVal * 1.0f / sumVal;
+        hpRed.fillAmount = targetHPProgram;
+    }
+    private void BlendBossHP()
+    {
+        if (Mathf.Abs(currentHPProgram - targetHPProgram) < Constants.accelerateHPSpeed * Time.deltaTime)
+        {
+            currentHPProgram = targetHPProgram;
+        }
+        else if (currentHPProgram > targetHPProgram)
+        {
+            currentHPProgram -= Constants.accelerateHPSpeed * Time.deltaTime;
+        }
+        else
+        {
+            currentHPProgram += Constants.accelerateHPSpeed * Time.deltaTime;
+        }
+        hpYellow.fillAmount = currentHPProgram;
     }
 }

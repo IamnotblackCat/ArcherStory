@@ -73,7 +73,7 @@ public class SkillManager:MonoBehaviour
                         entity.Hp = GameRoot.instance.Playerdata.hp;
                     }
                 }
-                else if (skillData.ID==106)//攻击力+50%，进入霸体状态
+                else if (skillData.ID==106)//状态技能，攻击力+50%，进入霸体状态
                 {
                     entity.AttackValue += GameRoot.instance.Playerdata.attackValue / 2;
                     entity.unBreakable = true;
@@ -131,13 +131,17 @@ public class SkillManager:MonoBehaviour
             int index = i;
             if (sum>0)//延迟伤害，比如火圈范围持续伤害
             {
-                    int attackid = timeSvc.AddTimeTask((int tid) =>
+
+                int attackid = timeSvc.AddTimeTask((int tid) =>
+                 {
+                     if (entity != null)//多个攻击同时打过来，已经死亡就会报空
                      {
                          SkillAction(entity, skillData, index);
                          entity.RemoveActionCallBake(tid);
+                     }
                          //LoopSkill(entity,skillData,index,sum);
                      }, sum * 1.0f / 1000);
-                    entity.skillActionCallBackList.Add(attackid);
+                entity.skillActionCallBackList.Add(attackid);
             }
             else//瞬间伤害
             {
@@ -167,6 +171,10 @@ public class SkillManager:MonoBehaviour
             for (int i = 0; i < monsterList.Count; i++)
             {
                 EntityMonster target = monsterList[i];
+                if (target==null)
+                {
+                    return;
+                }
                 //判断距离，角度
                 //如果是范围技能，施法者位置变更为鼠标指定区域位置，角度固定为360度
                 if (skillCfg.dmgType == DamageType.AreaSkill)
@@ -239,7 +247,16 @@ public class SkillManager:MonoBehaviour
             target.Hp = 0;
             //死亡
             target.Die();
+            if (target.entityType==EntityType.Monster)
+            {
             target.battleMg.RemoveMonster(target.Name);
+
+            }
+            else if (target.entityType==EntityType.Player)
+            {
+                target.battleMg.EndBattle(false,0);
+                target.battleMg.entitySelfPlayer = null;
+            }
         }
         else
         {

@@ -14,7 +14,9 @@ public class BattleSys:SystemRoot
 {
     public static BattleSys Instance = null;
     public PlayerCtrlWnd playerCtrlWnd;
+    [HideInInspector]
     public BattleManager battleMg;
+    public BattleEndWnd battleEndWnd;
 
     public override void InitSys()
     {
@@ -31,11 +33,20 @@ public class BattleSys:SystemRoot
         //Invoke("SetPlayerCtrlWndState", 0.5f);
         SetPlayerCtrlWndState();
     }
+    public void EndBatlle(bool isWin,int restHP)
+    {
+        playerCtrlWnd.SetWndState(false);
+        GameRoot.instance.dynamicWnd.RemoveAllHPItemInfo();
+    }
     public void SetPlayerCtrlWndState(bool isActive = true)
     {
         playerCtrlWnd.SetWndState(isActive);
     }
-
+    public void SetBattleEndWndState(FubenEndType endType, bool isActive=true)
+    {
+        battleEndWnd.SetWndType(endType);
+        battleEndWnd.SetWndState(isActive);
+    }
     public void ReleaseSkill(int index)
     {
         battleMg.ReleaseSkill(index);

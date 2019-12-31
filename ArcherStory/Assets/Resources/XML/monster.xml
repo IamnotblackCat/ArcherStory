@@ -61,7 +61,7 @@
 		<resPath>PrefabNPC/YangJian_03</resPath>
 		<skillID>301</skillID>
 		<atkDis>4.5</atkDis>
-		<hp>10000</hp>
+		<hp>1000</hp>
 		<attackValue>250</attackValue>
 		<defend>25</defend>
 		<critical>20</critical>
