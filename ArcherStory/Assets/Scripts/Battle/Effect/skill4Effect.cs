@@ -18,15 +18,15 @@ public class skill4Effect : MonoBehaviour
     {
         targetPos = BattleSys.Instance.playerCtrlWnd.pos;
         transform.LookAt(targetPos);
-        //1.5秒以后开始向目标地点移动
+        //一定时间以后开始向目标地点移动
         TimeService.instance.AddTimeTask((int tid)=>
         {
             canMove = true;
-        },1.5f);
+        },0.75f);
         TimeService.instance.AddTimeTask((int tid) =>
         {
             canMove = false;
-        }, 2f);
+        }, 1f);
     }
 
     private void Update()

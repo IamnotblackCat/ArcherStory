@@ -22,12 +22,13 @@ public class BattleManager:MonoBehaviour
     public EntityPlayer entitySelfPlayer;
    // public bool isExist;//是否通关
     public bool triggerCheck = true;//每次只检测一扇门
+    public bool isPaused = false;
 
     private MapConfig mapCfg;
     private AudioSource playerAudioSource;
 
     public Dictionary<string, EntityMonster> monsterDic = new Dictionary<string, EntityMonster>();
-    public void Init(int mapId)
+    public void Init(int mapId,Action action=null)
     {
         resSvc = ResSvc.instance;
         audioSvc = AudioSvc.instance;
@@ -56,11 +57,26 @@ public class BattleManager:MonoBehaviour
             ActiveCurrentBatchMonster();
 
             audioSvc.PlayBGMusic(Constants.BGFuben);
+            //地图加载完成以后开始计时
+            if (action != null)
+            {
+                action();
+            }
         });
+        
     }
 
     public void Update()
-    {
+    {/*这里的暂停时间是把时间变为0.1，需要注意的是timeSvc时间不受控制
+       所以延迟释放的技能，包括其他技能特效存在时长不受这个影响*/
+        if (isPaused)
+        {
+            Time.timeScale = 0.1f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
         foreach (var item in monsterDic)
         {
             EntityMonster em = item.Value;

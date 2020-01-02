@@ -58,14 +58,22 @@ public class MainCitySys : SystemRoot
     private void LoadPlayer(MapConfig mapData)
     {
         GameObject player = resSvc.LoadPrefab(PathDefine.ArcherPrefab, true);
-        //Debug.Log(player.transform.position);
+        
         player.transform.position = mapData.playerBornPos;
         player.transform.localEulerAngles = mapData.playerBornRote;
         player.transform.localScale = new Vector3(1.5f,1.5f,1.5f);
         playerCtrl= player.GetComponent<PlayerController>();
         playerCtrl.Init();
         nav = player.GetComponent<NavMeshAgent>();
-
+        //读取人物武器设置
+        if (GameRoot.instance.isNewBow)
+        {
+            playerCtrl.GetComponent<ChangeSkinSys>().ChangeWeaponSkinToNew();
+        }
+        else
+        {
+            playerCtrl.GetComponent<ChangeSkinSys>().ChangeWeaponSkinToOld();
+        }
         //相机初始化
         Camera.main.transform.position = mapData.mainCamPos;
         //Debug.Log("CameraPos"+Camera.main.transform.position+"--mapDataCamPos"+mapData.mainCamPos);

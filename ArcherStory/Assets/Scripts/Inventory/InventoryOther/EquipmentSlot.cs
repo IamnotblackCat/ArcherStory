@@ -61,13 +61,13 @@ public class EquipmentSlot : Slot {
             {
                 ItemUI currentItemUI = transform.GetChild(0).GetComponent<ItemUI>();
                 InventoryManager.Instance.PickupItem(currentItemUI.Item, currentItemUI.Amount);
-                Destroy(currentItemUI.gameObject);
+                DestroyImmediate(currentItemUI.gameObject);
                 isUpdateProperty = true;
             }
         }
         if (isUpdateProperty)
         {
-            //transform.parent.SendMessage("UpdatePropertyText");
+            transform.parent.parent.SendMessage("UpdateSkinned");
         }
     }
 

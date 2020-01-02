@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<item ID="1011">
-		<delayTime>700</delayTime>
+		<delayTime>200</delayTime>
 		<radius>12</radius>
 		<angle>10</angle>
 	</item>
 	<item ID="1021">
-		<delayTime>1190</delayTime>
+		<delayTime>600</delayTime>
 		<radius>3.0</radius>
 		<angle>360</angle>
 	</item>
 	<item ID="1031">
-		<delayTime>2000</delayTime>
+		<delayTime>1000</delayTime>
 		<radius>4.5</radius>
 		<angle>360</angle>
 	</item>
 	<item ID="1041">
-		<delayTime>500</delayTime>
+		<delayTime>450</delayTime>
 		<radius>3.0</radius>
 		<angle>360</angle>
 	</item>

@@ -3,8 +3,8 @@
 	<item ID="101">
 		<skillName>普通攻击</skillName>
 		<cdTime>0</cdTime>
-		<skillTime>1.167</skillTime>
-		<animTime>1.167</animTime>
+		<skillTime>0.5835</skillTime>
+		<animTime>0.5835</animTime>
 		<aniAction>0</aniAction>
 		<fx>skill1</fx>
 		<isBreak>0</isBreak>
@@ -15,9 +15,9 @@
 	</item>
 	<item ID="102">
 		<skillName>贯通箭</skillName>
-		<cdTime>3</cdTime>
+		<cdTime>5</cdTime>
 		<skillTime>1.333</skillTime>
-		<animTime>1.333</animTime>
+		<animTime>0.8886</animTime>
 		<aniAction>1</aniAction>
 		<fx>skill2</fx>
 		<isBreak>0</isBreak>
@@ -28,11 +28,11 @@
 	</item>
 	<item ID="103">
 		<skillName>烈焰矢</skillName>
-		<cdTime>5</cdTime>
+		<cdTime>7</cdTime>
 		<skillTime>1.833</skillTime>
-		<animTime>1.833</animTime>
+		<animTime>1.222</animTime>
 		<targetFX>skill3_ground</targetFX>
-		<delayFXTime>1.19</delayFXTime>
+		<delayFXTime>0.595</delayFXTime>
 		<delayCloseFXTime>1.5</delayCloseFXTime>
 		<aniAction>2</aniAction>
 		<fx>skill3</fx>
@@ -44,11 +44,11 @@
 	</item>
 	<item ID="104">
 		<skillName>陨石</skillName>
-		<cdTime>9</cdTime>
+		<cdTime>12</cdTime>
 		<skillTime>2</skillTime>
-		<animTime>2</animTime>
+		<animTime>1</animTime>
 		<targetFX>skill4_ground</targetFX>
-		<delayFXTime>2</delayFXTime>
+		<delayFXTime>1</delayFXTime>
 		<delayCloseFXTime>1</delayCloseFXTime>
 		<aniAction>3</aniAction>
 		<fx>skill4</fx>
@@ -56,13 +56,13 @@
 		<dmgType>2</dmgType>
 		<skillMove>1013</skillMove>
 		<skillActionList>1031</skillActionList>
-		<skillDamageList>100</skillDamageList>
+		<skillDamageList>600</skillDamageList>
 	</item>
 	<item ID="105">
 		<skillName>治疗</skillName>
 		<cdTime>12</cdTime>
 		<skillTime>0.8</skillTime>
-		<animTime>0.8</animTime>
+		<animTime>0.4</animTime>
 		<aniAction>4</aniAction>
 		<fx>skill5_heal</fx>
 		<isBreak>1</isBreak>
@@ -73,7 +73,7 @@
 		<skillName>变身</skillName>
 		<cdTime>30</cdTime>
 		<skillTime>15</skillTime>
-		<animTime>0.8</animTime>
+		<animTime>0.533</animTime>
 		<aniAction>5</aniAction>
 		<fx>skill6_huoBuff</fx>
 		<isBreak>1</isBreak>
@@ -84,7 +84,7 @@
 		<skillName>闪现</skillName>
 		<cdTime>12</cdTime>
 		<skillTime>0.8</skillTime>
-		<animTime>0.8</animTime>
+		<animTime>0.4</animTime>
 		<aniAction>6</aniAction>
 		<fx>skill7_blink</fx>
 		<isBreak>1</isBreak>
@@ -95,7 +95,7 @@
 		<skillName>闪避</skillName>
 		<cdTime>8</cdTime>
 		<skillTime>0.8</skillTime>
-		<animTime>0.8</animTime>
+		<animTime>0.4</animTime>
 		<aniAction>7</aniAction>
 		<fx>skill8</fx>
 		<isBreak>1</isBreak>

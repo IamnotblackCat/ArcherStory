@@ -249,7 +249,7 @@ public class SkillManager:MonoBehaviour
             target.Die();
             if (target.entityType==EntityType.Monster)
             {
-            target.battleMg.RemoveMonster(target.Name);
+                target.battleMg.RemoveMonster(target.Name);
 
             }
             else if (target.entityType==EntityType.Player)

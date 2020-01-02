@@ -36,4 +36,8 @@ public class TimeService : SystemRoot
     {
         pt.DeleteTimeTask(tid);
     }
+    public double GetNowTime()
+    {
+        return pt.GetMillisecondsTime();
+    }
 }

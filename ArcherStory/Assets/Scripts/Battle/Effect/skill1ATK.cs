@@ -43,13 +43,13 @@ public class skill1ATK : MonoBehaviour
             }
             monsterPos = new Vector3(pos.x, pos.y + 2f, pos.z);
             canFly = true;
-        }, 0.6f);
+        }, 0.3f);
         TimeService.instance.AddTimeTask((int tid)=>
         {
             canFly = false;
             transform.localPosition = beginPos;
             transform.localRotation = beginRot;
-        },1.2f);
+        },0.6f);
     }
     private void Update()
     {

@@ -264,15 +264,6 @@ public class PlayerCtrlWnd : WindowRoot
     }
     private void Update()
     {
-        #region 移动和技能按键检测
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        Vector2 _dir = new Vector2(h, v);
-        //boss血条激活了就启动血条渐变
-        if (bossHPTrans.gameObject.activeSelf)
-        {
-            BlendBossHP();
-        }
         #region 技能冷却显示
 
         float delta = Time.deltaTime;
@@ -425,8 +416,21 @@ public class PlayerCtrlWnd : WindowRoot
             SetText(txtSk8CD, val.ToString("0.0"));
         }
         #endregion
-        if (BattleSys.Instance.battleMg.entitySelfPlayer != null)
+        #region 移动和技能按键检测
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        Vector2 _dir = new Vector2(h, v);
+        //boss血条激活了就启动血条渐变
+        if (bossHPTrans.gameObject.activeSelf)
         {
+            BlendBossHP();
+        }
+        if (BattleSys.Instance.battleMg.entitySelfPlayer != null)
+        {//暂停时无法控制角色
+            if (BattleSys.Instance.battleMg.isPaused == true)
+            {
+                return;
+            }
             BattleSys.Instance.battleMg.SetSelfPlayerMoveDir(_dir);
             if (!BattleSys.Instance.battleMg.entitySelfPlayer.canControll)
             {
@@ -516,6 +520,7 @@ public class PlayerCtrlWnd : WindowRoot
     }
     public void ClickHeadBtn()
     {
+        BattleSys.Instance.battleMg.isPaused = true;
         BattleSys.Instance.SetBattleEndWndState(FubenEndType.Pause);
     }
     //实时显示技能范围图标

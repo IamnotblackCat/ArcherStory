@@ -18,6 +18,9 @@ public class BattleSys:SystemRoot
     public BattleManager battleMg;
     public BattleEndWnd battleEndWnd;
 
+    private double startTime;
+    private double endTime;
+    public int costTime;//消耗时间的秒钟数
     public override void InitSys()
     {
         base.InitSys();
@@ -28,15 +31,40 @@ public class BattleSys:SystemRoot
         GameObject go = new GameObject { name = "BattleRoot" };
         go.transform.SetParent(GameRoot.instance.transform);
         battleMg = go.AddComponent<BattleManager>();
-
-        battleMg.Init(mapid);
+        //延时调用委托
+        battleMg.Init(mapid,()=>
+        {
+            startTime = TimeService.instance.GetNowTime();
+        });
         //Invoke("SetPlayerCtrlWndState", 0.5f);
         SetPlayerCtrlWndState();
     }
     public void EndBatlle(bool isWin,int restHP)
     {
-        playerCtrlWnd.SetWndState(false);
+        SetPlayerCtrlWndState(false);
         GameRoot.instance.dynamicWnd.RemoveAllHPItemInfo();
+        if (isWin)
+        {
+            endTime = TimeService.instance.GetNowTime();
+            //这里得到的是秒钟数
+            costTime = (int)(endTime-startTime)/1000;
+            battleEndWnd.SetBattleEndData(costTime,restHP);
+            SetBattleEndWndState(FubenEndType.Win);
+        }
+        else
+        {
+            SetBattleEndWndState(FubenEndType.Lose);
+        }
+    }
+    public void DestroyBattle()
+    {
+        battleMg.isPaused = false;
+        //battleMG随后就被销毁了，没有运行update的修改timescale代码,手动修改
+        Time.timeScale = 1f;
+        SetPlayerCtrlWndState(false);
+        SetBattleEndWndState(FubenEndType.None,false);
+        GameRoot.instance.dynamicWnd.RemoveAllHPItemInfo();
+        Destroy(battleMg.gameObject);
     }
     public void SetPlayerCtrlWndState(bool isActive = true)
     {

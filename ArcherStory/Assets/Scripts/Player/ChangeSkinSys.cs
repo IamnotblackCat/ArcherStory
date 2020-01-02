@@ -18,39 +18,7 @@ public class ChangeSkinSys : SystemRoot
     public GameObject flashFX;
     private static ChangeSkinSys _instance;
 
-    //public SkinnedMeshRenderer smrClose;
-    //public GameObject hips;
-    //public Transform[] avatarHips;
-    //public UnityEngine.Material closeNew;
-    //public Mesh mesh;
-    //public bool isNew = false;
-
-    //private void Update()
-    //{
-    //    if (isNew)
-    //    {
-    //        ChangeMesh();
-    //    }
-    //}
-    //private void ChangeMesh()
-    //{
-        //list<transform> bones = new list<transform>();
-        //foreach (var trans in smrclose.bones)
-        //{
-        //    foreach (var bone in avatarhips)
-        //    {
-        //        if (bone.name == trans.name)
-        //        {
-        //            bones.add(bone);
-        //            break;
-        //        }
-        //    }
-        //}
-        //smrclose.bones = bones.toarray();
-        //smrclose.material = closenew;
-        //smrclose.sharedmesh = mesh;
-    //    smrClose.materials[1] = closeNew;
-    //}
+    
     public static ChangeSkinSys Instance
     {
         get

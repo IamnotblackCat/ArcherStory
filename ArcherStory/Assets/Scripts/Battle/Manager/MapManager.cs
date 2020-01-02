@@ -23,11 +23,11 @@ public class MapManager:MonoBehaviour
         //实例化第一批怪物
         battleMg.LoadMonsterByWaveID(waveIndex);
     }
-    public void TriggerMonsterBorn(TriggerData trigger,int waveIndex)
+    public void TriggerMonsterBorn(BoxCollider collider,int waveIndex)
     {
         if (battleMg!=null)
         {
-            BoxCollider collider = trigger.gameObject.GetComponent<BoxCollider>();
+            //BoxCollider collider = trigger.gameObject.GetComponent<BoxCollider>();
             collider.isTrigger = false;
 
             battleMg.LoadMonsterByWaveID(waveIndex);
@@ -42,7 +42,7 @@ public class MapManager:MonoBehaviour
         {
             if (triggerArray[i].triggerWave==waveIndex)
             {
-                BoxCollider co = triggerArray[i].GetComponent<BoxCollider>();
+                BoxCollider co = triggerArray[i].boxCollider;
                 co.isTrigger = true;
                 return true;
             }

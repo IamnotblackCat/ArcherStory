@@ -25,7 +25,6 @@ public class CharacterPanel : Inventory
         base.Start();
         _instance = transform.GetComponent<CharacterPanel>();
         player = GameObject.Find("MainCityWnd").GetComponent<Player>();
-        skinChange = ChangeSkinSys.Instance;
     }
 
 
@@ -52,21 +51,36 @@ public class CharacterPanel : Inventory
         }
         if(exitItem!=null)
             Knapsack.Instance.StoreItem(exitItem);
-        if (item is Weapon)
-        {
-            skinChange.ChangeWeaponSkinToNew();
-            GameRoot.instance.isNewBow = true;
-        }
+            UpdateSkinned();
     }
     
     public void PutOff(Item item)
     {
         Knapsack.Instance.StoreItem(item);
-        if (item is Weapon)
+        UpdateSkinned();
+    }
+
+    private void UpdateSkinned()
+    {
+        foreach (EquipmentSlot slot in slotList)
         {
-            skinChange.ChangeWeaponSkinToOld();
-            GameRoot.instance.isNewBow = false;
+            if (slot.transform.childCount>0)
+            {
+                Item item = slot.transform.GetChild(0).GetComponent<ItemUI>().Item;
+                if (item is Weapon)
+                {
+                    ChangeSkinSys.Instance.ChangeWeaponSkinToNew();
+                    GameRoot.instance.isNewBow = true;
+                }
+            }
+            else
+            {
+                if (slot.wpType==Weapon.WeaponType.MainHand)
+                {
+                    ChangeSkinSys.Instance.ChangeWeaponSkinToOld();
+                    GameRoot.instance.isNewBow = false;
+                }
+            }
         }
     }
-    
 }
