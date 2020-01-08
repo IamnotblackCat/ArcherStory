@@ -28,11 +28,16 @@
 	<item ID="2111">
 		<delayTime>600</delayTime>
 		<radius>2</radius>
-		<angle>60</angle>
+		<angle>90</angle>
 	</item>
 	<item ID="2211">
-		<delayTime>1000</delayTime>
+		<delayTime>600</delayTime>
 		<radius>4.5</radius>
-		<angle>60</angle>
+		<angle>140</angle>
+	</item>
+	<item ID="2311">
+		<delayTime>600</delayTime>
+		<radius>8</radius>
+		<angle>90</angle>
 	</item>
 </root>

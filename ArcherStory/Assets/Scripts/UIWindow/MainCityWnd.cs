@@ -43,7 +43,7 @@ public class MainCityWnd : WindowRoot
         SetText(txtLV,pd.lv);
 
         #region ExpProgress
-        int expValPercent = (int)(pd.exp * 1.0f /100);
+        int expValPercent = (int)(pd.exp * 1.0f);
         SetText(txtExpPrg, expValPercent + "%");
         int index = expValPercent / 10;
         GridLayoutGroup grid = expProgramTrans.GetComponent<GridLayoutGroup>();
@@ -72,16 +72,6 @@ public class MainCityWnd : WindowRoot
         }
         #endregion
 
-        //设置自动任务图标
-        //currentTaskData = resSvc.GetGuideCfgData(pd.guideid);
-        //if (currentTaskData!=null)
-        //{
-        //    SetGuideBtnIcon(currentTaskData.npcID);
-        //}
-        //else
-        //{//没任务就显示默认图标
-        //    SetGuideBtnIcon(-1);
-        //}
     }
     //根据任务的不同设置不同的NPC头像
     private void SetGuideBtnIcon(int npcID)
@@ -109,63 +99,34 @@ public class MainCityWnd : WindowRoot
         SetSprite(image,spPath);
     }
     #region Click Events
-    //public void ClickGuideBtn()
-    //{
-    //    audioSvc.PlayUIAudio(Constants.uiClick);
-    //    if (currentTaskData!=null)
-    //    {
-    //        MainCitySys.Instance.RunTask(currentTaskData);
-    //    }
-    //    else
-    //    {
-    //        GameRoot.instance.AddTips("更多引导，正在开发中，敬请期待。。。");
-    //    }
-    //}
-    //public void ClickMenuBtn()
-    //{
-    //    audioSvc.PlayUIAudio(Constants.uiExtenBtn);
-    //    menuState = !menuState;
-
-    //    AnimationClip clip = null;
-    //    //取反之后的状态
-    //    if (menuState)
-    //    {
-    //        clip = menuAnim.GetClip("OpenMainCityBtn");
-    //    }
-    //    else
-    //    {
-    //        clip = menuAnim.GetClip("CloseMainCityBtn");
-    //    }
-    //    menuAnim.Play(clip.name);
-    //}
+    
     public void ClickHeadBtn()
     {
         audioSvc.PlayUIAudio(Constants.uiOpenPage);
         MainCitySys.Instance.OpenInfoWnd();
     }
-    public void ClickStrengthBtn()
-    {
-        audioSvc.PlayUIAudio(Constants.uiOpenPage);
-        MainCitySys.Instance.OpenStrengthWnd();
-    }
     public void ClickFubenBtn()
     {
+        audioSvc.PlayUIAudio(Constants.uiOpenPage);
         goFuben.SetActive(true);
     }
     public void ClickKnapsackBtn()
     {
+        audioSvc.PlayUIAudio(Constants.uiOpenPage);
         Knapsack.Instance.DisplaySwitch();
     }
     public void ClickSkillBtn()
     {
+        audioSvc.PlayUIAudio(Constants.uiOpenPage);
         skillPanel.SetActive(true);
     }
     public void ClickSystemBtn()
     {
-
+        audioSvc.PlayUIAudio(Constants.uiOpenPage);
     }
     public void ClickConfirm()
     {
+        audioSvc.PlayUIAudio(Constants.uiClick);
         GameRoot.instance.ClearUIRoot();
         GameRoot.instance.dynamicWnd.SetWndState();
         goFuben.SetActive(false);
@@ -173,6 +134,7 @@ public class MainCityWnd : WindowRoot
     }
     public void ClickConcel()
     {
+        audioSvc.PlayUIAudio(Constants.uiClick);
         goFuben.SetActive(false);
     }
     private void Update()
@@ -186,43 +148,7 @@ public class MainCityWnd : WindowRoot
     {
         skillPanel.SetActive(false);
     }
-    //public void RegistrTouchEvts()
-    //{
-    //    //添加监听器
-    //    OnClickDown(imgTouch.gameObject, (PointerEventData evt) =>
-    //     {
-    //         clickPos = evt.position;
-    //         SetActive(imgDirPoint);
-    //         imgDirBg.transform.position = evt.position;
-    //     });
-    //    OnClickUP(imgTouch.gameObject, (PointerEventData evt) =>
-    //    {
-    //        imgDirBg.transform.position = defaultPos;
-    //        SetActive(imgDirPoint,false);
-    //        //小圆点位置设置为中心锚点的中间
-    //        imgDirPoint.transform.localPosition = Vector2.zero;
-    //        //方向信息传递
-    //        //MainCitySys.Instance.SetMoveDir(Vector2.zero);
-    //    });
-    //    OnDrag(imgTouch.gameObject, (PointerEventData evt) =>
-    //    {
-    //        Vector2 dir = evt.position - clickPos;//得到拖拽的方向
-    //        //要把拖拽向量方向不变，但是距离限制
-    //        if (dir.magnitude>pointDis)
-    //        {
-    //            Vector2 clampDir = Vector2.ClampMagnitude(dir,pointDis);
-    //            //背景图位置+自身需要移动的
-    //            imgDirPoint.transform.position = clickPos + clampDir;
-    //        }
-    //        else
-    //        {
-    //            imgDirPoint.transform.position = evt.position;
-    //        }
-    //        //方向信息传递
-    //        //MainCitySys.Instance.SetMoveDir(dir.normalized);
-    //    });
-    //}
-
+    
     #endregion
 
 }

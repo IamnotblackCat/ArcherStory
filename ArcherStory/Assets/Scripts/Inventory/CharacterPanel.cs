@@ -62,6 +62,7 @@ public class CharacterPanel : Inventory
 
     private void UpdateSkinned()
     {
+        int damage = 0, hp = 0;
         foreach (EquipmentSlot slot in slotList)
         {
             if (slot.transform.childCount>0)
@@ -71,6 +72,11 @@ public class CharacterPanel : Inventory
                 {
                     ChangeSkinSys.Instance.ChangeWeaponSkinToNew();
                     GameRoot.instance.isNewBow = true;
+                    damage += ((Weapon)item).Damage;
+                }
+                else if (item is Equipment)
+                {
+                    hp += ((Equipment)item).HP;
                 }
             }
             else
@@ -80,7 +86,9 @@ public class CharacterPanel : Inventory
                     ChangeSkinSys.Instance.ChangeWeaponSkinToOld();
                     GameRoot.instance.isNewBow = false;
                 }
+
             }
         }
+         GameRoot.instance.SetPlayerDataByEquipment(damage,hp);
     }
 }

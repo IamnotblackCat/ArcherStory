@@ -14,15 +14,16 @@ public class TriggerData : MonoBehaviour
     public bool isBossLevel;
     public BoxCollider boxCollider;
     public MapManager mapMgr;
-
+    private bool isDone = false;//是否已经触发过
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player"&&!isDone)
         {
             if (mapMgr != null)
             {
                 mapMgr.TriggerMonsterBorn(boxCollider, triggerWave);
+                isDone = true;
                 if (isBossLevel)
                 {
                     AudioSvc.instance.PlayBGMusic(Constants.BGBoss);

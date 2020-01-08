@@ -22,7 +22,7 @@ public class LoadingWnd : WindowRoot
     {//为了获得填充条的宽度
         fgWidth = imgFg.GetComponent<RectTransform>().sizeDelta.x;
 
-        SetText(textTips, "这是一条游戏tips");
+        SetText(textTips, "Tips:霸体状态下不会被打断/被僵直");
         SetText(textProgress, "0%");
         imgFg.fillAmount = 0;
         imgPoint.transform.position = new Vector3(-fgWidth/2, 0,0);

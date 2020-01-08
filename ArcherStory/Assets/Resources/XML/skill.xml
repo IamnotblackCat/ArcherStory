@@ -29,7 +29,7 @@
 	<item ID="103">
 		<skillName>烈焰矢</skillName>
 		<cdTime>7</cdTime>
-		<skillTime>1.833</skillTime>
+		<skillTime>1.222</skillTime>
 		<animTime>1.222</animTime>
 		<targetFX>skill3_ground</targetFX>
 		<delayFXTime>0.595</delayFXTime>
@@ -122,5 +122,14 @@
 		<skillActionList>2211</skillActionList>
 		<skillDamageList>65</skillDamageList>
 	</item>
-	<item/>
+	<item ID="401">
+		<skillName>黑白无常攻击</skillName>
+		<cdTime>0</cdTime>
+		<skillTime>1.2</skillTime>
+		<animTime>1.2</animTime>
+		<aniAction>11</aniAction>
+		<skillMove>1013</skillMove>
+		<skillActionList>2311</skillActionList>
+		<skillDamageList>35</skillDamageList>
+	</item>
 </root>

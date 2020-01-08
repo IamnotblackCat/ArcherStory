@@ -88,9 +88,9 @@ public class SkillManager:MonoBehaviour
         entity.SetAction(skillData.aniAction);
         entity.SetFX(skillData.fx,skillData.skillFXTime);
 
-        if (skillData.unBreakable)
+        if (skillData.cantStop)
         {
-            entity.unBreakable = true;
+            entity.cantStop = true;
         }
         SkillMoveCfg skillMoveCfg = resSvc.GetSkillMoveCfgData(skillData.skillMove);
         float speed = 0;
@@ -264,7 +264,7 @@ public class SkillManager:MonoBehaviour
             //判断是否符合获取霸体条件
             target.GetUnBreakState();
             //TODO,是否处于剑刃风暴状态，是则反弹伤害
-            if (!target.unBreakable)
+            if (!target.unBreakable&&!target.cantStop)
             {
                 target.Wound();
             }

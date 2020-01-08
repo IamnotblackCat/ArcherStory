@@ -6,7 +6,6 @@
 	功能：游戏启动入口
 *****************************************************/
 
-//using PEProtocol;
 using UnityEngine;
 
 public class GameRoot : MonoBehaviour 
@@ -14,13 +13,14 @@ public class GameRoot : MonoBehaviour
     public static GameRoot instance = null;
     public LoadingWnd loadingWnd;
     public DynamicWnd dynamicWnd;
+
+    public MainCityWnd mainCityWnd;
     //再主城界面读取是否更换了武器，在战斗管理加载战斗角色的时候根据这个来更换
     public bool isNewBow;
     private void Start()
     {
         instance = this;
         DontDestroyOnLoad(this);
-        //PECommon.Log("游戏开始。。。");
         ClearUIRoot();
         Init();    
     }
@@ -28,8 +28,6 @@ public class GameRoot : MonoBehaviour
     {
 
         //服务模块初始化
-        //NetService netService = GetComponent<NetService>();
-        //netService.InitSvc();
         ResSvc resSvc = GetComponent<ResSvc>();
         resSvc.InitSvc();
 
@@ -38,9 +36,7 @@ public class GameRoot : MonoBehaviour
 
         TimeService timeSvc = GetComponent<TimeService>();
         timeSvc.InitSvc();
-        //业务系统初始化
-        //LoginSys loginSys = GetComponent<LoginSys>();
-        //loginSys.InitSys();
+
         MainCitySys mainCitySys = GetComponent<MainCitySys>();
         mainCitySys.InitSys();
         BattleSys battleSys = GetComponent<BattleSys>();
@@ -48,8 +44,6 @@ public class GameRoot : MonoBehaviour
 
         
         dynamicWnd.SetWndState();
-        //进入登陆场景并加载UI
-        //loginSys.EnterLogin();
 
     }
     //初始化的时候确保所有的UI除了提示面板都是隐藏的
@@ -74,6 +68,7 @@ public class GameRoot : MonoBehaviour
     {
         get { return playerData; }
     }
+    //从json中更新读取数据
     public void ReadPlayerData()
     {
         playerData.ReadJson();
@@ -81,28 +76,16 @@ public class GameRoot : MonoBehaviour
     public void GetExp(int exp)
     {
         playerData.CalculateExp(exp);
+        mainCityWnd.RefreshUI();
     }
-    //public void SetPlayerData(ResponLogin data)
-    //{
-    //    playerData = data.playerData;
-    //}
-    //public void SetPlayerName(string name)
-    //{
-    //    playerData.name = name;
-    //}
-    //public void SetPlayerDataByGuide(RspGuide data)
-    //{
-    //    playerData.coin = data.coin;
-    //    playerData.exp = data.exp;
-    //    playerData.lv = data.lv;
-    //    //playerData.guideid = data.guideid;
-    //}
-    //public void SetPlayerDataByStrong(ResStrong data)
-    //{
-    //    Playerdata.coin = data.coin;
-    //    Playerdata.crystal = data.crystal;
-    //    Playerdata.attackValue = data.ad;
-
-    //    //Playerdata.strengthArray = data.strongArr;
-    //}
+    public void SetPlayerDataByEquipment(int attackValue,int hpValue)
+    {
+        //先修改一下playerData为基础数值
+        playerData.ReadJson();
+        playerData.attackValue += attackValue;
+        playerData.hp += hpValue;
+        //数值发生变化的时候就刷新一下详细信息
+        MainCitySys.Instance.infoWnd.RefreshUI();
+    }
+    
 }

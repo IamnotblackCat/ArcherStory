@@ -19,19 +19,7 @@ public class PlayerData
     public int pierce;
     public int coin;
     public int crystal;
-
-    //public PlayerData()
-    //{
-    //    hp = 475;
-    //    lv = 1;
-    //    exp = 0;
-    //    attackValue = 70;
-    //    defend = 15;
-    //    critical = 5;
-    //    pierce = 5;
-    //    coin = 1000;
-    //    crystal = 1000;
-    //}
+    
     public void SaveJson()
     {
         Memento memento = new Memento();
@@ -62,7 +50,8 @@ public class PlayerData
             if (addExpValue>upNeedExp)
             {
                 curLv++;
-                //TODO：升级特效
+                //升级特效
+                MainCitySys.Instance.PlayerLvUp();
                 addExpValue -= upNeedExp;
                 currentExp = 0;
             }
@@ -73,6 +62,7 @@ public class PlayerData
                 break;
             }
         }
-        SaveJson();
+        //暂时先不存储json
+        //SaveJson();
     }
 }

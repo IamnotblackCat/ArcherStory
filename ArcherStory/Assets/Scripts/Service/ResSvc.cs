@@ -17,7 +17,7 @@ using UnityEngine.SceneManagement;
 public class ResSvc : MonoBehaviour 
 {
     public static ResSvc instance = null;
-
+    public Player player;
 
     public void InitSvc()
     {
@@ -30,6 +30,7 @@ public class ResSvc : MonoBehaviour
         InitSkillAction(PathDefine.SkillActionCfg);
         //读取玩家数据
         GameRoot.instance.ReadPlayerData();
+        player.Init();
         //InitGuideCfg(PathDefine.GuideCfg);
        // InitStrengthCfg(PathDefine.StrengthCfg);
         //PECommon.Log("启动资源加载...");
@@ -367,7 +368,7 @@ public class ResSvc : MonoBehaviour
                             skillCfgData.aniAction = int.Parse(element.InnerText);
                             break;
                         case "isBreak":
-                            skillCfgData.unBreakable = element.InnerText.Equals("1");
+                            skillCfgData.cantStop = element.InnerText.Equals("1");
                             break;
                         case "fx":
                             skillCfgData.fx = element.InnerText;

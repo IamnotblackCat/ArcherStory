@@ -89,6 +89,18 @@ public class Slot : MonoBehaviour ,IPointerEnterHandler,IPointerExitHandler,IPoi
                     }
                     CharacterPanel.Instance.PutOn(currentItem);   
                 }
+                else if (currentItemUI.Item is Consumable)//苹果,吃了加经验
+                {
+                    AudioSvc.instance.PlayUIAudio(Constants.eatApple);
+                    currentItemUI.ReduceAmount(1);
+                    Item currentItem = currentItemUI.Item;
+                    if (currentItemUI.Amount <= 0)
+                    {
+                        DestroyImmediate(currentItemUI.gameObject);
+                        InventoryManager.Instance.HideToolTip();
+                    }
+                    GameRoot.instance.GetExp(40);//一个苹果+40点经验
+                }
             }
         }
 

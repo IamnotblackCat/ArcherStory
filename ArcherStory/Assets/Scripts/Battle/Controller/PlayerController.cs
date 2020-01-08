@@ -25,6 +25,8 @@ public class PlayerController : Controller
     private GameObject skill4Ground;
 
     #endregion
+    //主城升级特效
+    public GameObject lvUpEffect;
     #region 相机控制
     //private Transform camMainTrans;
     private float camRotSmooth = 3f;
@@ -268,5 +270,10 @@ public class PlayerController : Controller
         skill4Ground = resSvc.LoadPrefab(PathDefine.skill4Path);
         skill4Ground.name = Constants.skill4Name;
         skill4Ground.SetActive(false);
+    }
+    //人物升级
+    public void PlayerLvUp()
+    {
+        lvUpEffect.SetActive(true);
     }
 }

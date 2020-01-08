@@ -22,7 +22,8 @@ public abstract class EntityBase
     public SkillCfg currentSkillCfg;
 
     public bool canControll = true;
-    public bool unBreakable = false;//是否为霸体状态，不可打断
+    public bool unBreakable = false;//是否为霸体状态
+    public bool cantStop = false;//释放此技能是否不可打断——需要与霸体区分，因为有单独的霸体状态
     
     protected Controller controller = null;
 
@@ -280,10 +281,10 @@ public abstract class EntityBase
         }
     }
     public void ExitSkill()
-    {//如果当前技能是带霸体的且不是状态技能，释放完成以后解除霸体状态
-        if (currentSkillCfg.unBreakable&&currentSkillCfg.ID!=106)
+    {//如果当前技能是不可阻挡，释放完成以后解除
+        if (currentSkillCfg.cantStop)
         {
-            unBreakable = false;
+            cantStop = false;
         }
     }
     public virtual void GetUnBreakState()

@@ -60,7 +60,7 @@ public class InfoWnd : WindowRoot/*, IInitializePotentialDragHandler, IBeginDrag
             MainCitySys.Instance.SetPlayerRotate(rotate);
         });
     }
-    private void RefreshUI()
+    public void RefreshUI()
     {
         PlayerData pd = GameRoot.instance.Playerdata;
         SetText(txtExp,pd.exp+"/"+100);
@@ -70,10 +70,7 @@ public class InfoWnd : WindowRoot/*, IInitializePotentialDragHandler, IBeginDrag
         //detail
         SetText(hpValue,pd.hp);
         SetText(adValue,pd.attackValue);
-       // SetText(apValue,pd.ap);
         SetText(addValue,pd.defend);
-       // SetText(apdValue,pd.apdef);
-       // SetText(dodgeValue,pd.dodge);
         SetText(pierceValue,pd.pierce);
         SetText(criticalValue,pd.critical);
     }

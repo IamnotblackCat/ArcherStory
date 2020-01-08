@@ -85,6 +85,8 @@ public class Constants
     public const string uiClick = "uiClickBtn";
     public const string uiExtenBtn = "uiExtenBtn";
     public const string uiOpenPage = "uiOpenPage";
+    public const string eatApple = "eatApple";
+    public const string EarnCoin = "EarnCoin";
     public const string FBLose = "fblose";
     public const string FBItemEnter = "fbitem";
     public const string FBWin = "fbwin";

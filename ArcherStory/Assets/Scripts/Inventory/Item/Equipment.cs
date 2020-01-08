@@ -3,35 +3,17 @@ using System.Collections;
 
 public class Equipment : Item {
 
-    /// <summary>
-    /// 力量
-    /// </summary>
-    public int Strength { get; set; }
-    /// <summary>
-    /// 智力
-    /// </summary>
-    public int Intellect { get; set; }
-    /// <summary>
-    /// 敏捷
-    /// </summary>
-    public int Agility { get; set; }
-    /// <summary>
-    /// 体力
-    /// </summary>
-    public int Stamina { get; set; }
+    public int HP;
     /// <summary>
     /// 装备类型
     /// </summary>
     public EquipmentType EquipType { get; set; }
 
     public Equipment(int id, string name, ItemType type, ItemQuality quality, string des, int capacity, int buyPrice, int sellPrice,string sprite,
-        int strength,int intellect,int agility,int stamina,EquipmentType equipType)
+        int hp,EquipmentType equipType)
         : base(id, name, type, quality, des, capacity, buyPrice, sellPrice,sprite)
     {
-        this.Strength = strength;
-        this.Intellect = intellect;
-        this.Agility = agility;
-        this.Stamina = stamina;
+        this.HP = hp;
         this.EquipType = equipType;
     }
 
@@ -89,7 +71,7 @@ public class Equipment : Item {
          break;
 	}
 
-        string newText = string.Format("{0}\n\n<color=blue>装备类型：{1}\n力量：{2}\n智力：{3}\n敏捷：{4}\n体力：{5}</color>", text,equipTypeText,Strength,Intellect,Agility,Stamina);
+        string newText = string.Format("{0}\n\n<color=blue>装备类型：{1}\n增加血量：{2}</color>", text,equipTypeText,HP);
 
         return newText;
     }

@@ -14,7 +14,7 @@ public class PlayerCtrlWnd : WindowRoot
 {
     #region Public UI Transform
 
-    public GameObject returnGo;
+    public GameObject bossSkillGo;
     public Button btnGuide;
     public Transform expProgramTrans;
     public Text txtLV;
@@ -126,7 +126,7 @@ public class PlayerCtrlWnd : WindowRoot
         SetText(txtLV, pd.lv);
 
         #region ExpProgress
-        int expValPercent = (int)(pd.exp * 1.0f / 100);
+        int expValPercent = (int)(pd.exp * 1.0f);
 
         int index = expValPercent / 10;
         GridLayoutGroup grid = expProgramTrans.GetComponent<GridLayoutGroup>();
@@ -163,22 +163,7 @@ public class PlayerCtrlWnd : WindowRoot
         audioSvc.PlayUIAudio(Constants.uiOpenPage);
         MainCitySys.Instance.OpenInfoWnd();
     }
-    public void ClickReturnBtn()
-    {
-        returnGo.SetActive(true);
-    }
-    public void ClickConfirm()
-    {
-        GameRoot.instance.ClearUIRoot();
-        returnGo.SetActive(false);
-        Transform temp = GameRoot.instance.dynamicWnd.transform;
-        MainCitySys.Instance.EnterMainCity();
-    }
-    public void ClickConcel()
-    {
-        returnGo.SetActive(false);
-    }
-
+    
     #endregion
     public void ClickSkill1()
     {
@@ -514,14 +499,20 @@ public class PlayerCtrlWnd : WindowRoot
         #endregion
         #endregion
     }
-    public void ClickInitBtn()
-    {
-        resSvc.InitCfgData();
-    }
+   
     public void ClickHeadBtn()
     {
+        audioSvc.PlayUIAudio(Constants.uiOpenPage);
         BattleSys.Instance.battleMg.isPaused = true;
         BattleSys.Instance.SetBattleEndWndState(FubenEndType.Pause);
+    }
+    public void ClickBossSkillBtn()
+    {
+        bossSkillGo.SetActive(true);
+    }
+    public void ClickCloseBossSkillBtn()
+    {
+        bossSkillGo.SetActive(false);
     }
     //实时显示技能范围图标
     //传入一个距离，判断如果角色自身与射线检测目标地点超出距离，超出变换图片，且无法释放技能

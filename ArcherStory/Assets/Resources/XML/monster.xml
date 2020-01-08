@@ -6,7 +6,7 @@
 		<resPath>PrefabNPC/ChiMangJin_03</resPath>
 		<skillID>201</skillID>
 		<atkDis>2</atkDis>
-		<hp>100</hp>
+		<hp>200</hp>
 		<attackValue>100</attackValue>
 		<defend>5</defend>
 		<critical>30</critical>
@@ -37,8 +37,8 @@
 		<mName>黑无常</mName>
 		<mType>1</mType>
 		<resPath>PrefabNPC/HeiBaiWuChang_01</resPath>
-		<skillID>201</skillID>
-		<atkDis>2</atkDis>
+		<skillID>401</skillID>
+		<atkDis>8</atkDis>
 		<hp>800</hp>
 		<attackValue>150</attackValue>
 		<defend>10</defend>
@@ -48,8 +48,8 @@
 		<mName>白无常</mName>
 		<mType>1</mType>
 		<resPath>PrefabNPC/HeiBaiWuChang_02</resPath>
-		<skillID>201</skillID>
-		<atkDis>2</atkDis>
+		<skillID>401</skillID>
+		<atkDis>8</atkDis>
 		<hp>800</hp>
 		<attackValue>150</attackValue>
 		<defend>10</defend>
@@ -61,7 +61,7 @@
 		<resPath>PrefabNPC/YangJian_03</resPath>
 		<skillID>301</skillID>
 		<atkDis>4.5</atkDis>
-		<hp>500</hp>
+		<hp>8000</hp>
 		<attackValue>250</attackValue>
 		<defend>25</defend>
 		<critical>20</critical>
