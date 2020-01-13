@@ -131,7 +131,7 @@ public class PlayerController : Controller
         //解决不落地的问题，之前的检测到没落地才给方向的解决方案如果不运动的话还是有可能穿帮
         ctrl.Move(Vector3.down*Time.deltaTime*Constants.playerMoveSpeed);
     }
-    //TODO，如果指定了目标位置，则朝向指定位置方向移动，否则后退
+    //如果指定了目标位置，则朝向指定位置方向移动，否则后退
     private void SetSkillMove()
     {
         ctrl.Move(-transform.forward * Time.deltaTime * skillMoveSpeed);
@@ -208,7 +208,8 @@ public class PlayerController : Controller
         //Debug.Log(distance + "CameraOffset: " + cameraOffset);
     }
     #endregion
-    public override void SetFX(string fxName, float closeTime)
+    //这里的delayTime在这个方法是用不到的，有这个参数的原因是父类有，怪物子类有
+    public override void SetFX(string fxName, float closeTime,float delayTime)
     {
         GameObject go;
         if (fxDic.TryGetValue(fxName,out go))

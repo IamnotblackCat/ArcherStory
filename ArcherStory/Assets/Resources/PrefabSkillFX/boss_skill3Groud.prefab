@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4830992410804670}
   m_Layer: 0
-  m_Name: skill4_ground
+  m_Name: boss_skill3Groud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,6 +15,8 @@ public class SkillManager:MonoBehaviour
 {
     private TimeService timeSvc;
     private ResSvc resSvc;
+
+    
     public void Init()
     {
         resSvc = ResSvc.instance;
@@ -24,15 +26,17 @@ public class SkillManager:MonoBehaviour
     {
         entity.skillActionCallBackList.Clear();
         entity.skillEffectCallBackList.Clear();
-        AttackEffect(entity,skillID);
-        AttackDamage(entity,skillID);
+        //提前取得玩家位置，计算黑气的产生位置需要用
+        Vector3 blackAirPos = entity.battleMg.entitySelfPlayer.GetPos();
+        AttackEffect(entity,skillID,blackAirPos);
+        AttackDamage(entity,skillID,blackAirPos);
     }
     /// <summary>
     /// 技能效果表现
     /// </summary>
     /// <param name="entity">。。。</param>
     /// <param name="skillID"></param>
-    public void AttackEffect(EntityBase entity,int skillID)
+    public void AttackEffect(EntityBase entity,int skillID,Vector3 blackAirPos)
     {
         SkillCfg skillData = resSvc.GetSkillCfgData(skillID);
         //分技能类型调整角色行为
@@ -84,9 +88,18 @@ public class SkillManager:MonoBehaviour
                     },15f);
                 }
             }
+            //这里分开的目的是，玩家的部分技能也有延迟时间，但是是另一种特效，不能统一显示
+            entity.SetFX(skillData.fx,skillData.skillFXTime);
+        }
+        else//不是玩家，实际上这部分代码指的是boss的技能表现
+        {
+            if (skillData.dmgType==DamageType.AreaSkill)
+            {
+                entity.SetLoopSkill(skillData.fx,blackAirPos);
+            }
+            entity.SetFX(skillData.fx,skillData.skillFXTime,skillData.delayFXTime);
         }
         entity.SetAction(skillData.aniAction);
-        entity.SetFX(skillData.fx,skillData.skillFXTime);
 
         if (skillData.cantStop)
         {
@@ -105,6 +118,11 @@ public class SkillManager:MonoBehaviour
             speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
             entity.SetSkillMoveState(true,true,speed);
         }
+        else if (skillData.ID==304)//剑刃风暴，理论上来说可以和闪避技能公用代码
+        {
+            speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
+            entity.SetSkillMoveState(true, true, speed);
+        }
         timeSvc.AddTimeTask((int tid) =>
         {//技能移动时间到就设置为不能移动
             entity.SetSkillMoveState(false);
@@ -118,7 +136,7 @@ public class SkillManager:MonoBehaviour
         },skillData.animationTime);
     }
     //技能伤害
-    public void AttackDamage(EntityBase entity,int skillID)
+    public void AttackDamage(EntityBase entity,int skillID,Vector3 blackAirPos)
     {
         SkillCfg skillData = resSvc.GetSkillCfgData(skillID);
         List<int> actionList = skillData.skillActionList;
@@ -131,34 +149,36 @@ public class SkillManager:MonoBehaviour
             int index = i;
             if (sum>0)//延迟伤害，比如火圈范围持续伤害
             {
-
                 int attackid = timeSvc.AddTimeTask((int tid) =>
                  {
                      if (entity != null)//多个攻击同时打过来，已经死亡就会报空
                      {
-                         SkillAction(entity, skillData, index);
+                         SkillAction(entity, skillData, index,blackAirPos);
                          entity.RemoveActionCallBake(tid);
                      }
-                         //LoopSkill(entity,skillData,index,sum);
-                     }, sum * 1.0f / 1000);
+                     if (skillData.ID==302)//黑气技能，无限循环存在
+                     {
+                         LoopSkill(entity, skillData, index, sum, blackAirPos);
+                     }
+                  }, sum * 1.0f / 1000);
                 entity.skillActionCallBackList.Add(attackid);
             }
             else//瞬间伤害
             {
-                SkillAction(entity,skillData,index);
+                SkillAction(entity,skillData,index, Vector3.zero);
             }
         }
     }
     //永久存在的技能
-    private void LoopSkill(EntityBase entity,SkillCfg skillData,int index,int sum)
+    private void LoopSkill(EntityBase entity,SkillCfg skillData,int index,int sum,Vector3 blackAirPos)
     {
         timeSvc.AddTimeTask((int temp) =>
         {
-            SkillAction(entity, skillData, index);
-            LoopSkill(entity,skillData,index,sum);
+            SkillAction(entity, skillData, index, blackAirPos);
+            LoopSkill(entity,skillData,index,sum, blackAirPos);
         }, sum * 1.0f / 1000);
     }
-    public void SkillAction(EntityBase caster,SkillCfg skillCfg,int index)
+    public void SkillAction(EntityBase caster,SkillCfg skillCfg,int index,Vector3 blackAirPos)
     {
         SkillActionCfg skillActionCfg = resSvc.GetSkillActionData(skillCfg.skillActionList[index]);
 
@@ -202,11 +222,28 @@ public class SkillManager:MonoBehaviour
         else if (caster.entityType==EntityType.Monster)//如果是怪物只能攻击玩家
         {
             EntityPlayer target = caster.battleMg.entitySelfPlayer;
+            
             //判断距离角度
-            if (InRange(caster.GetPos(),target.GetPos(),skillActionCfg.radius)&&InAngle(caster.GetTrans(), target.GetPos(), skillActionCfg.angle))
+            //范围技能（黑气）则施法者位置变更为玩家当前所处位置，提前取得
+            if (skillCfg.dmgType== DamageType.AreaSkill)
             {
-                CalcDamage(caster, target, skillCfg, damage);
+                if (blackAirPos==null||target==null)
+                {
+                    return;
+                }
+                if (InRange(blackAirPos, target.GetPos(), skillActionCfg.radius) && InAngle(caster.GetTrans(), target.GetPos(), skillActionCfg.angle))
+                {
+                    CalcDamage(caster, target, skillCfg, damage);
+                }
             }
+            else
+            {
+                if (InRange(caster.GetPos(), target.GetPos(), skillActionCfg.radius) && InAngle(caster.GetTrans(), target.GetPos(), skillActionCfg.angle))
+                {
+                    CalcDamage(caster, target, skillCfg, damage);
+                }
+            }
+           
         }
     }
     System.Random rd = new System.Random();

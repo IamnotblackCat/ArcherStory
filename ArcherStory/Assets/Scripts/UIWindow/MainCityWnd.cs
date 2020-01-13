@@ -23,8 +23,7 @@ public class MainCityWnd : WindowRoot
     public Transform expProgramTrans;
 
     #endregion
-
-    private bool menuState = true;//true是打开，false收起
+    
     private AutoGuideCfg currentTaskData;
 
     //UI自适应不能使用固定距离，要计算得出比率距离

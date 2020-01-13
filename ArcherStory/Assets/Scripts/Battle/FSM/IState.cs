@@ -20,7 +20,7 @@ public enum AniState
 {
     None,
     Idle,
-    Run,
+    Walk,
     Attack,
     Wound,
     Die

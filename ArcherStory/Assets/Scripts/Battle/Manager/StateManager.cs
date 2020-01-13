@@ -16,7 +16,7 @@ public class StateManager : MonoBehaviour
     public void Init()
     {
         fsm.Add(AniState.Idle,new StateIdle());
-        fsm.Add(AniState.Run,new StateRun());
+        fsm.Add(AniState.Walk,new StateWalk());
         fsm.Add(AniState.Attack,new StateAttack());
         fsm.Add(AniState.Wound,new StateWound());
         fsm.Add(AniState.Die,new StateDie());

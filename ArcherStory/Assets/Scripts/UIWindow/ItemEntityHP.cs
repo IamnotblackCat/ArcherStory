@@ -31,13 +31,20 @@ public class ItemEntityHP : MonoBehaviour
 
         UpdateMixBlend();
     }
-    public void InitItemInfo(Transform targetTrans, int hp)
+    public void InitItemInfo(Transform targetTrans, int hp,bool isBoss=false)
     {
         rect = transform.GetComponent<RectTransform>();
         rootTrans = targetTrans;
         hpVal = hp;
         ImgHPGreen.fillAmount = 1;
         ImgHPRed.fillAmount = 1;
+        if (isBoss)
+        {
+            ImgHPGreen.enabled = false;
+            ImgHPRed.enabled = false;
+            Image imgBG = GetComponent<Image>();
+            imgBG.enabled = false;
+        }
     }
     //多个数字飘出来的时候，要覆盖掉前面的
     public void SetCritical(int criticalNum)

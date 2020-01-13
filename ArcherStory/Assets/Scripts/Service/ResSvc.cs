@@ -364,6 +364,9 @@ public class ResSvc : MonoBehaviour
                         case "delayCloseFXTime":
                             skillCfgData.delayCloseFXTime = float.Parse(element.InnerText);
                             break;
+                        case "skillAtkDistance":
+                            skillCfgData.skillAtkDistance = float.Parse(element.InnerText);
+                            break;
                         case "aniAction":
                             skillCfgData.aniAction = int.Parse(element.InnerText);
                             break;
@@ -421,6 +424,7 @@ public class ResSvc : MonoBehaviour
                                 }
                             }
                             break;
+                        
                         default:
                             break;
                     }

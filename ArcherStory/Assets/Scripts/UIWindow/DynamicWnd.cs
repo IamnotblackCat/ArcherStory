@@ -68,7 +68,7 @@ public class DynamicWnd : WindowRoot
             cb();
         }
     }
-    public void AddHPItemInfo(string mName,int hp,Transform trans)
+    public void AddHPItemInfo(string mName,int hp,Transform trans,bool isBoss=false)
     {
         ItemEntityHP item = null;
         if (itemDic.TryGetValue(mName,out item))
@@ -81,7 +81,7 @@ public class DynamicWnd : WindowRoot
             go.transform.SetParent(hpItemRoot);
             go.transform.localPosition = new Vector3(-1000,0,0);
             ItemEntityHP itemCom = go.GetComponent<ItemEntityHP>();
-            itemCom.InitItemInfo(trans, hp);
+            itemCom.InitItemInfo(trans, hp,isBoss);//boss血条不显示，但还要出伤害
             itemDic.Add(mName,itemCom);
         }
     }

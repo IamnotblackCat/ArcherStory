@@ -36,14 +36,14 @@ public class InfoWnd : WindowRoot/*, IInitializePotentialDragHandler, IBeginDrag
     public Text criticalValue;
 
     private Vector2 startPos;
-    private RectTransform rect;
+    //private RectTransform rect;
     private Vector3 uiOffset = Vector3.zero;
     protected override void InitWnd()
     {
         base.InitWnd();
         RegistTouchEvts();
         RefreshUI();
-        rect = GetComponent<RectTransform>();
+        //rect = GetComponent<RectTransform>();
         SetActive(transDetail,false);
     }
     private void RegistTouchEvts()

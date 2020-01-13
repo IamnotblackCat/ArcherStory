@@ -23,6 +23,7 @@ public abstract class Controller:MonoBehaviour
 
     public Animator anim;
     public CharacterController ctrl;
+    public bool isCrazy = false;//boss是不是狂暴了
     public Vector2 Dir
     {
         get
@@ -64,9 +65,13 @@ public abstract class Controller:MonoBehaviour
         anim.SetInteger("Action",act);
         //Debug.Log(anim.GetInteger("Action"));
     }
-    public virtual void SetFX(string fxName ,float closeTime)
+    public virtual void SetFX(string fxName ,float closeTime,float delayTime)
     {
         
+    }
+    public virtual void SetLoopFX(string fxName,Vector3 pos)
+    {
+
     }
     public virtual void SetAreaSkillFX(EntityBase entity, string fxName,float beginTime,float closeTime)
     {

@@ -113,7 +113,7 @@
 		<skillDamageList>26</skillDamageList>
 	</item>
 	<item ID="301">
-		<skillName>精英怪物攻击</skillName>
+		<skillName>boss普通攻击</skillName>
 		<cdTime>0</cdTime>
 		<skillTime>1.2</skillTime>
 		<animTime>1.2</animTime>
@@ -121,6 +121,7 @@
 		<skillMove>1013</skillMove>
 		<skillActionList>2211</skillActionList>
 		<skillDamageList>65</skillDamageList>
+		<skillAtkDistance>4.5</skillAtkDistance>
 	</item>
 	<item ID="401">
 		<skillName>黑白无常攻击</skillName>
@@ -131,5 +132,44 @@
 		<skillMove>1013</skillMove>
 		<skillActionList>2311</skillActionList>
 		<skillDamageList>35</skillDamageList>
+	</item>
+	<item ID="302">
+		<skillName>污浊之气</skillName>
+		<cdTime>0</cdTime>
+		<skillTime>1</skillTime>
+		<animTime>1</animTime>
+		<targetFX>boss_skill2Area</targetFX>
+		<aniAction>12</aniAction>
+		<fx>boss_skill2Begin</fx>
+		<dmgType>2</dmgType>
+		<skillMove>1013</skillMove>
+		<skillActionList>3011</skillActionList>
+		<skillDamageList>0</skillDamageList>
+		<skillAtkDistance>20</skillAtkDistance>
+	</item>
+	<item ID="303">
+		<skillName>裂地斩</skillName>
+		<cdTime>0</cdTime>
+		<skillTime>2.167</skillTime>
+		<animTime>2</animTime>
+		<delayFXTime>1.18</delayFXTime>
+		<aniAction>13</aniAction>
+		<fx>boss_skill3Groud</fx>
+		<skillMove>1013</skillMove>
+		<skillActionList>3021</skillActionList>
+		<skillDamageList>100</skillDamageList>
+		<skillAtkDistance>10</skillAtkDistance>
+	</item>
+	<item ID="304">
+		<skillName>剑刃风暴</skillName>
+		<cdTime>0</cdTime>
+		<skillTime>1.667</skillTime>
+		<animTime>1.667</animTime>
+		<aniAction>14</aniAction>
+		<fx>boss_skill4FX</fx>
+		<skillMove>2011</skillMove>
+		<skillActionList>3031</skillActionList>
+		<skillDamageList>100</skillDamageList>
+		<skillAtkDistance>8</skillAtkDistance>
 	</item>
 </root>

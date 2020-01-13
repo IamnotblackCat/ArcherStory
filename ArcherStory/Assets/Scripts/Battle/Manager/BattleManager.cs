@@ -183,6 +183,7 @@ public class BattleManager:MonoBehaviour
                 else if (md.mCfg.mType==MonsterType.Boss)
                 {
                     BattleSys.Instance.playerCtrlWnd.SetBossHPTransform(true);
+                    GameRoot.instance.dynamicWnd.AddHPItemInfo(em.Name, em.Hp, mc.hpRoot,true);
                 }
             }
         }

@@ -64,4 +64,5 @@ public class PathDefine
     public const string skill3Path = "PrefabSkillFX/skill3_ground";
     public const string skill4Path = "PrefabSkillFX/skill4_groundNew";
     public const string skillAreaIcon = "PrefabSkillFX/skillAreaIcon";
+    public const string boss_SkillLoop = "PrefabSkillFX/boss_skill2Area";
 }

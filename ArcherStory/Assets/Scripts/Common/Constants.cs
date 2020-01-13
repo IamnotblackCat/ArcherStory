@@ -113,6 +113,7 @@ public class Constants
     //移动速度
     public const float playerMoveSpeed = 8;
     public const float monsterMoveSpeed = 3;
+    public const float BossCrazyMoveSpeed = 6;
 
     //动画混合树平滑加快速率
     public const float accelerateSpeed = 5;
@@ -128,6 +129,7 @@ public class Constants
     //混合树动画设定值
     public const float blendIdle = 0;
     public const float blendRun = 1;
+    public const float blendWalk = 0.5f;
 
     //json文件目录
     public const string jsonPath = "/Resources/Json/playerData.json";
@@ -136,6 +138,7 @@ public class Constants
     //技能特效名字
     public const string skill3Name = "skill3_ground";
     public const string skill4Name = "skill4_ground";
+    public const string boss_Unbreakable = "boss_Unbreakable";
 
     //范围技能最大施法范围
     public const float skill3MaxArea = 12;

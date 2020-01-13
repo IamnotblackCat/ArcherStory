@@ -103,7 +103,7 @@ public abstract class EntityBase
     }
     public void Move()
     {
-        stateMg.ChangeState(this, AniState.Run, null);
+        stateMg.ChangeState(this, AniState.Walk, null);
     }
     public void Attack(int skillID)
     {
@@ -145,11 +145,18 @@ public abstract class EntityBase
             controller.SetAction(act);
         }
     }
-    public virtual void SetFX(string fxName,float closeTime)
+    public virtual void SetFX(string fxName,float closeTime,float delayTime=0f)
     {
         if (controller!=null)
         {
-            controller.SetFX(fxName,closeTime);
+           controller.SetFX(fxName,closeTime,delayTime);
+        }
+    }
+    public virtual void SetLoopSkill(string fxName,Vector3 pos)
+    {
+        if (controller!=null)
+        {
+            controller.SetLoopFX(fxName,pos);
         }
     }
     public virtual void SetAreaSkillFX(string fxName,float beginTime,float closeTime)
@@ -182,7 +189,6 @@ public abstract class EntityBase
     {
         if (controller!=null)
         {
-
             controller.SetSkillMoveState(move,isBlink,skillSpeed);
         }
     }
@@ -190,7 +196,6 @@ public abstract class EntityBase
     {
         if (controller != null)
         {
-
             GameRoot.instance.dynamicWnd.SetCritical(Name, critical);
         }
     }

@@ -51,6 +51,7 @@ public class SkillCfg : BaseData<SkillCfg>
     public int skillMove;
     public List<int> skillActionList;
     public List<int> skillDamageList;
+    public float skillAtkDistance;
 }
 public class SkillActionCfg : BaseData<SkillActionCfg>
 {

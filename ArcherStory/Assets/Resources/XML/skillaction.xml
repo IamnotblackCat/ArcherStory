@@ -40,4 +40,20 @@
 		<radius>8</radius>
 		<angle>90</angle>
 	</item>
+	<item ID="3011">
+		<delayTime>800</delayTime>
+		<radius>1.5</radius>
+		<angle>360</angle>
+	</item>
+	<item ID="3021">
+		<delayTime>1180</delayTime>
+		<radius>10</radius>
+		<angle>120</angle>
+	</item>
+	<item ID="3031">
+		<delayTime>200</delayTime>
+		<radius>3</radius>
+		<angle>360</angle>
+	</item>
+	<item/>
 </root>

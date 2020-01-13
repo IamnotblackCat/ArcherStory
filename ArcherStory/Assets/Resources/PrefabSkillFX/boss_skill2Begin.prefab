@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4917325532940190}
   m_Layer: 0
-  m_Name: ground 13
+  m_Name: boss_skill2Begin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
