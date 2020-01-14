@@ -172,4 +172,16 @@
 		<skillDamageList>100</skillDamageList>
 		<skillAtkDistance>8</skillAtkDistance>
 	</item>
+	<item ID="305">
+		<skillName>四方斩</skillName>
+		<cdTime>0</cdTime>
+		<skillTime>1.667</skillTime>
+		<animTime>1.667</animTime>
+		<aniAction>15</aniAction>
+		<fx>boss_sifangzhan</fx>
+		<skillMove>1012</skillMove>
+		<skillActionList>3032</skillActionList>
+		<skillDamageList>700</skillDamageList>
+		<skillAtkDistance>7.5</skillAtkDistance>
+	</item>
 </root>

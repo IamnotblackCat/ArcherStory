@@ -118,6 +118,10 @@ public class PlayerCtrlWnd : WindowRoot
         sk7CDTime = resSvc.GetSkillCfgData(107).skillCDTime;
         sk8CDTime = resSvc.GetSkillCfgData(108).skillCDTime;
         InitSkillAreaIcon();
+        if (bossHPTrans.gameObject.activeSelf)
+        {
+            bossHPTrans.gameObject.SetActive(false);
+        }
     }
     public void RefreshUI()
     {

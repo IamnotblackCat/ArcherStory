@@ -61,7 +61,7 @@ public class SkillManager:MonoBehaviour
                     entity.SetAtkRotation(dir);
                 }
                 //如果是范围技能，且不是瞬移，在动画播放快结束的时候播放对应延迟特效,持续时间后消失。
-                if (skillData.ID != 107)
+                if (skillData.ID != Constants.id_PlayerSkill_Blink)
                 {
                     entity.SetAreaSkillFX(skillData.targetFX, skillData.delayFXTime, skillData.delayCloseFXTime);
 
@@ -69,7 +69,7 @@ public class SkillManager:MonoBehaviour
             }
             else//辅助技能
             {
-                if (skillData.ID==105)//治疗技能
+                if (skillData.ID==Constants.id_PlayerSkill_Heal)//治疗技能
                 {
                     entity.Hp += GameRoot.instance.Playerdata.hp / 3;
                     if (entity.Hp>GameRoot.instance.Playerdata.hp)
@@ -77,7 +77,7 @@ public class SkillManager:MonoBehaviour
                         entity.Hp = GameRoot.instance.Playerdata.hp;
                     }
                 }
-                else if (skillData.ID==106)//状态技能，攻击力+50%，进入霸体状态
+                else if (skillData.ID==Constants.id_PlayerSkill_Buff)//状态技能，攻击力+50%，进入霸体状态
                 {
                     entity.AttackValue += GameRoot.instance.Playerdata.attackValue / 2;
                     entity.unBreakable = true;
@@ -107,21 +107,27 @@ public class SkillManager:MonoBehaviour
         }
         SkillMoveCfg skillMoveCfg = resSvc.GetSkillMoveCfgData(skillData.skillMove);
         float speed = 0;
-        if (skillData.ID==107)//是瞬移技能，不是闪避
+        if (skillData.ID==Constants.id_PlayerSkill_Blink)//是瞬移技能，不是闪避
         {
             float dis = Vector3.Distance(entity.GetPos(),BattleSys.Instance.playerCtrlWnd.pos);
             speed = dis / (skillMoveCfg.moveTime/1000f);
-            entity.SetSkillMoveState(true,false,speed);
+            entity.SetSkillMoveState(true,false,false,speed);
         }
-        else if(skillData.ID==108)//闪避技能
+        else if(skillData.ID==Constants.id_PlayerSkill_Dodge)//闪避技能
         {
             speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
-            entity.SetSkillMoveState(true,true,speed);
+            entity.SetSkillMoveState(true,true,false,speed);
         }
-        else if (skillData.ID==304)//剑刃风暴，理论上来说可以和闪避技能公用代码
+        else if (skillData.ID==Constants.id_BossSkill_bladeStorm)//剑刃风暴，理论上来说可以和闪避技能公用代码
         {
             speed = skillMoveCfg.moveDis / (skillMoveCfg.moveTime / 1000f);//单位是毫秒
-            entity.SetSkillMoveState(true, true, speed);
+            entity.SetSkillMoveState(true, true,false, speed);
+        }
+        else if (skillData.ID == Constants.id_BossSkill_sifangzhen)//四方斩技能要位移到场地中间
+        {
+            float dis = Vector3.Distance(entity.GetPos(),Constants.sifangzhanPos);
+            speed = dis / (skillMoveCfg.moveTime/1000f);
+            entity.SetSkillMoveState(true,false,true,speed);
         }
         timeSvc.AddTimeTask((int tid) =>
         {//技能移动时间到就设置为不能移动

@@ -30,7 +30,7 @@ public class StateWalk : IState
             EntityMonster monster = (EntityMonster)entity;
             if (monster.md.mCfg.mType==MonsterType.Boss)
             {
-                if (monster.isCrazy)
+                if (monster.speedUp)
                 {
                     entity.SetBlend(Constants.blendRun);
                 }

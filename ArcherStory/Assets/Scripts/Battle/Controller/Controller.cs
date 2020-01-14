@@ -16,14 +16,15 @@ public abstract class Controller:MonoBehaviour
 
     protected bool isMove;
     protected bool isBlinkSkill;
+    protected bool isBossSkillMove;
     protected TimeService timeSvc;
     protected Transform camMainTrans;
 
     private Vector2 dir = Vector2.zero;
 
     public Animator anim;
-    public CharacterController ctrl;
     public bool isCrazy = false;//boss是不是狂暴了
+    public CharacterController ctrl;
     public Vector2 Dir
     {
         get
@@ -77,10 +78,11 @@ public abstract class Controller:MonoBehaviour
     {
 
     }
-    public void SetSkillMoveState(bool move,bool isBlink,float skillSpeed=0f)
+    public void SetSkillMoveState(bool move,bool isBlink,bool isBossSkillMove,float skillSpeed=0f)
     {
         skillMove = move;
         isBlinkSkill = isBlink;
+        this.isBossSkillMove = isBossSkillMove;
         skillMoveSpeed = skillSpeed;
     }
     //不加上摄像机偏转

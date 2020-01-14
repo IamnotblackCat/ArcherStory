@@ -17,6 +17,8 @@ public class MonsterController:Controller
     public GameObject boss_Skill2Begin;
     public GameObject boss_Skill3Ground;
     public GameObject boss_Skill4FX;
+    public GameObject boss_Crazy;
+    public GameObject boss_sifangzhan;
 
     private Dictionary<string, GameObject> bossFXDic = new Dictionary<string, GameObject>();
     public override void Init()
@@ -28,6 +30,8 @@ public class MonsterController:Controller
             bossFXDic.Add(boss_Skill2Begin.name,boss_Skill2Begin);
             bossFXDic.Add(boss_Skill3Ground.name,boss_Skill3Ground);
             bossFXDic.Add(boss_Skill4FX.name,boss_Skill4FX);
+            bossFXDic.Add(boss_Crazy.name,boss_Crazy);
+            bossFXDic.Add(boss_sifangzhan.name,boss_sifangzhan);
         }
         
     }
@@ -40,7 +44,14 @@ public class MonsterController:Controller
         }
         if (skillMove)
         {
-            SetSkillMove();
+            if (isBossSkillMove)
+            {
+                SetBossSpecialSkillMove(Constants.sifangzhanPos);
+            }
+            else
+            {
+                SetSkillMove();
+            }
         }
     }
     private void SetDir()
@@ -52,6 +63,12 @@ public class MonsterController:Controller
     private void SetSkillMove()
     {
         ctrl.Move(transform.forward * Time.deltaTime * skillMoveSpeed);
+    }
+    //四方斩技能，移动到固定位置
+    private void SetBossSpecialSkillMove(Vector3 pos)
+    {
+        Vector3 dir = (pos - transform.position).normalized;
+        ctrl.Move(dir*Time.deltaTime*skillMoveSpeed);
     }
     private void SetMove()
     {

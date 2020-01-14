@@ -139,9 +139,22 @@ public class Constants
     public const string skill3Name = "skill3_ground";
     public const string skill4Name = "skill4_ground";
     public const string boss_Unbreakable = "boss_Unbreakable";
+    public const string boss_Crazy = "boss_crazy";
 
     //范围技能最大施法范围
     public const float skill3MaxArea = 12;
     public const float skill4MaxArea = 15;
     public const float skill7MaxArea = 20;
+
+    //角色技能id
+    public const int id_PlayerSkill_Heal = 105;
+    public const int id_PlayerSkill_Buff = 106;
+    public const int id_PlayerSkill_Blink = 107;
+    public const int id_PlayerSkill_Dodge = 108;
+
+    //Boss技能ID
+    public const int id_BossSkill_bladeStorm = 304;
+    public const int id_BossSkill_sifangzhen = 305;
+
+    public static Vector3 sifangzhanPos = new Vector3(110,42.93f,73.39f);
 }

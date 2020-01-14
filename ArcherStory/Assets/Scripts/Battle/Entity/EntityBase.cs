@@ -185,11 +185,11 @@ public abstract class EntityBase
             }
         }
     }
-    public virtual void SetSkillMoveState(bool move,bool isBlink=true,float skillSpeed=0f)
+    public virtual void SetSkillMoveState(bool move,bool isBlink=true,bool isBossSkillMove=false,float skillSpeed=0f)
     {
         if (controller!=null)
         {
-            controller.SetSkillMoveState(move,isBlink,skillSpeed);
+            controller.SetSkillMoveState(move,isBlink,isBossSkillMove, skillSpeed);
         }
     }
     public virtual void SetCritical(int critical)
@@ -218,7 +218,7 @@ public abstract class EntityBase
     {
         if (controller!=null)
         {
-        return controller.transform.position;
+            return controller.transform.position;
         }
         Debug.Log("无法获取位置");
         return Vector3.zero;

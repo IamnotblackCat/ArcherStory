@@ -13,6 +13,9 @@ using Random = UnityEngine.Random;
 
 public class EntityMonster:EntityBase
 {
+    [HideInInspector]
+    public bool speedUp = false;
+    [HideInInspector]
     public bool isCrazy = false;
     public MonsterData md;
     //启动的时候等待2秒检测一下玩家位置
@@ -23,7 +26,7 @@ public class EntityMonster:EntityBase
     private float atkTimeCount = 0;
     private bool runAI = true;
 
-    private int[] bossSkillArray = new int[]{301,302,303,304};
+    private int[] bossSkillArray = new int[]{301,302,303,304,305};
     private int lastSkill=0;//boss释放的上一个技能，确保不要重复
     private int currentBossSkill;
     private bool skillEnd = true;//当前boss技能释放是否完毕
@@ -136,7 +139,7 @@ public class EntityMonster:EntityBase
                     SetDir(dir);
                     Move();
                     //攻击4秒钟还没打出去，直接调用黑气，可以修改地形压迫玩家走位
-                    if (checkTimeCount>=6)
+                    if (checkTimeCount>=4)
                     {
                         SetDir(Vector2.zero);
                         atkTimeCount += delta;
@@ -151,14 +154,14 @@ public class EntityMonster:EntityBase
                         else
                         {//攻击间隔就追踪移动，可能回过于灵敏
                          //贴身的时候要进入idle状态
+                            SetDir(dir);
                             if (DistanceTooClose())
                             {
-                                SetDir(dir);
-                                Move();
+                                Attack(bossSkillArray[0]);
                             }
                             else
                             {
-                                Idle();
+                                Move();
                             }
                         }
                         checkTimeCount = 0;
@@ -175,21 +178,22 @@ public class EntityMonster:EntityBase
                     {
                         //达到攻击时间，转向并且攻击
                         SetAtkRotation(dir);
-                        //TODO多个技能需要用出招表来控制，
+                        
                         Attack(currentBossSkill);
                         skillEnd = true;
                         atkTimeCount = 0;
                     }
                     else
                     {//攻击间隔就追踪移动，可能回过于灵敏
-                        //贴身的时候要进入idle状态
+                        //贴身的时候就会发动攻击
+                        SetDir(dir);
                         if (DistanceTooClose())
                         {
-                            Idle();
+                            Attack(bossSkillArray[0]);
+                            //Idle();
                         }
                         else
                         {
-                            SetDir(dir);
                             Move();
                         }
                     }
@@ -201,7 +205,7 @@ public class EntityMonster:EntityBase
 
         }
     }
-    //boss贴身以后攻击间隔每到，进入idle状态
+    //boss是否贴身
     private bool DistanceTooClose()
     {
         Vector3 target = battleMg.entitySelfPlayer.GetPos();
@@ -221,7 +225,7 @@ public class EntityMonster:EntityBase
         int temp;
         while (true)
         {
-            temp = Random.Range(0,4);
+            temp = Random.Range(0,5);
             if (lastSkill!=temp)
             {
                 lastSkill = temp;
@@ -292,7 +296,7 @@ public class EntityMonster:EntityBase
             }
         }
     }
-    //boss血量低于90%进入霸体,低于50%狂暴，移速增加100%
+    //boss血量低于90%进入霸体,低于50%移速增加100%，低于25%狂暴，攻击力+50%
     public override void GetUnBreakState()
     {
         if (md.mCfg.mType==MonsterType.Boss)
@@ -302,16 +306,25 @@ public class EntityMonster:EntityBase
                 if (!unBreakable)
                 {
                     unBreakable = true;
+                    //霸体特效
+                    SetFX(Constants.boss_Unbreakable,999f);
                 }
-                //TODO，霸体特效
-                SetFX(Constants.boss_Unbreakable,999f);
                 if (Hp <= BattleProps.hp * 0.5f)
                 {
-                    if (!isCrazy)
+                    if (!speedUp)
                     {
-                        isCrazy = true;
+                        speedUp = true;
                         this.controller.isCrazy = true;
                         this.SetBlend(Constants.blendRun);
+                    }
+                    if (Hp<=BattleProps.hp*0.25f)
+                    {
+                        if (!isCrazy)
+                        {
+                            isCrazy = true;
+                            AttackValue += BattleProps.attackValue / 2;
+                            SetFX(Constants.boss_Crazy,2f);
+                        }
                     }
                 }
             }
