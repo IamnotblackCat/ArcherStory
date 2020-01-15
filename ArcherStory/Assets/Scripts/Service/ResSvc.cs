@@ -601,6 +601,10 @@ public class ResSvc : MonoBehaviour
                             {
                                 monsterCfg.mType =MonsterType.Normal ;
                             }
+                            else if (element.InnerText.Equals("3"))
+                            {
+                                monsterCfg.mType = MonsterType.Elite;
+                            }
                             else
                             {
                                 monsterCfg.mType = MonsterType.Boss;

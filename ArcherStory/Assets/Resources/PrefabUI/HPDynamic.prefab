@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224661130552102436}
   - component: {fileID: 222301620196884858}
   - component: {fileID: 114550558984200768}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ImgHPRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 222573878940892048}
   - component: {fileID: 114825084827173186}
   - component: {fileID: 111521573294300864}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TxtCritical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 224650534937498900}
   - component: {fileID: 222234635745503338}
   - component: {fileID: 114353448324236980}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ImgHPGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 222113856955281496}
   - component: {fileID: 114816179752809496}
   - component: {fileID: 114459830067662018}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPDynamic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 222493802420743598}
   - component: {fileID: 114113763021731666}
   - component: {fileID: 111661742868432064}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TxtHPDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}

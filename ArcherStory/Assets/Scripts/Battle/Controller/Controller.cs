@@ -23,7 +23,8 @@ public abstract class Controller:MonoBehaviour
     private Vector2 dir = Vector2.zero;
 
     public Animator anim;
-    public bool isCrazy = false;//boss是不是狂暴了
+    [HideInInspector]
+    public bool bossSpeedUp = false;//boss是不是加速了
     public CharacterController ctrl;
     public Vector2 Dir
     {

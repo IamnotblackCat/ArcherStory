@@ -422,7 +422,14 @@ public class PlayerCtrlWnd : WindowRoot
             }
             BattleSys.Instance.battleMg.SetSelfPlayerMoveDir(_dir);
             if (!BattleSys.Instance.battleMg.entitySelfPlayer.canControll)
-            {
+            {//被打断取消范围显示
+                if (skillArea.activeSelf)
+                {
+                    skillArea.SetActive(false);
+                    areaSkill3Icon = false;
+                    areaSkill4Icon = false;
+                    areaSkill7Icon = false;
+                }
                 return;
             }
            
@@ -455,10 +462,14 @@ public class PlayerCtrlWnd : WindowRoot
         }
         if (areaSkill3Icon)
         {
-            UpdateAreaIcon(KeyCode.Alpha3,Constants.skill3MaxArea);
+            UpdateAreaIcon(KeyCode.Alpha3,Constants.skill3MaxArea,Constants.skill3Scale);
         }
         if (Input.GetKeyUp(KeyCode.Alpha3))
         {
+            if (areaSkill3Icon==false)
+            {
+                return;
+            }
             skillArea.SetActive(false);
             areaSkill3Icon = false;
             if (canRealseSkill)//超出范围无法释放
@@ -472,10 +483,14 @@ public class PlayerCtrlWnd : WindowRoot
         }
         if (areaSkill4Icon)
         {
-            UpdateAreaIcon(KeyCode.Alpha4, Constants.skill4MaxArea);
+            UpdateAreaIcon(KeyCode.Alpha4, Constants.skill4MaxArea,Constants.skill4Scale);
         }
         if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
+        {//可能已经被中断
+            if (areaSkill4Icon==false)
+            {
+                return;
+            }
             skillArea.SetActive(false);
             areaSkill4Icon = false;
             if (canRealseSkill)//超出范围无法释放
@@ -489,10 +504,14 @@ public class PlayerCtrlWnd : WindowRoot
         }
         if (areaSkill7Icon)
         {
-            UpdateAreaIcon(KeyCode.F, Constants.skill7MaxArea);
+            UpdateAreaIcon(KeyCode.F, Constants.skill7MaxArea,Constants.skill7Scale);
         }
         if (Input.GetKeyUp(KeyCode.F))
         {
+            if (areaSkill7Icon == false)
+            {
+                return;
+            }
             skillArea.SetActive(false);
             areaSkill7Icon = false;
             if (canRealseSkill)//超出范围无法释放
@@ -520,7 +539,7 @@ public class PlayerCtrlWnd : WindowRoot
     }
     //实时显示技能范围图标
     //传入一个距离，判断如果角色自身与射线检测目标地点超出距离，超出变换图片，且无法释放技能
-    public void UpdateAreaIcon(KeyCode key,float distance)
+    public void UpdateAreaIcon(KeyCode key,float distance,Vector3 skillScale)
     {
         Sprite changeSprite = null;
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -545,16 +564,15 @@ public class PlayerCtrlWnd : WindowRoot
                 }
                 skillArea.GetComponent<SpriteRenderer>().sprite = changeSprite;
                 skillArea.transform.position = pos;
+                skillArea.transform.localScale = skillScale;
             }
         }
     }
     private void InitSkillAreaIcon()
     {
         skillArea = resSvc.LoadPrefab(PathDefine.skillAreaIcon);
-        //skillArea.transform.Rotate(new Vector3(90, 0, 0));
         skillArea.transform.SetParent(GameRoot.instance.transform);
         skillArea.SetActive(false);
-        //Debug.Log(skillArea);
     }
 
     //玩家血球显示 TODO，修改为渐变

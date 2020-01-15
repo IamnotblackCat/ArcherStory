@@ -174,7 +174,7 @@ public class BattleManager:MonoBehaviour
 
                 monsterPrefab.SetActive(false);
                 monsterDic.Add(monsterPrefab.name,em);
-                if (md.mCfg.mType==MonsterType.Normal)
+                if (md.mCfg.mType==MonsterType.Normal||md.mCfg.mType==MonsterType.Elite)
                 {
                     //字典一定要存储已经变更过的HP，配置文件的hp没更新的
                     GameRoot.instance.dynamicWnd.AddHPItemInfo(em.Name,em.Hp,mc.hpRoot);
@@ -236,6 +236,7 @@ public class BattleManager:MonoBehaviour
             //Debug.Log(dir);
             entitySelfPlayer.SetDir(dir);
         }
+        entitySelfPlayer.SetMoveDir(dir);
     }
     public void ReleaseSkill(int index)
     {

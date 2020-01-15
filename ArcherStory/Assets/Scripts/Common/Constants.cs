@@ -32,6 +32,7 @@ public enum MonsterType
 {
     None,
     Normal,
+    Elite,
     Boss
 }
 public class Constants 
@@ -92,6 +93,7 @@ public class Constants
     public const string FBWin = "fbwin";
     public const string strengthSuccess = "fbitem";
     public const string archerWound = "wound";
+    public const string archerSpecialWound = "player_Special_wound";
     public const string skill1 = "skill1";
     public const string skill2 = "skill2";
     public const string skill3 = "skill3";
@@ -141,11 +143,15 @@ public class Constants
     public const string boss_Unbreakable = "boss_Unbreakable";
     public const string boss_Crazy = "boss_crazy";
 
-    //范围技能最大施法范围
+    //范围技能最大施法距离
     public const float skill3MaxArea = 12;
     public const float skill4MaxArea = 15;
     public const float skill7MaxArea = 20;
 
+    //范围技能图标显示技能范围
+    public static Vector3 skill3Scale = new Vector3(3f,3f,1);
+    public static Vector3 skill4Scale = new Vector3(4.5f,4.5f,1);
+    public static Vector3 skill7Scale = new Vector3(1,1,1);
     //角色技能id
     public const int id_PlayerSkill_Heal = 105;
     public const int id_PlayerSkill_Buff = 106;

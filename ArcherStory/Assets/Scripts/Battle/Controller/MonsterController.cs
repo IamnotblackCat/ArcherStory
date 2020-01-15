@@ -72,7 +72,7 @@ public class MonsterController:Controller
     }
     private void SetMove()
     {
-        if (!isCrazy)
+        if (!bossSpeedUp)
         {
             ctrl.Move(transform.forward * Time.deltaTime * Constants.monsterMoveSpeed);
         }

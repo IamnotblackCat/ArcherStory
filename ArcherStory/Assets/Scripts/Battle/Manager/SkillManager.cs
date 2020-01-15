@@ -311,6 +311,14 @@ public class SkillManager:MonoBehaviour
             {
                 target.Wound();
             }
+            else
+            {//为了对玩家友好，霸体状态下也会受伤提示
+                if (target is EntityPlayer)
+                {
+                    AudioSource characterAudio = target.GetAudio();
+                    AudioSvc.instance.PlayCharacterAudio(Constants.archerSpecialWound, characterAudio);
+                }
+            }
         }
     }
     private bool InRange(Vector3 from,Vector3 to,float range)

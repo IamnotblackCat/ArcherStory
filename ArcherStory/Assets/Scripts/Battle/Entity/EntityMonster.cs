@@ -20,6 +20,7 @@ public class EntityMonster:EntityBase
     public MonsterData md;
     //启动的时候等待2秒检测一下玩家位置
     private float checkTime = 2;
+    private float bossCheckTime = 4;//boss有过场动画，启动时间要长一点
     private float checkTimeCount = 0;
     //2秒攻击一次
     private float atkTime = 2;
@@ -56,7 +57,7 @@ public class EntityMonster:EntityBase
         {
             return;
         }
-        if (this.md.mCfg.mType==MonsterType.Normal)
+        if (this.md.mCfg.mType==MonsterType.Normal||md.mCfg.mType==MonsterType.Elite)
         {
             NormalMonsterLogic();
         }
@@ -78,6 +79,13 @@ public class EntityMonster:EntityBase
             }
             else
             {
+                if (md.mCfg.mType==MonsterType.Elite)
+                {
+                    if (checkTimeCount<bossCheckTime)
+                    {
+                        return;
+                    }
+                }
                 //计算目标方向
                 Vector2 dir = CalculateTargetDir();
                 if (!InAtkRange(false))
@@ -109,6 +117,7 @@ public class EntityMonster:EntityBase
                 }
                 //让检测时间在0.1~0.5秒内浮动
                 checkTime = PETools.RDInt(1, 5) * 1.0f / 10;
+                bossCheckTime= PETools.RDInt(1, 5) * 1.0f / 10;
             }
 
         }
@@ -120,7 +129,7 @@ public class EntityMonster:EntityBase
         {
             float delta = Time.deltaTime;
             checkTimeCount += delta;
-            if (checkTimeCount < checkTime)
+            if (checkTimeCount < bossCheckTime)
             {
                 return;
             }
@@ -155,6 +164,7 @@ public class EntityMonster:EntityBase
                         {//攻击间隔就追踪移动，可能回过于灵敏
                          //贴身的时候要进入idle状态
                             SetDir(dir);
+                            SetAtkRotation(dir);
                             if (DistanceTooClose())
                             {
                                 Attack(bossSkillArray[0]);
@@ -165,6 +175,7 @@ public class EntityMonster:EntityBase
                             }
                         }
                         checkTimeCount = 0;
+                        bossCheckTime = PETools.RDInt(1, 5) * 1.0f / 10;
                     }
                 }
                 else
@@ -187,10 +198,10 @@ public class EntityMonster:EntityBase
                     {//攻击间隔就追踪移动，可能回过于灵敏
                         //贴身的时候就会发动攻击
                         SetDir(dir);
+                        SetAtkRotation(dir);
                         if (DistanceTooClose())
                         {
                             Attack(bossSkillArray[0]);
-                            //Idle();
                         }
                         else
                         {
@@ -201,6 +212,7 @@ public class EntityMonster:EntityBase
                 }
                 //让检测时间在0.1~0.5秒内浮动
                 checkTime = PETools.RDInt(1, 5) * 1.0f / 10;
+                bossCheckTime = PETools.RDInt(1, 5) * 1.0f / 10;
             }
 
         }
@@ -225,7 +237,27 @@ public class EntityMonster:EntityBase
         int temp;
         while (true)
         {
-            temp = Random.Range(0,5);
+            int rdNum = Random.Range(1,101);
+            if (rdNum<=40)
+            {
+                temp = 1;
+            }
+            else if (rdNum<=60)
+            {
+                temp = 2;
+            }
+            else if (rdNum<=80)
+            {
+                temp = 3;
+            }
+            else if (rdNum<=90)
+            {
+                temp = 4;
+            }
+            else
+            {
+                temp = 0;
+            }
             if (lastSkill!=temp)
             {
                 lastSkill = temp;
@@ -314,7 +346,7 @@ public class EntityMonster:EntityBase
                     if (!speedUp)
                     {
                         speedUp = true;
-                        this.controller.isCrazy = true;
+                        this.controller.bossSpeedUp = true;
                         this.SetBlend(Constants.blendRun);
                     }
                     if (Hp<=BattleProps.hp*0.25f)

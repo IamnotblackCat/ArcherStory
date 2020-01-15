@@ -14,6 +14,7 @@ public class TriggerData : MonoBehaviour
     public bool isBossLevel;
     public BoxCollider boxCollider;
     public MapManager mapMgr;
+    public GameObject timeLine;
     private bool isDone = false;//是否已经触发过
     
     private void OnTriggerEnter(Collider other)
@@ -26,6 +27,14 @@ public class TriggerData : MonoBehaviour
                 isDone = true;
                 if (isBossLevel)
                 {
+                    if (!timeLine.activeSelf)
+                    {
+                        timeLine.SetActive(true);
+                    }
+                    //暂时禁用黑白无常头顶的血条，2.5秒后恢复显示
+                    GameRoot.instance.dynamicWnd.SetWndState(false);
+                    TimeService.instance.AddTimeTask((int tid)=>
+                    { GameRoot.instance.dynamicWnd.SetWndState();},2.5f);
                     AudioSvc.instance.PlayBGMusic(Constants.BGBoss);
                 }
             }

@@ -35,7 +35,7 @@
 	</item>
 	<item ID="1004">
 		<mName>黑无常</mName>
-		<mType>1</mType>
+		<mType>3</mType>
 		<resPath>PrefabNPC/HeiBaiWuChang_01</resPath>
 		<skillID>401</skillID>
 		<atkDis>8</atkDis>
@@ -46,7 +46,7 @@
 	</item>
 	<item ID="1005">
 		<mName>白无常</mName>
-		<mType>1</mType>
+		<mType>3</mType>
 		<resPath>PrefabNPC/HeiBaiWuChang_02</resPath>
 		<skillID>401</skillID>
 		<atkDis>8</atkDis>

@@ -138,6 +138,17 @@ public abstract class EntityBase
             controller.Dir = dir;
         }
     }
+    public virtual void SetMoveDir(Vector2 dir)
+    {
+        if (controller!=null)
+        {
+            if (controller is PlayerController)
+            {
+                PlayerController plCtrl = (PlayerController)controller;
+                plCtrl.moveDir = dir;
+            }
+        }
+    }
     public virtual void SetAction(int act)
     {
         if (controller != null)

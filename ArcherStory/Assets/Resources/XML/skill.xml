@@ -99,7 +99,7 @@
 		<aniAction>7</aniAction>
 		<fx>skill8</fx>
 		<isBreak>1</isBreak>
-		<dmgType>1</dmgType>
+		<dmgType>3</dmgType>
 		<skillMove>1011</skillMove>
 	</item>
 	<item ID="201">

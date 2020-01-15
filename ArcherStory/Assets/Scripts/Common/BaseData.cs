@@ -68,7 +68,7 @@ public class MonsterCfg : BaseData<MonsterCfg>
 {
     public string mName;
     public string resPath;
-    public MonsterType mType;//1是普通怪物，2是boss
+    public MonsterType mType;//1是普通怪物，2是boss,3是精英怪物
     public int skillID;
     public float atkDis;
     public BattleProps bps;

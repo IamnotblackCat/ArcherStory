@@ -63,6 +63,6 @@ public class PlayerData
             }
         }
         //暂时先不存储json
-        //SaveJson();
+        SaveJson();
     }
 }

@@ -119,8 +119,8 @@ public class PlayerController : Controller
         }
     }
     private void SetDir()
-    {//第二个参数是角色正面朝向，h=0,v=1,这里因为摄像机偏转了，
-        //所以人物的朝向也需要加上摄像机的偏转，不然会出现朝向不一致
+    {/*第二个参数是角色正面朝向，h=0,v=1,这里因为摄像机偏转了，
+        所以人物的朝向也需要加上摄像机的偏转，不然会出现朝向不一致*/
         float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) + camMainTrans.eulerAngles.y;
         Vector3 eulerAngle = new Vector3(0, angle, 0);
         transform.eulerAngles = eulerAngle;
@@ -132,9 +132,19 @@ public class PlayerController : Controller
         ctrl.Move(Vector3.down*Time.deltaTime*Constants.playerMoveSpeed);
     }
     //如果指定了目标位置，则朝向指定位置方向移动，否则后退
+    /*设计这个变量的原因是无法正确取得Dir这个变量，所以我在battleManager里面
+     新添加给这个变量赋值，这样可以及时取得当前角色所在朝向*/
+    public Vector2 moveDir;
     private void SetSkillMove()
     {
-        ctrl.Move(-transform.forward * Time.deltaTime * skillMoveSpeed);
+        if (moveDir==Vector2.zero)
+        {
+            ctrl.Move(-transform.forward * Time.deltaTime * skillMoveSpeed);
+        }
+        else
+        {
+            ctrl.Move(transform.forward * Time.deltaTime * skillMoveSpeed);
+        }
     }
     //大位移技能，瞬移
     private void SetSkillBigMove()

@@ -51,12 +51,14 @@ public class CharacterPanel : Inventory
         }
         if(exitItem!=null)
             Knapsack.Instance.StoreItem(exitItem);
+            AudioSvc.instance.PlayUIAudio(Constants.uiExtenBtn);
             UpdateSkinned();
     }
     
     public void PutOff(Item item)
     {
         Knapsack.Instance.StoreItem(item);
+        AudioSvc.instance.PlayUIAudio(Constants.uiExtenBtn);
         UpdateSkinned();
     }
 
