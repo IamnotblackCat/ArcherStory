@@ -12,13 +12,13 @@ public class PathDefine
 {
     #region Config
     public const string RDName = "ResCfgs/rdName";
-    public const string MapCfg = "XML/map_v1";
+    public const string MapCfg = "/XML/map_v1.xml";
     public const string GuideCfg = "ResCfgs/guideCfg";
     public const string StrengthCfg = "ResCfgs/strengthCfg";
-    public const string SkillCfg = "XML/skill";
-    public const string SkillMoveCfg = "XML/skillmove";
-    public const string SkillActionCfg = "XML/skillAction";
-    public const string MonsterCfg = "XML/monster";
+    public const string SkillCfg = "/XML/skill.xml";
+    public const string SkillMoveCfg = "/XML/skillmove.xml";
+    public const string SkillActionCfg = "/XML/skillAction.xml";
+    public const string MonsterCfg = "/XML/monster.xml";
     
     #endregion
 

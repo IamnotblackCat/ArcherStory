@@ -126,16 +126,18 @@ public class ResSvc : MonoBehaviour
     private Dictionary<int, MapConfig> mapCfgDataDic = new Dictionary<int, MapConfig>();
     private void InitMapCfg(string path)
     {
-        TextAsset xml = Resources.Load<TextAsset>(path);
-        if (!xml)
-        {
-            //PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
-            Debug.Log("指定文件不存在，路径：" + path);
-        }
-        else
-        {
+        //TextAsset xml = Resources.Load<TextAsset>(path);
+        string streamingXML = Application.streamingAssetsPath + path;
+        //if (!xml)
+        //{
+        //    //PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
+        //    Debug.Log("指定文件不存在，路径：" + path);
+        //}
+        //else
+        //{
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml.text);
+            //doc.LoadXml(xml.text);
+            doc.Load(streamingXML);
             //选中子节点集合
             XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
             for (int i = 0; i < nodList.Count; i++)
@@ -226,7 +228,7 @@ public class ResSvc : MonoBehaviour
                 mapCfgDataDic.Add(ID,mapCfg);
                 //Debug.Log("ID:"+ID+"  mapCfg:"+mapCfg.ToString());
             }
-        }
+        //}
     }
     public MapConfig GetMapCfgData(int id)
     {
@@ -314,15 +316,17 @@ public class ResSvc : MonoBehaviour
     private Dictionary<int, SkillCfg> skillCfgDic = new Dictionary<int, SkillCfg>();
     private void InitSkillCfg(string path)
     {
-        TextAsset xml = Resources.Load<TextAsset>(path);
-        if (!xml)
-        {
-            PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
-        }
-        else
-        {
+        //TextAsset xml = Resources.Load<TextAsset>(path);
+        string streamingXML=Application.streamingAssetsPath+path;
+        //if (!xml)
+        //{
+        //    PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
+        //}
+        //else
+        //{
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml.text);
+            //doc.LoadXml(xml.text);
+            doc.Load(streamingXML);
             //选中子节点集合
             XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
             for (int i = 0; i < nodList.Count; i++)
@@ -432,7 +436,7 @@ public class ResSvc : MonoBehaviour
                 skillCfgDic.Add(ID, skillCfgData);
                 //Debug.Log("ID:"+ID+"  mapCfg:"+mapCfg.ToString());
             }
-        }
+        //}
     }
     public SkillCfg GetSkillCfgData(int id)
     {
@@ -451,15 +455,17 @@ public class ResSvc : MonoBehaviour
     private Dictionary<int, SkillActionCfg> skillActionDic = new Dictionary<int, SkillActionCfg>();
     private void InitSkillAction(string path)
     {
-        TextAsset xml = Resources.Load<TextAsset>(path);
-        if (!xml)
-        {
-            Debug.Log("指定文件不存在，路径：" + path);
-        }
-        else
-        {
+        //TextAsset xml = Resources.Load<TextAsset>(path);
+        string streamingXML = Application.streamingAssetsPath + path;
+        //if (!xml)
+        //{
+        //    Debug.Log("指定文件不存在，路径：" + path);
+        //}
+        //else
+        //{
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml.text);
+            //doc.LoadXml(xml.text);
+            doc.Load(streamingXML);
             //选中子节点集合
             XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
             for (int i = 0; i < nodList.Count; i++)
@@ -493,7 +499,7 @@ public class ResSvc : MonoBehaviour
                 skillActionDic.Add(ID, skillActionData);
                 //Debug.Log("ID:"+ID+"  mapCfg:"+mapCfg.ToString());
             }
-        }
+        //}
     }
     public SkillActionCfg GetSkillActionData(int id)
     {
@@ -512,15 +518,17 @@ public class ResSvc : MonoBehaviour
     private Dictionary<int, SkillMoveCfg> skillMoveCfgDic = new Dictionary<int, SkillMoveCfg>();
     private void InitSkillMoveCfg(string path)
     {
-        TextAsset xml = Resources.Load<TextAsset>(path);
-        if (!xml)
-        {
-            PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
-        }
-        else
-        {
+        //TextAsset xml = Resources.Load<TextAsset>(path);
+        string streamingXML = Application.streamingAssetsPath + path;
+        //if (!xml)
+        //{
+        //    PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
+        //}
+        //else
+        //{
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml.text);
+            //doc.LoadXml(xml.text);
+            doc.Load(streamingXML);
             //选中子节点集合
             XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
             for (int i = 0; i < nodList.Count; i++)
@@ -548,7 +556,7 @@ public class ResSvc : MonoBehaviour
                 }
                 skillMoveCfgDic.Add(ID, SkillMoveCfgData);
             }
-        }
+        //}
     }
     public SkillMoveCfg GetSkillMoveCfgData(int id)
     {
@@ -564,15 +572,17 @@ public class ResSvc : MonoBehaviour
     private Dictionary<int, MonsterCfg> monsterCfgDic = new Dictionary<int, MonsterCfg>();
     private void InitMonsterCfg(string path)
     {
-        TextAsset xml = Resources.Load<TextAsset>(path);
-        if (!xml)
-        {
-            Debug.Log("指定文件不存在，路径：" + path);
-        }
-        else
-        {
+        //TextAsset xml = Resources.Load<TextAsset>(path);
+        string streamingXML = Application.streamingAssetsPath + path;
+        //if (!xml)
+        //{
+        //    Debug.Log("指定文件不存在，路径：" + path);
+        //}
+        //else
+        //{
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml.text);
+            //doc.LoadXml(xml.text);
+            doc.Load(streamingXML);
             //选中子节点集合
             XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
             for (int i = 0; i < nodList.Count; i++)
@@ -635,7 +645,7 @@ public class ResSvc : MonoBehaviour
                 }
                 monsterCfgDic.Add(ID, monsterCfg);
             }
-        }
+        //}
     }
     public MonsterCfg GetMonsterCfgData(int id)
     {

@@ -10,7 +10,7 @@ public class Memento
     public void SaveByJson()
     {
         PlayerData pd = GameRoot.instance.Playerdata;
-        string filePath = Application.dataPath + Constants.jsonPath; 
+        string filePath = Application.streamingAssetsPath + Constants.jsonPath; 
         string saveJson= JsonMapper.ToJson(pd);
         StreamWriter sw = new StreamWriter(filePath);
         sw.Write(saveJson);
@@ -19,7 +19,7 @@ public class Memento
     public PlayerData ReadByJsonFile()
     {
         PlayerData pd = new PlayerData();
-        string filePath = Application.dataPath + Constants.jsonPath;
+        string filePath = Application.streamingAssetsPath + Constants.jsonPath;
         StreamReader sr = new StreamReader(filePath);
         string jsonSr = sr.ReadToEnd();
         sr.Close();

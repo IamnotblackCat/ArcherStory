@@ -134,8 +134,8 @@ public class Constants
     public const float blendWalk = 0.5f;
 
     //json文件目录
-    public const string jsonPath = "/Resources/Json/playerData.json";
-    public const string jsonInitPath = "/Resources/Json/playerInitData.json";
+    public const string jsonPath = "/Json/playerData.json";
+    public const string jsonInitPath = "/Json/playerInitData.json";
 
     //技能特效名字
     public const string skill3Name = "skill3_ground";

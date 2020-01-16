@@ -29,7 +29,8 @@ public class MainCitySys : SystemRoot
     {
         base.InitSys();
         Instance = this;
-        //PECommon.Log("Main City Init...");
+        //TimeService.instance.AddTimeTask((int tid)=>
+        //{ EnterMainCity(); },3f);
     }
 
     public void EnterMainCity()

@@ -12,10 +12,10 @@ using UnityEngine;
 
 public class MoveCube : Controller 
 {
-    public CharacterController ctrl;
+    //public CharacterController ctrl;
 
     #region 相机控制
-    private Transform camMainTrans;
+    //private Transform camMainTrans;
     private float camRotSmooth = 3f;
     private bool isRotate;
     private float distance;

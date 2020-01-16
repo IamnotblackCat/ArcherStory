@@ -14,6 +14,7 @@ public class MainCityWnd : WindowRoot
     #region Public UI Transform
     
     public GameObject goFuben;
+    public GameObject exitGame;
     public GameObject skillPanel;
     public Text txtLV;
     public Text txtExpPrg;
@@ -122,8 +123,9 @@ public class MainCityWnd : WindowRoot
     public void ClickSystemBtn()
     {
         audioSvc.PlayUIAudio(Constants.uiOpenPage);
+        exitGame.SetActive(true);
     }
-    public void ClickConfirm()
+    public void ClickFubenConfirm()
     {
         audioSvc.PlayUIAudio(Constants.uiClick);
         GameRoot.instance.ClearUIRoot();
@@ -131,7 +133,18 @@ public class MainCityWnd : WindowRoot
         goFuben.SetActive(false);
         BattleSys.Instance.StartBattle(Constants.Duplicate);
     }
-    public void ClickConcel()
+    public void ClickExitConfirm()
+    {
+        audioSvc.PlayUIAudio(Constants.uiClick);
+        exitGame.SetActive(false);
+        Application.Quit();
+    }
+    public void ClickExitCancel()
+    {
+        audioSvc.PlayUIAudio(Constants.uiClick);
+        exitGame.SetActive(false);
+    }
+    public void ClickFubenConcel()
     {
         audioSvc.PlayUIAudio(Constants.uiClick);
         goFuben.SetActive(false);
