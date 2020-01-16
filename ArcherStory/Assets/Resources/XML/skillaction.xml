@@ -52,7 +52,7 @@
 	</item>
 	<item ID="3031">
 		<delayTime>200</delayTime>
-		<radius>3</radius>
+		<radius>2</radius>
 		<angle>360</angle>
 	</item>
 	<item ID="3032">

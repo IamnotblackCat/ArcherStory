@@ -13,8 +13,8 @@
 		<moveDis>0</moveDis>
 	</item>
 	<item ID="2011">
-		<moveTime>80</moveTime>
-		<moveDis>7</moveDis>
+		<moveTime>300</moveTime>
+		<moveDis>8</moveDis>
 	</item>
 	<item/>
 </root>

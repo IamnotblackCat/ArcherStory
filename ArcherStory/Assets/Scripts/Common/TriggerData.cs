@@ -33,8 +33,12 @@ public class TriggerData : MonoBehaviour
                     }
                     //暂时禁用黑白无常头顶的血条，2.5秒后恢复显示
                     GameRoot.instance.dynamicWnd.SetWndState(false);
+                    GameRoot.instance.bossBeginWnd.SetActive(true);
                     TimeService.instance.AddTimeTask((int tid)=>
-                    { GameRoot.instance.dynamicWnd.SetWndState();},2.5f);
+                    {
+                        GameRoot.instance.dynamicWnd.SetWndState();
+                        GameRoot.instance.bossBeginWnd.SetActive(false);
+                    },2.5f);
                     AudioSvc.instance.PlayBGMusic(Constants.BGBoss);
                 }
             }

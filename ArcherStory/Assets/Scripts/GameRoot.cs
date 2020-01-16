@@ -13,6 +13,7 @@ public class GameRoot : MonoBehaviour
     public static GameRoot instance = null;
     public LoadingWnd loadingWnd;
     public DynamicWnd dynamicWnd;
+    public GameObject bossBeginWnd;
 
     public MainCityWnd mainCityWnd;
     //再主城界面读取是否更换了武器，在战斗管理加载战斗角色的时候根据这个来更换
