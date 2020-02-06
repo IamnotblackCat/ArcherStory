@@ -16,7 +16,7 @@
     "name": "上古弓的锻造秘籍",
     "type": "Material",
     "quality": "Artifact",
-    "description": "用来锻造上古弓的秘籍",
+    "description": "秘籍+铁块，可以锻造上古弓",
     "capacity": 2,
     "buyPrice": 10,
     "sellPrice": 10,

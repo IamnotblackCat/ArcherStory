@@ -60,7 +60,7 @@
 	</item>
 	<item ID="105">
 		<skillName>治疗</skillName>
-		<cdTime>12</cdTime>
+		<cdTime>24</cdTime>
 		<skillTime>0.8</skillTime>
 		<animTime>0.4</animTime>
 		<aniAction>4</aniAction>

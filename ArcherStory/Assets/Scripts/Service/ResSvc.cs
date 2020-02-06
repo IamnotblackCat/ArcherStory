@@ -25,6 +25,7 @@ public class ResSvc : MonoBehaviour
         //InitRDNameCfg(PathDefine.RDName);
         InitMonsterCfg(PathDefine.MonsterCfg);
         InitMapCfg(PathDefine.MapCfg);
+        InitGuideCfg(PathDefine.GuideCfg);
         InitSkillCfg(PathDefine.SkillCfg);
         InitSkillMoveCfg(PathDefine.SkillMoveCfg);
         InitSkillAction(PathDefine.SkillActionCfg);
@@ -246,15 +247,17 @@ public class ResSvc : MonoBehaviour
     private Dictionary<int, AutoGuideCfg> autoGuideDic = new Dictionary<int, AutoGuideCfg>();
     private void InitGuideCfg(string path)
     {
-        TextAsset xml = Resources.Load<TextAsset>(path);
-        if (!xml)
-        {
-            PECommon.Log("指定文件不存在，路径：" + path, LogType.Error);
-        }
-        else
-        {
+        string streamingXML = Application.streamingAssetsPath + path;
+        //TextAsset xml = Resources.Load<TextAsset>(path);
+        //if (!xml)
+        //{
+        //    Debug.Log("指定文件不存在，路径：" + path);
+        //}
+        //else
+        //{
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml.text);
+            //doc.LoadXml(xml.text);
+            doc.Load(streamingXML);
             //选中子节点集合
             XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
             for (int i = 0; i < nodList.Count; i++)
@@ -296,7 +299,7 @@ public class ResSvc : MonoBehaviour
                 }
                 autoGuideDic.Add(ID, guideCfg);
                 //Debug.Log("ID:"+ID+"  mapCfg:"+mapCfg.ToString());
-            }
+            //}
         }
     }
     public AutoGuideCfg GetGuideCfgData(int id)

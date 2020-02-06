@@ -39,8 +39,8 @@
 		<resPath>PrefabNPC/HeiBaiWuChang_01</resPath>
 		<skillID>401</skillID>
 		<atkDis>8</atkDis>
-		<hp>800</hp>
-		<attackValue>150</attackValue>
+		<hp>3000</hp>
+		<attackValue>100</attackValue>
 		<defend>10</defend>
 		<critical>30</critical>
 	</item>
@@ -50,8 +50,8 @@
 		<resPath>PrefabNPC/HeiBaiWuChang_02</resPath>
 		<skillID>401</skillID>
 		<atkDis>8</atkDis>
-		<hp>800</hp>
-		<attackValue>150</attackValue>
+		<hp>3000</hp>
+		<attackValue>100</attackValue>
 		<defend>10</defend>
 		<critical>30</critical>
 	</item>
@@ -61,7 +61,7 @@
 		<resPath>PrefabNPC/YangJian_03</resPath>
 		<skillID>301</skillID>
 		<atkDis>4.5</atkDis>
-		<hp>10000</hp>
+		<hp>12000</hp>
 		<attackValue>220</attackValue>
 		<defend>25</defend>
 		<critical>20</critical>

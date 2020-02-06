@@ -88,5 +88,12 @@ public class GameRoot : MonoBehaviour
         //数值发生变化的时候就刷新一下详细信息
         MainCitySys.Instance.infoWnd.RefreshUI();
     }
-    
+    public void SetPlayerDataByGuide(AutoGuideCfg data)
+    {
+        playerData.coin += data.coin;
+        playerData.guideid ++;
+        GetExp(data.exp);
+        //playerData.exp = data.exp;
+        //playerData.lv = data.lv;
+    }
 }

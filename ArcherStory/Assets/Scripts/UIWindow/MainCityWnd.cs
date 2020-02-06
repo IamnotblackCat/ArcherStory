@@ -16,6 +16,8 @@ public class MainCityWnd : WindowRoot
     public GameObject goFuben;
     public GameObject exitGame;
     public GameObject skillPanel;
+    public GameObject skillDrawPanel;
+    public GameObject skillDescriptionPanel;
     public Text txtLV;
     public Text txtExpPrg;
 
@@ -71,7 +73,16 @@ public class MainCityWnd : WindowRoot
             }
         }
         #endregion
-
+        //设置自动任务图标
+        currentTaskData = resSvc.GetGuideCfgData(pd.guideid);
+        if (currentTaskData != null)
+        {
+            SetGuideBtnIcon(currentTaskData.npcID);
+        }
+        else
+        {//没任务就显示默认图标
+            SetGuideBtnIcon(-1);
+        }
     }
     //根据任务的不同设置不同的NPC头像
     private void SetGuideBtnIcon(int npcID)
@@ -99,7 +110,18 @@ public class MainCityWnd : WindowRoot
         SetSprite(image,spPath);
     }
     #region Click Events
-    
+    public void ClickGuideBtn()
+    {
+        audioSvc.PlayUIAudio(Constants.uiClick);
+        if (currentTaskData != null)
+        {
+            MainCitySys.Instance.RunTask(currentTaskData);
+        }
+        else
+        {
+            GameRoot.instance.AddTips("更多引导，正在开发中，敬请期待。。。");
+        }
+    }
     public void ClickHeadBtn()
     {
         audioSvc.PlayUIAudio(Constants.uiOpenPage);
@@ -160,7 +182,19 @@ public class MainCityWnd : WindowRoot
     {
         skillPanel.SetActive(false);
     }
-    
+    public void ClickSwitchSkillPanel()
+    {
+        if (skillDrawPanel.activeSelf)
+        {
+            skillDescriptionPanel.SetActive(true);
+            skillDrawPanel.SetActive(false);
+        }
+        else
+        {
+            skillDrawPanel.SetActive(true);
+            skillDescriptionPanel.SetActive(false);
+        }
+    }
     #endregion
 
 }

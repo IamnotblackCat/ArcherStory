@@ -11,6 +11,7 @@ using UnityEngine;
 public class PlayerData 
 {
     public int hp;
+    public int guideid;
     public int lv;
     public int exp;
     public int attackValue;
@@ -30,6 +31,7 @@ public class PlayerData
         Memento memento = new Memento();
         PlayerData pd= memento.ReadByJsonFile();
         hp = pd.hp;
+        guideid = pd.guideid;
         lv = pd.lv;
         exp = pd.exp;
         attackValue = pd.attackValue;

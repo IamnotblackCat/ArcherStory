@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 114620223943363010}
   - component: {fileID: 95001438015925202}
   - component: {fileID: 114188615956396950}
+  - component: {fileID: 195143079782199586}
   m_Layer: 9
   m_Name: Archer_Female_00
   m_TagString: Player
@@ -930,7 +931,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.889696, y: 47.50846, z: 34.37}
+  m_LocalPosition: {x: 21.494505, y: 47.50846, z: 22.428875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4429265152424556}
@@ -3065,6 +3066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 95001438015925202}
+  bossSpeedUp: 0
   ctrl: {fileID: 14300000}
   hpRoot: {fileID: 0}
   skill1FX: {fileID: 0}
@@ -3078,6 +3080,7 @@ MonoBehaviour:
   skill7FX: {fileID: 0}
   skill8FX: {fileID: 0}
   lvUpEffect: {fileID: 1029285379943212}
+  moveDir: {x: 0, y: 0}
 --- !u!137 &137529089540219256
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -3130,6 +3133,27 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.09106669, y: -0.027999341, z: 0.001252342}
     m_Extent: {x: 0.4924561, y: 1.0672488, z: 0.04555389}
   m_DirtyAABB: 0
+--- !u!195 &195143079782199586
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!198 &198956155874592288
 ParticleSystem:
   m_ObjectHideFlags: 1
