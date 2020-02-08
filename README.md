@@ -1,0 +1,73 @@
+# ArcherStory
+The first hero is a fox  
+整个作品都是我独立完成的，模型都是购买的，其他素材都是在各个地方抠出来的。  
+一、游戏主城主要模块：背包/仓库/商店/合成系统，等级系统（注意，等级不影响人物属性，为了减少数值调试压力），装备/换装系统（换装做的有点简陋，只有武器皮肤），
+自动引导系统，角色展示系统。  
+二、游戏副本主要模块：较为全面的技能系统（涵盖自动索敌技能，范围技能，位移技能，buff技能），打断/僵直/霸体系统，返回城镇（三种不同返回设计），Boss出招表。  
+三、游戏设计部分元素参考游戏：  
+    主城UI设计——QQ幻想  
+    副本UI设计——GW2  
+    技能图标——GW2  
+    副本音乐——尼尔机械纪元  
+    暂停设计——巫师3  
+四、角色技能详细描述：  
+![看不到图？百度吧~](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720191129170100.png)；  
+1技能：普通攻击  
+冷却时间：无  
+瞬发/自动索敌/指向技能  
+可被打断/攻击距离12米  
+描述：击中敌人后会发生极小范围爆炸  
+![IMG](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720191129165228.png)
+2技能：贯通箭  
+冷却时间：5秒  
+瞬发/自动索敌/指向技能  
+可被打断/攻击距离12米  
+描述：贯穿一条直线上的所有敌人，会造成两次伤害  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720191218094458.png)
+3技能：烈焰矢  
+冷却时间：7秒  
+吟唱读条/范围伤害/持续伤害  
+可被打断/攻击距离12米  
+描述：在指定地点创造一个圆形火焰区域，范围内敌人会受到持续伤害  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720191129165018.png)
+4技能：陨石箭  
+冷却时间：12秒  
+吟唱读条/范围伤害/爆发伤害  
+可被打断/攻击距离15米  
+描述：召唤一支巨大的陨石箭，撞向指定地点，造成巨额伤害  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720191129165451.png)
+Q技能：治疗术  
+冷却时间：24秒  
+瞬发/治疗技能  
+不可打断  
+描述：恢复生命最大值的30%  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720191218093356.png)
+E技能：火焰盾  
+冷却时间：30秒  
+瞬发/状态技能  
+不可打断  
+描述：火焰包围自身，持续时间15秒，攻击力+50%，进入霸体状态。（霸体状态不会被打断，被攻击不会僵直）  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720191129165924.png)
+F技能：瞬移  
+冷却时间：12秒  
+瞬发/位移技能  
+不可打断  
+描述：瞬间移动到鼠标指定地点，移动距离最高20米。  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720191218093830.png)
+V技能：闪避  
+冷却时间：8秒  
+瞬发/位移技能  
+不可打断  
+描述：立即朝指定方向移动5.5米，未指定方向则往角色面对反方向移动。  
+  
+Boss技能介绍：  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720191129165714.png)
+神之心：当杨戬血量低于90%，进入霸体状态；低于50%，移动速度+100%；低于25%，攻击力+50%。  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720200206190213.png)
+污浊之球：在玩家当前所在地点召唤一团黑球，在黑球范围内会受到持续伤害，黑球一旦出现则不会消失。  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720200206190748.png)
+裂地斩：朝前方释放一次威力极大的斩击。  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720200206190756.png)
+旋风斩：杨戬旋转自身，同时会朝玩家方向进行突进。  
+![img](https://github.com/IamnotblackCat/ArcherStory/blob/master/ArcherStory/Assets/Resources/ResImages/TIM%E5%9B%BE%E7%89%8720200206190801.png)
+四方斩：杨戬跳跃至场地中心，蓄力释放一个威力极大的魔法阵。  
